@@ -1,0 +1,887 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="16c3ed81-0975-492c-ba60-8514fa7db696" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/controller/OrgAdmController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/mapper/CourseMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/mapper/CourseMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/mapper/ModifyApplyMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/mapper/ModifyApplyMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/mapper/TeacherMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/mapper/TeacherMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/service/OrgAdmService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/service/impl/OrgAdmServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/add_course.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/add_lecturer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/course.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/current_apply.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/lecturer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/modify_apply.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/modify_course.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/modify_lecturer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/huadi/education/config/MyMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/config/MyMvcConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/huadi/education/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/huadi/education/controller/NewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/controller/NewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/huadi/education/controller/OrgController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/controller/OrgController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/huadi/education/entity/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/entity/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/huadi/education/entity/ModifyApply.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/entity/ModifyApply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/huadi/education/entity/OrgApply.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/entity/OrgApply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/huadi/education/mapper/NewMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/mapper/NewMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/huadi/education/mapper/OrgMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/mapper/OrgMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/huadi/education/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/huadi/education/service/NewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/service/NewService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/huadi/education/service/OrgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/service/OrgService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/huadi/education/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/huadi/education/service/impl/NewServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/service/impl/NewServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/huadi/education/service/impl/OrgServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/service/impl/OrgServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/huadi/education/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/huadi/education/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/visitor/css/myself.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/visitor/css/myself.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/expose-black.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/expose-black.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/expose-white.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/expose-white.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/news-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/news-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/org-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/org-details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/policy-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/policy-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/report.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/report.html" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/huadi/education/config/MyMvcConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="8468">
+              <caret line="292" column="5" selection-start-line="283" selection-start-column="4" selection-end-line="292" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor />
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/huadi/education/controller/OrgController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3132">
+              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="JavaScript File" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>search</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/org-details.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/course.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/current_apply.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/lecturer.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/modify_lecturer.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/modify_course.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/modify_apply.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/add_course.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/add_lecturer.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/adminList.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/insertUser.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/applyList.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/modifyApplyList.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/insertOrg.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/orgList.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/insertNews.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/newsList.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/myAccount.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/huadi/education/config/MyMvcConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/thymeleaf/index.html" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="D:/apache-maven-3.6.1" />
+        <option name="userSettingsFile" value="D:\apache-maven-3.6.1\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="demo" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="952" />
+    <option name="y" value="-8" />
+    <option name="width" value="976" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectId" id="1dNnePnj7keFMlk5y8zSVUXduF0" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Education" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springbootdemo" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1592993163793" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lemon\Desktop\springbootdemo\src\main\java\com\huadi\education\mapper" />
+      <recent name="C:\Users\lemon\Desktop\springbootdemo\src\main\resources\templates\thymeleaf" />
+      <recent name="C:\Users\lemon\Desktop\springbootdemo\src\main\java\com\huadi\education\controller" />
+      <recent name="E:\学习资料\2020华迪实训\整合\springbootdemo\src\main\java\com\huadi\education\controller" />
+      <recent name="E:\学习资料\2020华迪实训\整合\springbootdemo\src\main\resources\templates\thymeleaf" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.huadi.education.utils" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Lei Xinjian\Desktop\springbootdemo2\src\main\resources\templates\thymeleaf" />
+      <recent name="C:\Users\Lei Xinjian\Desktop\springbootdemo2\src\main\java\com\huadi\education\controller" />
+      <recent name="C:\Users\Lei Xinjian\Desktop\springbootdemo2\src\main\java\com\huadi\education\mapper" />
+      <recent name="C:\Users\Lei Xinjian\Desktop\springbootdemo2\src\main\resources\static\visitor" />
+      <recent name="C:\Users\Lei Xinjian\Desktop\springbootdemo2\src\main\java\com\huadi\education\utils" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.EducationApplication">
+    <configuration name="expose-black.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/springbootdemo/templates/thymeleaf/expose-black.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/springbootdemo/templates/thymeleaf/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="login.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/springbootdemo/templates/thymeleaf/login.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="search-list.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/springbootdemo2/springbootdemo/templates/thymeleaf/search-list.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="EducationApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="springbootdemo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.huadi.education.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.huadi.education.EducationApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.EducationApplication" />
+        <item itemvalue="JavaScript Debug.search-list.html" />
+        <item itemvalue="JavaScript Debug.expose-black.html" />
+        <item itemvalue="JavaScript Debug.login.html" />
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="16c3ed81-0975-492c-ba60-8514fa7db696" name="Default Changelist" comment="" />
+      <created>1592164601627</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1592164601627</updated>
+      <workItem from="1592164606387" duration="3368000" />
+      <workItem from="1592190980536" duration="11773000" />
+      <workItem from="1592214860029" duration="8117000" />
+      <workItem from="1592274514992" duration="6980000" />
+      <workItem from="1592290054969" duration="5421000" />
+      <workItem from="1592307775093" duration="4809000" />
+      <workItem from="1592356303968" duration="3027000" />
+      <workItem from="1592359348711" duration="21826000" />
+      <workItem from="1592443946701" duration="58074000" />
+      <workItem from="1592554255836" duration="3033000" />
+      <workItem from="1592579714697" duration="18957000" />
+      <workItem from="1592711047076" duration="1361000" />
+      <workItem from="1592740192470" duration="3646000" />
+      <workItem from="1592787495410" duration="10304000" />
+      <workItem from="1592811595063" duration="12434000" />
+      <workItem from="1592874161431" duration="3316000" />
+      <workItem from="1592878363028" duration="182000" />
+      <workItem from="1592878563505" duration="2302000" />
+      <workItem from="1592889491260" duration="27899000" />
+      <workItem from="1592922811180" duration="2722000" />
+      <workItem from="1592925553085" duration="902000" />
+      <workItem from="1592926465032" duration="10587000" />
+      <workItem from="1592962814497" duration="6961000" />
+      <workItem from="1592976726428" duration="2381000" />
+      <workItem from="1592986963795" duration="6221000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="DemoApplicationTests_adminControllerTest - 2020.06.15 at 11h 37m 52s.xml">
+      <configuration name="DemoApplicationTests.adminControllerTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DemoApplicationTests_seleteAdminTest - 2020.06.15 at 12h 11m 34s.xml">
+      <configuration name="DemoApplicationTests.seleteAdminTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DemoApplicationTests_seleteAdminTest - 2020.06.15 at 12h 13m 02s.xml">
+      <configuration name="DemoApplicationTests.seleteAdminTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DemoApplicationTests_seleteAdminTest - 2020.06.15 at 12h 15m 23s.xml">
+      <configuration name="DemoApplicationTests.seleteAdminTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="EducationApplicationTests_orgMapperTest - 2020.06.15 at 20h 32m 29s.xml">
+      <configuration name="EducationApplicationTests.orgMapperTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="EducationApplicationTests_orgMapperTest - 2020.06.15 at 20h 36m 46s.xml">
+      <configuration name="EducationApplicationTests.orgMapperTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="EducationApplicationTests_orgMapperTest - 2020.06.15 at 20h 39m 30s.xml">
+      <configuration name="EducationApplicationTests.orgMapperTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="EducationApplicationTests_orgMapperTest - 2020.06.15 at 20h 41m 36s.xml">
+      <configuration name="EducationApplicationTests.orgMapperTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="EducationApplicationTests_orgControllerTest - 2020.06.15 at 20h 55m 15s.xml">
+      <configuration name="EducationApplicationTests.orgControllerTest" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="6221000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Designer" />
+      <window_info id="Image Layers" />
+      <window_info id="Capture Tool" />
+      <window_info id="UI Designer" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info id="Web" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17110874" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Spring" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" weight="0.32962137" />
+      <window_info anchor="bottom" id="Problems" />
+      <window_info anchor="bottom" id="Java Enterprise" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32962137" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Maven" weight="0.32995737" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="690" y="275" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1592908901238">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="275" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592908901238" />
+    <state x="765" y="225" key="#com.intellij.ide.util.MemberChooser" timestamp="1592924121327">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="225" key="#com.intellij.ide.util.MemberChooser/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592924121327" />
+    <state x="736" y="387" width="447" height="273" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1592901091878">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="736" y="387" width="447" height="273" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592901091878" />
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1592917129689">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592917129689" />
+    <state x="218" y="169" key="FileChooserDialogImpl" timestamp="1592962959145">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="-1647" y="203" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1592917637464" />
+    <state x="273" y="203" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592275551551" />
+    <state x="218" y="169" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1592962959145" />
+    <state x="273" y="203" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1592878527264" />
+    <state width="1493" height="80" key="GridCell.Tab.0.bottom" timestamp="1592981739298">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1877" height="241" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592960288611" />
+    <state width="1493" height="100" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592877402197" />
+    <state width="1493" height="80" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1592981739298" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592880867526" />
+    <state width="1493" height="80" key="GridCell.Tab.0.center" timestamp="1592981739298">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1877" height="241" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592960288611" />
+    <state width="1493" height="100" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592877402197" />
+    <state width="1493" height="80" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1592981739298" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592880867526" />
+    <state width="1493" height="80" key="GridCell.Tab.0.left" timestamp="1592981739298">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1877" height="241" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592960288611" />
+    <state width="1493" height="100" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592877402196" />
+    <state width="1493" height="80" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1592981739298" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592880867526" />
+    <state width="1493" height="80" key="GridCell.Tab.0.right" timestamp="1592981739298">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1877" height="241" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592960288611" />
+    <state width="1493" height="100" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592877402197" />
+    <state width="1493" height="80" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1592981739298" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592880867526" />
+    <state width="1493" height="80" key="GridCell.Tab.1.bottom" timestamp="1592981739299">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1877" height="241" key="GridCell.Tab.1.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592960288611" />
+    <state width="1493" height="100" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592877402200" />
+    <state width="1493" height="80" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1592981739299" />
+    <state width="1877" height="282" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592880867526" />
+    <state width="1493" height="80" key="GridCell.Tab.1.center" timestamp="1592981739299">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1877" height="241" key="GridCell.Tab.1.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592960288611" />
+    <state width="1493" height="100" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1592877402198" />
+    <state width="1493" height="80" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1592981739299" />
+    <state width="1877" height="282" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592880867526" />
+    <state width="1493" height="80" key="GridCell.Tab.1.left" timestamp="1592981739298">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1877" height="241" key="GridCell.Tab.1.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592960288611" />
+    <state width="1493" height="100" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1592877402198" />
+    <state width="1493" height="80" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1592981739298" />
+    <state width="1877" height="282" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592880867526" />
+    <state width="1493" height="80" key="GridCell.Tab.1.right" timestamp="1592981739299">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1877" height="241" key="GridCell.Tab.1.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592960288611" />
+    <state width="1493" height="100" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1592877402198" />
+    <state width="1493" height="80" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1592981739299" />
+    <state width="1877" height="282" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592880867526" />
+    <state x="497" y="179" key="Maven.ArtifactSearchDialog" timestamp="1592469360888">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="497" y="179" key="Maven.ArtifactSearchDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592469360888" />
+    <state x="352" y="78" key="SettingsEditor" timestamp="1592963000373">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="440" y="94" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592275554667" />
+    <state x="352" y="78" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1592963000373" />
+    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1592878619081" />
+    <state x="753" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592792676226">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="753" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592792676226" />
+    <state x="690" y="274" key="extract.method.dialog" timestamp="1592921993869">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="274" key="extract.method.dialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592921993869" />
+    <state x="623" y="244" key="run.anything.popup" timestamp="1592960046812">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="244" key="run.anything.popup/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592960046812" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1592957470972">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1592957470972" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/springbootdemo$EducationApplication.ic" NAME="EducationApplication Coverage Results" MODIFIED="1592641932693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.huadi.education.*</FILTER>
+    </SUITE>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1022" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/huadi/education/EducationApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/org-details.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="170" column="40" selection-start-line="170" selection-start-column="40" selection-end-line="170" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/course.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="91" column="88" selection-start-line="91" selection-start-column="88" selection-end-line="91" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/current_apply.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="105" column="39" selection-start-line="105" selection-start-column="39" selection-end-line="105" selection-end-column="39" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/lecturer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="104" column="39" selection-start-line="104" selection-start-column="39" selection-end-line="104" selection-end-column="39" />
+          <folding>
+            <element signature="n#ul#0;n#div#0;n#div#0;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/modify_lecturer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="91" column="88" selection-start-line="91" selection-start-column="88" selection-end-line="91" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/modify_course.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="92" column="88" selection-start-line="92" selection-start-column="88" selection-end-line="92" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/modify_apply.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="95" column="25" selection-start-line="95" selection-start-column="25" selection-end-line="95" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/add_course.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="106" column="39" selection-start-line="106" selection-start-column="39" selection-end-line="106" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/add_lecturer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="105" column="39" selection-start-line="105" selection-start-column="39" selection-end-line="105" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/adminList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="119" column="64" selection-start-line="119" selection-start-column="64" selection-end-line="119" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/insertUser.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="82" column="66" selection-start-line="82" selection-start-column="66" selection-end-line="82" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/apply.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1827" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/applyList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="145" column="18" selection-start-line="145" selection-start-column="18" selection-end-line="145" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/modifyApplyList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/insertOrg.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="149" column="31" selection-start-line="149" selection-start-column="31" selection-end-line="149" selection-end-column="31" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/orgList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="56">
+          <caret line="146" column="31" selection-start-line="146" selection-start-column="31" selection-end-line="146" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/insertNews.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="219" column="117" selection-start-line="219" selection-start-column="117" selection-end-line="219" selection-end-column="117" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/newsList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="194" column="130" selection-start-line="194" selection-start-column="130" selection-end-line="194" selection-end-column="130" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/myAccount.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="207" column="77" selection-start-line="207" selection-start-column="77" selection-end-line="207" selection-end-column="77" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#2;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#div#0;n#div#0;n#div#2;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/upload/images/1592990858171.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/classes/static/upload/images/1592990229933.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/huadi/education/controller/OrgAdmController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="725">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/huadi/education/controller/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/huadi/education/controller/OrgApplyController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/huadi/education/controller/ReportController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/huadi/education/controller/InteractiveController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/huadi/education/config/MyMvcConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/huadi/education/controller/OrgController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3132">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/thymeleaf/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8468">
+          <caret line="292" column="5" selection-start-line="283" selection-start-column="4" selection-end-line="292" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>12</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>springbootdemo</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: ch.qos.logback:logback-classic:1.2.3</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

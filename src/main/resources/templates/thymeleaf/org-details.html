@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Favicon icons -->
+  <link href="visitor/images/favicon.png" rel="shortcut icon">
+
+  <!-- All CSS -->
+  <link rel="stylesheet" href="visitor/css/bootstrap.min.css">
+  <link rel="stylesheet" href="visitor/css/themify-icons.css">
+  <link rel="stylesheet" href="visitor/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="visitor/other/layui/css/layui.css">
+  <link rel="stylesheet" href="visitor/css/style.css">
+  <!-- <link rel="stylesheet" href="visitor/other/layui/css/layui.css"> -->
+
+  <title>机构名</title>
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="preloader">
+  <div id="status"></div>
+</div>
+
+<!-- Header strat -->
+<header class="header">
+  <div class="container">
+    <nav class="navbar">
+      <!-- Site logo -->
+      <a href="index.html" class="logo">
+        <img src="/visitor/images/logo.png" alt="">
+      </a>
+      <a href="javascript:void(0);" id="mobile-menu-toggler">
+        <i class="ti-align-justify"></i>
+      </a>
+      <ul class="navbar-nav">
+        <li><a href="/index">首页</a></li>
+        <li><a href="/searchlist">定位搜索</a></li>
+        <li class="has-menu-child" style="margin-right: 10px;">
+          <a href="javascript:void(0);">曝光台</a>
+          <ul class="sub-menu">
+            <li><a href="/whitelists">白名单</a></li>
+            <li><a href="/blocklists">黑名单</a></li>
+          </ul>
+        </li>
+        <li class="has-menu-child" style="margin-right: 10px;">
+          <a href="javascript:void(0);">信息公示</a>
+          <ul class="sub-menu">
+            <li><a href="/policylist">政策法规</a></li>
+            <li><a href="/newslist">通知公告</a></li>
+          </ul>
+        </li>
+        <li><a href="/report.html">监督反馈</a></li>
+        <li class="has-menu-child" style="margin-right: 10px;">
+          <a href="javascript:void(0);">用户登录</a>
+          <ul class="sub-menu">
+            <li><a href="login.html">用户登录</a></li>
+            <li><a href="apply.html">机构申请</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- Header strat -->
+
+<!-- Page feature start -->
+<section class="page-feature">
+  <div class="container text-center">
+    <h2>机构详情</h2>
+    <div class="breadcrumb">
+      <a href="index.html">返回列表</a>
+      <span>/ 机构详情</span>
+    </div>
+  </div>
+</section>
+<!-- Page feature end -->
+
+<!-- Course Details section start -->
+<section class="course-details">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="course-content">
+          <h4 style="margin-bottom: 15px; font-size: 1.5rem;">[[${orgInfo.orgName}]] <span class="badge" style="font-size: 16px; color: white; background-color: #06979d;">正常办学</span></h4>
+          <p style="display: inline-block; padding-right: 8.7rem; margin-bottom: 5px;">许可证号：[[${orgInfo.licenseKey}]]</p>
+          <p style="display: inline-block; padding-right: 8.7rem; margin-bottom: 5px;">有效期限：2019-08-13 至 2024-08-12</p>
+          <p style="display: inline-block; padding-right: 8.7rem; margin-bottom: 5px;" th:if="${orgInfo.blackReason} !=null">进入黑名单的理由: [[${orgInfo.blackReason}]]</p>
+          <div class="details">
+            <span style="font-size: medium;">最近更新时间：2020-06-19</span>
+          </div>
+        </div>
+
+        <div class="course-curriculum">
+          <ul class="nav nav-tabs">
+            <li><a class="active" data-toggle="tab" href="#overview">基础信息</a></li>
+            <li><a data-toggle="tab" href="#curriculum">课程信息</a></li>
+            <li><a data-toggle="tab" href="#courseObj">教师信息</a></li>
+          </ul>
+
+          <div class="tab-content" style="font-size: 1rem; line-height: 2.2; color:dimgrey;">
+            <div id="overview" class="tab-pane fade in show active">
+              <h4 class="tab-title">机构基本信息</h4>
+              <ul class="tab-list-2col mb-4" style="margin-bottom: 0!important;">
+                <li><i class="ti-user"></i>校&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;长：[[${orgInfo.principal}]]</li>
+                <li><i class="ti-user"></i>法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人：[[${orgInfo.legalPerson}]]</li>
+                <li><i class="ti-money"></i>机构类型：[[${orgInfo.orgType}]]</li>
+                <li><i class="ti-menu"></i>办学类型：语言类</li>
+                <li><i class="ti-mobile"></i>联系电话：[[${orgInfo.publicTel}]]</li>
+                <li><i class="ti-comments"></i>累计投诉：[[${orgInfo.complainNum}]]</li>
+              </ul>
+              <ul style="margin-bottom: 20px;">
+                <li><i class="ti-home"></i>机构地址：[[${orgInfo.address}]]</li>
+              </ul>
+
+              <h4 class="tab-title">机构简介</h4>
+              <p>青岛市市南区新航道语言培训学校有限公司是新航道国际教育集团直属一级分校。凭借深厚的学术功底、务实的教学作风和旺盛的进取精神，新航道学校在业内迅速脱颖而出，在教学内容、授课质量、环境服务等多个方面，为业界创立了全新的教学理念和服务标准。</p>
+              <p>青岛新航道雅思由“中国雅思之父”胡敏教授领衔的“雅思梦之队”全程执教，依托胡敏雅思完善的阶梯式课程体系，采用备受追捧的胡敏雅思金牌教程，小班授课，从基础到技巧。</p>
+
+            </div>
+            <div id="curriculum" class="tab-pane fade">
+              <div class="accordion" id="accordion">
+                <div class="accordion-item" th:each="course: ${orgCourseInfo}">
+                  <h5 class="" data-toggle="collapse" data-target="#t-acpan1" aria-expanded="true" >
+                    [[${course.cozname}]]
+                    <span>学时([[${course.hours}]])</span>
+                  </h5>
+                  <div id="t-acpan1" class="collapse show" data-parent="#accordion">
+                    <div class="acr-body">
+                      <ul>
+                        <li><a href="javascript:void(0);" th:onclick="courseScore([[${course.cozid}]])"><i class="ti-control-play"></i>课程评分：[[${course.cozscore}]]</a></li>
+                        <li><a href="#" style="pointer-events: none;"><i class="ti-control-play"></i>班次：[[${course.shift}]]</a></li>
+                        <li><a href="#" style="pointer-events: none;"><i class="ti-control-play"></i>授课教师：[[${course.teacher}]]</a></li>
+                        <li><a href="#" style="pointer-events: none;"><i class="ti-control-play"></i>授课形式：[[${course.teachingform}]]</a></li>
+                        <li><a href="#" style="pointer-events: none;"><i class="ti-control-play"></i>授课起始时间：[[${course.starttime}]]</a></li>
+                        <li><a href="#" style="pointer-events: none;"><i class="ti-control-play"></i>授课结束时间：[[${course.endtime}]]</a></li>
+                        <li><a href="#" style="pointer-events: none;"><i class="ti-control-play"></i>学生规模：[[${course.studentsize}]]</a></li>
+                        <li><a href="#" style="pointer-events: none;"><i class="ti-control-play"></i>招生对象：[[${course.enrltarget}]]</a></li>
+                        <li><a href="#" style="pointer-events: none;"><i class="ti-control-play"></i>收费标准：[[${course.cozcharges}]]</a></li>
+                        <li th:switch = "${course.coztype}" >
+                          <a  th:case="1" href="#" style="pointer-events: none;"><i class="ti-control-play"></i>课程类型：文理类</a>
+                          <a  th:case="2" href="#" style="pointer-events: none;"><i class="ti-control-play"></i>课程类型：艺术类</a>
+                          <a  th:case="3" href="#" style="pointer-events: none;"><i class="ti-control-play"></i>课程类型：语言类</a>
+                          <a  th:case="4" href="#" style="pointer-events: none;"><i class="ti-control-play"></i>课程类型：科技类</a>
+                          <a  th:case="5" href="#" style="pointer-events: none;"><i class="ti-control-play"></i>课程类型：其他</a>
+                        </li>
+                        <li><a href="#" style="pointer-events: none;"><i class="ti-control-play"></i>授课内容：[[${course.cozcontent}]]</a></li>
+                        <li><a href="#" style="pointer-events: none;"><i class="ti-control-play"></i>教学目标：[[${course.cozobjective}]]</a></li>
+                        <li><a href="#" style="pointer-events: none;"><i class="ti-control-play"></i>课程特色：[[${course.cozfeature}]]</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="courseObj" class="tab-pane fade">
+              <div class="accordion" id="accordion2">
+                <div class="accordion-item"  th:each="teacher:${orgTeacherInfo}" >
+                  <h5 class="" data-toggle="collapse" data-target="#c-acpan1" aria-expanded="true">
+                    [[${teacher.tchname}]]
+                    <span>[[${teacher.tchcontent}]]</span>
+                  </h5>
+                  <div id="c-acpan1" class="collapse show" data-parent="#accordion2">
+                    <div class="acr-body">
+                      <ul>
+                        <li th:switch = "${teacher.tchgender}" >
+                          <a  th:case="1" href="#" style="pointer-events: none;"><i class="ti-control-play"></i>性别：男</a>
+                          <a  th:case="0" href="#" style="pointer-events: none;"><i class="ti-control-play"></i>性别：女</a>
+                        </li>
+                        <li><a href="#" style="pointer-events: none;"><i class="ti-control-play"></i>资格证编号：[[${teacher.tchcertnum}]]</a></li>
+                        <li><a href="#" style="pointer-events: none;"><i class="ti-control-play"></i>入职时间：[[${teacher.tchentrytime}]]</a></li>
+                        <li><a href="#" style="pointer-events: none;"><i class="ti-control-play"></i>学历：[[${teacher.tcheducation}]]</a></li>
+                        <li><a href="#" style="pointer-events: none;"><i class="ti-control-play"></i>毕业院校：[[${teacher.tchschool}]]</a></li>
+                        <li th:switch = "${teacher.tchisforeign}" >
+                          <a  th:case="0" href="#" style="pointer-events: none;"><i class="ti-control-play"></i>是否外籍教师：否</a>
+                          <a  th:case="1" href="#" style="pointer-events: none;"><i class="ti-control-play"></i>是否外籍教师：是</a>
+                        </li>
+                        <li th:switch = "${teacher.tchpermitnuminchina}" >
+                          <a  th:case="0" href="#" style="pointer-events: none;"><i class="ti-control-play"></i>来华工作证编号：无</a>
+                          <a  th:case="*" href="#" style="pointer-events: none;"><i class="ti-control-play"></i>来华工作证编号：[[${teacher.tchpermitnuminchina}]]</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="comments">
+          <h4 class="comment-title" style="font-size: 1.3rem;">评论</h4>
+          <ul th:each="comment:${orgComments}">
+            <ul class="cmnt-level-2" th:if="${comment.comType} eq 4">
+              <li>
+                <div class="single-comment">
+                  <div class="user-thumb">
+                    <img class="avatar-small circle" src="visitor/images/avatar-small.png" alt="">
+                  </div>
+                  <div class="comments-body">
+                    <h4>[[${comment.userName}]]</h4>
+                    <p>[[${comment.comments}]]</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+            <li th:if="${comment.comType} eq 1">
+              <div class="single-comment">
+                <div class="user-thumb">
+                  <img class="avatar-small circle" src="visitor/images/avatar-small.png" alt="">
+                </div>
+                <div class="comments-body">
+                  <h4>[[${comment.userName}]]</h4>
+                  <p>[[${comment.comments}]]</p>
+                  <a href="javascript:void(0)" th:onclick="reply([[${comment.comID}]])"><i class="ti-back-right"></i>回复</a>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+
+        <div class="comment-form">
+          <h4 class="comment-title" style="font-size: 1.3rem;">留下您的评论</h4>
+          <form action="#">
+            <textarea id="comment" placeholder="写下评论"></textarea>
+            <button class="btn btn-filled btn-round ml-auto" onclick="submitCommentBtn()" type="button" style="font-size: 16px;"><span class="bh"></span> <span>提交</span></button>
+          </form>
+        </div>
+
+      </div>
+      <div class="col-lg-4">
+        <aside class="sidebar">
+          <div class="widget instractors">
+            <figure style="margin-bottom: 10px;">
+              <img src="visitor/images/license.jpg" alt="" id="licenseFile">
+            </figure>
+            <h4>办学许可证</h4>
+          </div>
+
+          <div class="widget recent-courses">
+            <h3 class="widget-title">同类课程推荐</h3>
+            <ul>
+              <li th:each="cr: ${orgCourseRecommendation}" >
+                <a href="#">
+                  <img src="visitor/images/lectures/3.jpg" alt="">
+                  <h5 th:text="${cr.cozname}">英语口语</h5>
+                  <div th:switch="${cr.coztype}">
+                    <span class="skills" style="font-size: 0.9rem;" th:case="1">文理类</span>
+                    <span class="skills" style="font-size: 0.9rem;" th:case="2">艺术类</span>
+                    <span class="skills" style="font-size: 0.9rem;" th:case="3">语言类</span>
+                    <span class="skills" style="font-size: 0.9rem;" th:case="4">科技类</span>
+                    <span class="skills" style="font-size: 0.9rem;" th:case="5">其他</span>
+                  </div>
+                  <span class="lectures" style="font-size: 0.9rem;" th:text="${cr.teacher}">青岛金笔语言文化培训学校</span>
+                </a>
+              </li>
+
+
+            </ul>
+          </div>
+
+
+            </ul>
+          </div>
+
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Courses Details section end -->
+
+<!-- Footer strat -->
+<footer class="footer">
+  <div class="foo-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-sm-6">
+          <div class="widget widget-navigation">
+            <h4 class="widget-title">联系方式</h4>
+            <ul>
+              <li><a href="tel:+6119XXXXXXX" >咨询方式：010-6119XXXX-XXX</a></li>
+              <li><a href="mailto:XXXX@cse.edu.cn" >客服邮箱：XXXX@cse.edu.cn</a></li>
+              <li><a href="" style="pointer-events: none;">官方微信：XXXX机构规范平台</a></li>
+              <li><a href="" style="pointer-events: none;">微信公众号：gh-76ba7712XXXX</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <div class="widget widget-navigation">
+            <h4 class="widget-title">友情链接</h4>
+            <ul>
+              <li><a href="http://www.moe.gov.cn/">中国人民共和国教育部</a></li>
+              <li><a href="http://www.scedu.net/">四川省教育厅</a></li>
+              <li><a href="http://edu.chengdu.gov.cn/">成都市教育局</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="foo-btm">
+    <div class="container">
+      <p class="copyright">Copyright &copy; 2019.Company name All rights reserved.</p>
+    </div>
+  </div>
+
+</footer>
+<!-- Footer end -->
+
+<!-- JS -->
+<script src="visitor/js/jquery-3.3.1.min.js"></script>
+<script src="visitor/js/jquery-ui.min.js"></script>
+<script src="visitor/js/bootstrap.min.js"></script>
+<script src="visitor/js/owl.carousel.min.js"></script>
+<script src="visitor/js/scripts.js"></script>
+<script src="visitor/js/layer/layer.js"></script>
+<script src="visitor/other/layui/layui.js"></script>
+
+
+<!-- 图片预览 -->
+<script>
+  $('#licenseFile').click(function(config) {
+    // 输入文件路径
+    config.src = "visitor/images/license.jpg";
+    if(!config.src || config.src==""){
+      layer.msg("没有发现图片！");
+      return ;
+    }
+    var default_config = {title: "图片预览"};
+    console.log(default_config);
+    var img = new Image();
+    img.onload = function() {//避免图片还未加载完成无法获取到图片的大小。
+      //避免图片太大，导致弹出展示超出了网页显示访问，所以图片大于浏览器时下窗口可视区域时，进行等比例缩小。
+      var max_height = $(window).height() - 100;
+      var max_width = $(window).width();
+      //rate1，rate2，rate3 三个比例中取最小的。
+      var rate1 = max_height/img.height;
+      var rate2 = max_width/img.width;
+      var rate3 = 1;
+      var rate = Math.min(rate1,rate2,rate3);
+      //等比例缩放
+      default_config.height = img.height * rate; //获取图片高度
+      default_config.width = img.width  * rate; //获取图片宽度
+      console.log(default_config);
+
+      $.extend( default_config, config);
+      var imgHtml = "<img src='" + default_config.src + "' width='"+default_config.width+"px' height='"+default_config.height+"px'/>";
+      //弹出层
+      layer.open({
+        type: 1,
+        shade: 0.8,
+        offset: 'auto',
+        area: [default_config.width + 'px',default_config.height + 50 +'px'], ////宽，高
+        shadeClose:true,
+        scrollbar: false,
+        title: default_config.title, //不显示标题
+        content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+        cancel: function () {
+          //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+        }
+      });
+    }
+    img.src = config.src;
+  })
+</script>
+
+
+<!--回复评论-->
+<script>
+  function reply(comID){
+    //prompt层
+    layer.prompt({title: '请输入您的回复，并确认', formType: 2}, function(text, index){
+      layer.close(index);
+      submitComment(comID, 4, text);
+       //layer.msg('感谢您的回复');
+    });
+  }
+</script>
+
+<!--提交评论/回复 ajax-->
+<script>
+  function submitComment(id, type, text){
+    $.ajax({
+      type:"POST",
+      url:"submitComment",
+      data:{
+        comID: id,
+        comType: type,
+        comments: text,
+      },
+      success: function(data) {
+        // console.log(data);
+        if (data.msg == 1){
+          layer.msg('提交成功，感谢您的评论！', {time: 700});
+        }
+        else{
+          layer.msg('提交失败', {time: 700});
+        }
+      },
+    });
+  }
+</script>
+
+<!--点击评论按钮，调用提交方法-->
+<script>
+  function submitCommentBtn() {
+    var text = document.getElementById("comment").value;
+    // console.log(text);
+    var orgid= [[${orgInfo.orgID}]];
+    submitComment(orgid, 1, text);
+    document.getElementById("comment").value = '';
+  }
+</script>
+
+
+<!--提交课程评分 ajax-->
+<script>
+  function submitScore(id, score){
+    $.ajax({
+      type:"POST",
+      url:"/submitScore",
+      data:{
+        cozID: id,
+        score: score,
+      },
+      success: function(data) {
+        if (data.msg == 1){
+          layer.msg('提交成功，感谢您的评分！', {time: 700});
+        }
+        else{
+          layer.msg('提交失败', {time: 700});
+        }
+      },
+    });
+  }
+</script>
+
+<!-- 课程评分 -->
+<script>
+  function courseScore(cozid){
+    //prompt层
+    layer.prompt({title: '请输入您对该课程的评分(1-5)，并确认', formType: 0}, function(pass, index){
+      layer.close(index);
+      // layer.msg('感谢您的评分',{time: 700});
+      submitScore(cozid, pass);
+    });
+  }
+</script>
+</body>
+</html>

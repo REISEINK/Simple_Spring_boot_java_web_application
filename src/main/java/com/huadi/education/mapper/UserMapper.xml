@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace表示命名空间 -->
+<mapper namespace="com.huadi.education.mapper.UserMapper">
+    <resultMap id="userWithOrg" type="com.huadi.education.entity.User">
+        <id property="userID" column="userID"></id>
+        <result property="tel" column="tel"></result>
+        <result property="name" column="name"></result>
+        <result property="access" column="access"></result>
+        <result property="passwd" column="passwd"></result>
+        <result property="email" column="email"></result>
+        <result property="status" column="status"></result>
+        <association property="org" column="orgID" javaType="com.huadi.education.entity.Org">
+            <id property="orgID" column="orgID"></id>
+            <result property="orgName" column="orgName"></result>
+            <result property="licenseKey" column="licenseKey" ></result>
+            <result property="licenseFile" column="licenseFile"></result>
+            <result property="orgType" column="orgType"></result>
+            <result property="legalPerson" column="legalPerson"></result>
+            <result property="principal" column="principal"></result>
+            <result property="operationType" column="operationType"></result>
+            <result property="publicTel" column="publicTel"></result>
+            <result property="regStatus" column="regStatus"></result>
+            <result property="address" column="address"></result>
+            <result property="complainNum" column="complainNum"></result>
+            <result property="blackReason" column="blackReason"></result>
+            <result property="haveAdm" column="haveAdm"></result>
+            <result property="operationInfo" column="operationInfo"></result>
+        </association>
+    </resultMap>
+
+    <resultMap id="modifyApplyWithOrg" type="com.huadi.education.entity.ModifyApply">
+        <id property="modID" column="modID"></id>
+        <result property="modStatus" column="modStatus"></result>
+        <result property="legalPerson" column="legalPerson"></result>
+        <result property="principal" column="principal"></result>
+        <result property="publicTel" column="publicTel"></result>
+        <result property="address" column="address"></result>
+        <result property="operationInfo" column="operationInfo"></result>
+        <result property="feedback" column="feedback"></result>
+        <association property="org" column="orgID" javaType="com.huadi.education.entity.Org">
+            <id property="orgID" column="orgID"></id>
+            <result property="orgName" column="orgName"></result>
+            <result property="licenseKey" column="licenseKey" ></result>
+            <result property="licenseFile" column="licenseFile"></result>
+            <result property="orgType" column="orgType"></result>
+            <result property="legalPerson" column="o_legalPerson"></result>
+            <result property="principal" column="o_principal"></result>
+            <result property="operationType" column="operationType"></result>
+            <result property="publicTel" column="o_publicTel"></result>
+            <result property="regStatus" column="regStatus"></result>
+            <result property="address" column="o_address"></result>
+            <result property="complainNum" column="complainNum"></result>
+            <result property="blackReason" column="blackReason"></result>
+            <result property="haveAdm" column="haveAdm"></result>
+            <result property="operationInfo" column="o_operationInfo"></result>
+        </association>
+    </resultMap>
+
+    <select id="findOrgUserById" parameterType="Integer" resultMap="userWithOrg">
+        select * from user natural join org where userID = #{id}
+    </select>
+
+    <select id="findOrgByLicense" parameterType="String" resultType="com.huadi.education.entity.Org">
+        select * from org where licenseKey = #{licenseKey}
+    </select>
+
+    <select id="findAllOrgUser" resultMap="userWithOrg">
+        select * from user natural join org where access = 3
+    </select>
+
+    <select id="findUserById" parameterType="Integer" resultType="com.huadi.education.entity.User">
+        select * from user where userID = #{id}
+    </select>
+
+    <insert id="insertUser" parameterType="com.huadi.education.entity.User" keyProperty="userID" useGeneratedKeys="true">
+        insert into user (tel,name,access,passwd,email,status)
+        values(#{tel},#{name},2,#{passwd},#{email},1)
+    </insert>
+
+    <insert id="insertOrgUser" parameterType="com.huadi.education.entity.User" keyProperty="userID" useGeneratedKeys="true">
+        insert into user (orgID,tel,name,access,passwd,email,status)
+        values(#{org.orgID},#{tel},#{name},3,123456,#{email},1)
+    </insert>
+
+    <select id="findAll" parameterType="com.huadi.education.entity.User" resultType="com.huadi.education.entity.User">
+         select userID, tel, name, access, email, status from user where access = 2
+    </select>
+
+    <select id="findAllOrg" parameterType="com.huadi.education.entity.Org" resultType="com.huadi.education.entity.Org">
+         select orgID, orgName, licenseKey, orgType, legalPerson, principal, operationType, publicTel, regStatus, address, complainNum, haveAdm from org
+    </select>
+
+    <select id="findAllNews" parameterType="com.huadi.education.entity.News" resultType="com.huadi.education.entity.News">
+         select * from news ORDER BY top DESC, date DESC;
+    </select>
+
+    <select id="showAllModifyApply" resultMap="modifyApplyWithOrg">
+         select
+            m.modID,
+            m.modStatus,
+            m.legalPerson,
+            m.principal,
+            m.publicTel,
+            m.address,
+            m.operationInfo,
+            m.feedback,
+            o.orgID,
+            o.orgName,
+            o.licenseKey,
+            o.licenseFile,
+            o.orgType,
+            o.legalPerson "o_legalPerson",
+            o.principal "o_principal",
+            o.operationType,
+            o.publicTel "o_publicTel",
+            o.regStatus,
+            o.address "o_address",
+            o.complainNum,
+            o.blackReason,
+            o.haveAdm,
+            o.operationInfo "o_operationInfo"
+        from org_modify_apply m  left join org o on (m.orgID=o.orgID)  ORDER BY modStatus ASC, modID DESC;
+    </select>
+
+    <update id="modifyStatus" >
+        update user set
+        status = #{status}
+        where userID = #{id}
+    </update>
+
+    <update id="modifyOrgStatus" >
+        update org set
+        regStatus = #{status}
+        where orgID = #{id}
+    </update>
+
+    <update id="setTopStatus" >
+        update news set
+        top = #{top}
+        where newsID = #{id}
+    </update>
+
+    <update id="verifyAccount" >
+        update org_apply set
+        applyStatus = 1
+        where applyID = #{id}
+    </update>
+
+    <update id="verifyModify" >
+        update org_modify_apply set
+        modStatus = 1
+        where modID = #{id}
+    </update>
+
+    <update id="backAccount" >
+        update org_apply set
+        applyStatus = 2
+        where applyID = #{id}
+    </update>
+
+    <update id="backModify" >
+        update org_modify_apply set
+        modStatus = 2
+        where modID = #{id}
+    </update>
+
+    <update id="updateModifyApply" parameterType="com.huadi.education.entity.ModifyApply">
+        update org_modify_apply
+        <set>
+            <if test="feedback!=null and feedback!=''">feedback = #{feedback},</if>
+        </set>
+        where modID = #{modID}
+    </update>
+
+    <update id="updateUser" parameterType="com.huadi.education.entity.User">
+        update user
+        <set>
+            <if test="name!=null and name!=''">name = #{name},</if>
+            <if test="tel!=null and tel!=''">tel = #{tel},</if>
+            <if test="email!=null and email!=''">email = #{email},</if>
+            <if test="passwd!=null and passwd!=''">passwd = #{passwd},</if>
+        </set>
+        where userID = #{userID}
+    </update>
+
+    <update id="updateOrgModify" parameterType="com.huadi.education.entity.Org">
+        update org
+        <set>
+            <if test="legalPerson!=null and legalPerson!=''">legalPerson = #{legalPerson},</if>
+            <if test="principal!=null and principal!=''">principal = #{principal},</if>
+            <if test="publicTel!=null and publicTel!=''">publicTel = #{publicTel},</if>
+            <if test="address!=null and address!=''">address = #{address},</if>
+            <if test="operationInfo!=null and operationInfo!=''">operationInfo = #{operationInfo},</if>
+        </set>
+        where orgID = #{orgID}
+    </update>
+
+    <delete id="deleteUserById" parameterType="Integer">
+        delete from user where userID = #{id}
+    </delete>
+
+    <delete id="deleteOrgById" parameterType="Integer">
+        delete from org where orgID = #{id}
+    </delete>
+
+    <delete id="deleteUserByOrgId" parameterType="Integer">
+        delete from user where orgID = #{id}
+    </delete>
+
+    <delete id="deleteModifyByOrgId" parameterType="Integer">
+        delete from org_apply where orgID = #{id}
+    </delete>
+
+    <delete id="deleteApplyByOrgId" parameterType="Integer">
+        delete from org_modify_apply where orgID = #{id}
+    </delete>
+
+    <delete id="deleteAddressByOrgId" parameterType="Integer">
+        delete from address where orgID = #{id}
+    </delete>
+
+    <delete id="deleteModifyApplyById" parameterType="Integer">
+        delete from org_modify_apply where modID = #{id}
+    </delete>
+
+
+    <delete id="deleteNewsById" parameterType="Integer">
+        delete from news where newsID = #{id}
+    </delete>
+
+    <insert id="insertOrg" parameterType="com.huadi.education.entity.Org" keyProperty="orgID" useGeneratedKeys="true">
+        insert into org (orgName,licenseKey,licenseFile,orgType,legalPerson,principal,operationType,publicTel,regStatus,address,operationInfo,complainNum,blackReason,haveAdm)
+        values(#{orgName},#{licenseKey},#{licenseFile},#{orgType},#{legalPerson},#{principal},#{operationType},#{publicTel},#{regStatus},#{address},#{operationInfo},#{complainNum},#{blackReason},#{haveAdm})
+    </insert>
+
+    <insert id="insertNews" parameterType="com.huadi.education.entity.News" keyProperty="newsID" useGeneratedKeys="true">
+        insert into news (title, date, event, fileSrc, top, category)
+        values(#{title},SYSDATE(),#{event},#{fileSrc},#{top},#{category})
+    </insert>
+
+</mapper>

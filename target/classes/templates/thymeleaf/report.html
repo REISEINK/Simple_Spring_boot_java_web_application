@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Favicon icons -->
+  <link href="/visitor/images/favicon.png" rel="shortcut icon">
+
+  <!-- All CSS -->
+  <link rel="stylesheet" href="/visitor/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/visitor/css/themify-icons.css">
+  <link rel="stylesheet" href="/visitor/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="/visitor/css/style.css">
+  <link rel="stylesheet" href="/visitor/css/myself.css">
+  <link rel="stylesheet" href="/visitor/other/layui/css/layui.css">
+
+  <title>监督反馈</title>
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="preloader">
+  <div id="status"></div>
+</div>
+
+<!-- Header strat -->
+<header class="header">
+  <div class="container">
+    <nav class="navbar">
+      <!-- Site logo -->
+      <a href="index.html" class="logo">
+        <img src="/visitor/images/logo.png" alt="">
+      </a>
+      <a href="javascript:void(0);" id="mobile-menu-toggler">
+        <i class="ti-align-justify"></i>
+      </a>
+      <ul class="navbar-nav">
+        <li><a href="/index">首页</a></li>
+        <li><a href="/searchlist">定位搜索</a></li>
+        <li class="has-menu-child" style="margin-right: 10px;">
+          <a href="javascript:void(0);">曝光台</a>
+          <ul class="sub-menu">
+            <li><a href="/whitelists">白名单</a></li>
+            <li><a href="/blocklists">黑名单</a></li>
+          </ul>
+        </li>
+        <li class="has-menu-child" style="margin-right: 10px;">
+          <a href="javascript:void(0);">信息公示</a>
+          <ul class="sub-menu">
+            <li><a href="/policylist">政策法规</a></li>
+            <li><a href="/newslist">通知公告</a></li>
+          </ul>
+        </li>
+        <li><a href="/report.html">监督反馈</a></li>
+        <li class="has-menu-child" style="margin-right: 10px;">
+          <a href="javascript:void(0);">用户登录</a>
+          <ul class="sub-menu">
+            <li><a href="/login">用户登录</a></li>
+            <li><a href="/orgApply/toSubmit">机构申请</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- Header strat -->
+
+<!-- Page feature start -->
+<section class="page-feature">
+  <div class="container text-center">
+    <h2>监督反馈</h2>
+    <div class="breadcrumb">
+      <a href="index.html">首页</a>
+      <span>/ 监督反馈</span>
+    </div>
+  </div>
+</section>
+<!-- Page feature end -->
+
+<!-- Contact section start -->
+<section class="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 col-md-9 m-auto text-center">
+        <div class="sec-heading">
+          <span class="tagline" style="font-size: 22px;">联系我们</span>
+          <h3 class="sec-title" style="font-size: 32px; line-height: 1.5;">如果您对站内教育机构有任何意见或建议, <br>请留下您的反馈</h3>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="split-line">
+          <span class="line"></span>
+          <span class="txt"> 监督反馈详情 </span>
+          <span class="line"></span>
+        </div>
+        <form id="repoForm" action="">
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <label for="orgName">机构名称</label>
+              <input name="orgName" type="text" class="form-control" id="orgName" placeholder="请输入机构全称 (确保与站内显示的机构全称一致)" required>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="repoType">反馈类型</label>
+              <select name="repoType" id="repoType" class="form-control" style="height: 46px; padding-bottom: 10px;">
+                <option value="1">办学资质</option>
+                <option value="2">培训课程</option>
+                <option value="3">师资队伍</option>
+                <option value="4">场地安全及环境</option>
+                <option value="5">培训费用</option>
+                <option value="6">其他</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="repoEvent">反馈详情</label>
+            <textarea name="repoEvent" class="form-control" id="repoEvent" placeholder="描述反馈的详细内容" required=""></textarea>
+          </div>
+          <!-- 文件上传 begin -->
+          <div class="layui-upload">
+            <button type="button" class="layui-btn layui-btn-normal" id="testList" style="background-color: #0c2e60;">选择多文件</button>
+            <div class="layui-upload-list">
+              <table class="layui-table">
+                <thead>
+                <tr><th>文件名</th>
+                  <th>大小</th>
+                  <th>状态</th>
+                  <th>操作</th>
+                </tr></thead>
+                <tbody id="demoList"></tbody>
+              </table>
+            </div>
+            <button type="button" class="layui-btn" id="fileAction">开始上传</button>
+          </div>
+          <!-- 文件上传 end -->
+          <div class="form-group" style="margin-bottom: 0;">
+            <input type="hidden" id="fileNames" name="fileNames"/>
+          </div>
+          <div class="split-line">
+            <span class="line"></span>
+            <span class="txt"> 反馈人详情 </span>
+            <span class="line"></span>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <label for="whistleName">姓名</label>
+              <input type="text" class="form-control" id="whistleName" name="whistleName" placeholder="请输入姓名" required>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="whistleTel">联系电话</label>
+              <input type="text" class="form-control" id="whistleTel" name="whistleTel" placeholder="请输入联系电话">
+              <span></span>
+            </div>
+            <div class="form-group col-sm-12">
+              <label for="whistleID">身份证号</label>
+              <input type="text" class="form-control" id="whistleID" name="whistleID" placeholder="请输入身份证号" required>
+              <span></span>
+            </div>
+          </div>
+          <button type="button" class="btn btn-default" id="submit" name="submit" onclick="save()" style="font-size: 16px;">提交</button>
+        </form>
+      </div>
+      <div class="col-md-4">
+        <aside class="sidebar">
+          <div class="widget contact-info">
+            <h3 class="widget-title">温馨提示</h3>
+            <p style="font-size: initial; line-height: 1.7; color: dimgray;">内部管理人员在对民众反馈的内容与相关部门进行核实并确认后，将会根据反馈人留下的联系电话以手机短信的形式通知最后的处理结果。</p><br>
+            <p style="font-size: initial; line-height: 1.7; color: dimgray;">除了直接在网站上提交反馈，您也可以选择通过下列联系方式，联系我们内部管理人员进行反馈。</p>
+            <div>
+              <h6>热线电话</h6>
+              <a href="tel:+12345678912">+123 4567 8912</a>
+            </div>
+            <div>
+              <h6>电子邮箱</h6>
+              <a href="mailto:report@example.com">report@example.com</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Contact section end -->
+
+<!-- Footer strat -->
+<footer class="footer">
+  <div class="foo-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-sm-6">
+          <div class="widget widget-navigation">
+            <h4 class="widget-title">联系方式</h4>
+            <ul>
+              <li><a href="tel:+6119XXXXXXX" >咨询方式：010-6119XXXX-XXX</a></li>
+              <li><a href="mailto:XXXX@cse.edu.cn" >客服邮箱：XXXX@cse.edu.cn</a></li>
+              <li><a href="" style="pointer-events: none;">官方微信：XXXX机构规范平台</a></li>
+              <li><a href="" style="pointer-events: none;">微信公众号：gh-76ba7712XXXX</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <div class="widget widget-navigation">
+            <h4 class="widget-title">友情链接</h4>
+            <ul>
+              <li><a href="http://www.moe.gov.cn/">中国人民共和国教育部</a></li>
+              <li><a href="http://www.scedu.net/">四川省教育厅</a></li>
+              <li><a href="http://edu.chengdu.gov.cn/">成都市教育局</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="foo-btm">
+    <div class="container">
+      <p class="copyright">Copyright &copy; 2019.Company name All rights reserved.</p>
+    </div>
+  </div>
+
+</footer>
+<!-- Footer end -->
+
+<!-- JS -->
+<script src="/visitor/js/jquery-3.3.1.min.js"></script>
+<script src="/visitor/js/jquery-ui.min.js"></script>
+<script src="/visitor/js/bootstrap.min.js"></script>
+<script src="/visitor/js/owl.carousel.min.js"></script>
+<!-- <script src="https://ditu.google.cn/maps/api/js?key=AIzaSyCxYLtelXg0PGjeTiFDtlN7nrH_47buDWo"></script> -->
+<script src="/visitor/js/scripts.js"></script>
+<script src="/visitor/other/layui/layui.js"></script>
+<!--<script src="/visitor/js/layer/layer.js"></script>-->
+
+<!-- 文件上传 -->
+<script>
+  var files = [];
+  var fileNames;
+  layui.use('upload', function(){
+    var $ = layui.jquery;
+    var upload = layui.upload;
+
+    //多文件列表示例
+    var demoListView = $('#demoList')
+            ,uploadListIns = upload.render({
+      elem: '#testList'
+      ,url: '/uploadReportFiles' //改成您自己的上传接口
+      ,accept: 'file'
+      ,multiple: true
+      ,auto: false
+      ,bindAction: '#fileAction'
+      ,choose: function(obj){
+        var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+        //读取本地文件
+        obj.preview(function(index, file, result){
+          var tr = $(['<tr id="upload-'+ index +'">'
+            ,'<td>'+ file.name +'</td>'
+            ,'<td>'+ (file.size/1024).toFixed(1) +'kb</td>'
+            ,'<td>等待上传</td>'
+            ,'<td>'
+            ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+            ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+            ,'</td>'
+            ,'</tr>'].join(''));
+
+          //单个重传
+          tr.find('.demo-reload').on('click', function(){
+            obj.upload(index, file);
+          });
+
+          //删除
+          tr.find('.demo-delete').on('click', function(){
+            delete files[index]; //删除对应的文件
+            tr.remove();
+            uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+          });
+
+          demoListView.append(tr);
+        });
+      }
+      ,done: function(res, index, upload){
+        if(res.code == 0){ //上传成功
+          if(fileNames != null){
+            fileNames = fileNames + '&&' + res.fileName;
+          }
+          else fileNames = res.fileName;
+          console.log(fileNames);
+
+          $("#fileNames").attr("value",fileNames);
+          console.log($("#fileNames"));
+
+          var fileUrl = res.fileUrl;
+          var tr = demoListView.find('tr#upload-'+ index)
+                  ,tds = tr.children();
+          tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+          tds.eq(3).html(''); //清空操作
+          return delete this.files[index]; //删除文件队列已经上传成功的文件
+        }
+        this.error(index, upload);
+      }
+      ,error: function(index, upload){
+        var tr = demoListView.find('tr#upload-'+ index)
+                ,tds = tr.children();
+        tds.eq(2).html('<span style="color: #ff5722;">上传失败</span>');
+        tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+      }
+    });
+  });
+</script>
+
+<!-- 手机、身份证输入正则表达式验证 -->
+<script>
+  $(function() {
+    $("input[name='whistleID']").blur(function() { //失去焦点
+      var namestr = $(this).val();
+      var regstr = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+      if(!regstr.test(namestr)) {
+        $(this).next().html("输入身份证号不合法").css("color", "red");
+        return false;
+      }
+      $(this).next().html("");
+      return true;
+    });
+    $("input[name='whistleTel']").blur(function() { //失去焦点
+      var namestr = $(this).val();
+      var regstr = /^[0-9]{11}$/;
+      if(!regstr.test(namestr)) {
+        $(this).next().html("输入联系电话不合法").css("color", "red");
+        return false;
+      }
+      $(this).next().html("");
+      return true;
+    });
+  });
+</script>
+
+<!-- 表单信息提交 ajax -->
+<script>
+  /*数据新增方法*/
+  function save() {
+    var fd = new FormData();
+    var formData = new FormData($("#repoForm")[0]);
+    console.log(formData);
+    $.ajax({
+      cache : true,
+      type : "post",
+      url : "/submitReport",
+      data : formData,  // 你的formid
+      async : false,
+      contentType: false,   //jax 中 contentType 设置为 false 是为了避免 JQuery 对其操作，从而失去分界符，而使服务器不能正常解析文件
+      processData: false,   //当设置为true的时候,jquery ajax 提交的时候不会序列化 data，而是直接使用data
+      // error : function(request) {
+      //   parent.layer.alert("网络超时");
+      // },
+      success: function(data){
+        if (data.msg == 1){
+          console.log(data);
+          layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.msg('提交成功', {time: 700});
+            setTimeout(function () {
+              window.location.reload();
+            }, 1000);
+          });
+        }
+        else{
+          layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.msg('提交失败', {time: 700});
+          });
+        }
+      }
+    });
+  }
+</script>
+</body>
+</html>

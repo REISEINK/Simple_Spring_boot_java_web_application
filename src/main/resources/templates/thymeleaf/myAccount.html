@@ -1,0 +1,882 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="shortcut icon" href="/admin/images/favicon.png" type="image/png">
+
+		<title>Admin</title>
+
+		<link href="/admin/css/style.default.css" rel="stylesheet">
+		<link href="/admin/css/jquery.datatables.css" rel="stylesheet">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+    <script src="/admin/js/html5shiv.js"></script>
+    <script src="/admin/js/respond.min.js"></script>
+    <![endif]-->
+	</head>
+
+	<body>
+
+		<!-- Preloader -->
+		<div id="preloader">
+			<div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+		</div>
+
+		<section>
+
+			<div class="leftpanel">
+
+				<div class="logopanel">
+					<h1><span>[</span> Admin <span>]</span></h1>
+				</div>
+				<!-- logopanel -->
+
+				<div class="leftpanelinner">
+
+					<!-- This is only visible to small devices -->
+					<div class="visible-xs hidden-sm hidden-md hidden-lg">
+						<div class="media userlogged">
+							<img alt="" src="/admin/images/photos/loggeduser.png" class="media-object">
+							<div class="media-body">
+								<h4 th:text="${session.loginUser.name}">用户名</h4>
+								<span>"Life is so..."</span>
+							</div>
+						</div>
+
+						<h5 class="sidebartitle actitle">Account</h5>
+						<ul class="nav nav-pills nav-stacked nav-bracket mb30">
+							<li>
+								<a href="profile.html"><i class="fa fa-user"></i> <span>Profile</span></a>
+							</li>
+							<li>
+								<a href=""><i class="fa fa-cog"></i> <span>Account Settings</span></a>
+							</li>
+							<li>
+								<a href=""><i class="fa fa-question-circle"></i> <span>Help</span></a>
+							</li>
+							<li>
+								<a href="signout.html"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a>
+							</li>
+						</ul>
+					</div>
+
+					<h5 class="sidebartitle">Navigation</h5>
+					<ul class="nav nav-pills nav-stacked nav-bracket">
+						<span class="glyphicon glyphicon-iconname"></span>
+						<li >
+							<a href="/user/getUserList"><i class="fa fa-users"></i> <span>管理员列表</span></a>
+						</li>
+						<li th:if="${session.accessLevel==1}">
+							<a href="/user/toInsertUser"><i class="fa fa-plus-square"></i> <span>添加管理员</span></a>
+						</li>
+						<li class="nav-parent"><a href=""><i class="fa fa-list"></i> <span>审核管理</span></a>
+							<ul class="children" style="display: none">
+								<li ><a href="/user/getOrgApplyList"><i class="fa fa-caret-right"></i>审核机构账户申请</a></li>
+								<li ><a href="/user/modifyApplyList"><i class="fa fa-caret-right"></i>审核机构信息修改申请</a></li>
+							</ul>
+						</li>
+						<li class="nav-parent"><a href=""><i class="fa fa-bank"></i> <span>机构管理</span></a>
+							<ul class="children" style="display: none">
+								<li ><a href="/user/toInsertOrg"><i class="fa fa-caret-right"></i>新增组织机构</a></li>
+								<li ><a href="/user/getOrgList"><i class="fa fa-caret-right"></i>组织机构列表</a></li>
+							</ul>
+						</li>
+						<li class="nav-parent">
+							<a href=""><i class="fa fa-folder-open"></i> <span>资讯管理</span></a>
+							<ul class="children" style="display: none">
+								<li >
+									<a href="/user/toInsertNews"><i class="fa fa-caret-right"></i>新增辅助资讯</a>
+								</li>
+								<li >
+									<a href="/user/getNewsList"><i class="fa fa-caret-right"></i>辅助资讯列表</a>
+								</li>
+							</ul>
+						</li>
+						<li class="active">
+							<a href=""><i class="fa fa-user"></i> <span>我的个人信息</span></a>
+						</li>
+					</ul>
+
+					<!--<div class="infosummary">
+              <h5 class="sidebartitle">Information Summary</h5>
+              <ul>
+                  <li>
+                      <div class="datainfo">
+                          <span class="text-muted">Daily Traffic</span>
+                          <h4>630, 201</h4>
+                      </div>
+                      <div id="sidebar-chart" class="chart"></div>
+                  </li>
+                  <li>
+                      <div class="datainfo">
+                          <span class="text-muted">Average Users</span>
+                          <h4>1, 332, 801</h4>
+                      </div>
+                      <div id="sidebar-chart2" class="chart"></div>
+                  </li>
+                  <li>
+                      <div class="datainfo">
+                          <span class="text-muted">Disk Usage</span>
+                          <h4>82.2%</h4>
+                      </div>
+                      <div id="sidebar-chart3" class="chart"></div>
+                  </li>
+                  <li>
+                      <div class="datainfo">
+                          <span class="text-muted">CPU Usage</span>
+                          <h4>140.05 - 32</h4>
+                      </div>
+                      <div id="sidebar-chart4" class="chart"></div>
+                  </li>
+                  <li>
+                      <div class="datainfo">
+                          <span class="text-muted">Memory Usage</span>
+                          <h4>32.2%</h4>
+                      </div>
+                      <div id="sidebar-chart5" class="chart"></div>
+                  </li>
+              </ul>
+            </div>-->
+					<!-- infosummary -->
+
+				</div>
+				<!-- leftpanelinner -->
+			</div>
+			<!-- leftpanel -->
+
+			<div class="mainpanel">
+
+				<div class="headerbar">
+
+					<a class="menutoggle"><i class="fa fa-bars"></i></a>
+
+					<div class="header-right">
+						<ul class="headermenu">
+							<li>
+								<div class="btn-group">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <img src="/admin/images/photos/loggeduser.png" alt="" />
+										[[${session.loginUser.name}]]
+                                <span class="caret"></span>
+                            </button>
+									<ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+										<li><a href="/user/getUserInfo"><i class="glyphicon glyphicon-user"></i> 我的个人信息</a></li>
+										<li><a href="/login"><i class="glyphicon glyphicon-log-out"></i> 退出登录</a></li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<!-- header-right -->
+
+				</div>
+				<!-- headerbar -->
+
+				<div class="pageheader">
+					<h2><i class="fa fa-user"></i> 我的个人信息 <span>对自己的个人信息进行管理</span></h2>
+					<div class="breadcrumb-wrapper">
+						<span class="label">You are here:</span>
+						<ol class="breadcrumb">
+							<li class="active">我的个人信息</li>
+						</ol>
+					</div>
+				</div>
+
+				<div class="contentpanel">
+
+					<div class="row">
+						<div class="col-sm-3">
+<!--							<img src="/admin/images/photos/profile-1.png" class="thumbnail img-responsive"  alt="" />-->
+
+							<div class="mb30"></div>
+
+							<h5 class="subtitle" style="font-size: 18px;">Access</h5>
+							<p class="mb30" th:if="${userInfo.access==1}" th:text="系统管理员">用户权限：系统管理员/普通管理员</p>
+							<p class="mb30" th:if="${userInfo.access==2}" th:text="平台管理员">用户权限：系统管理员/普通管理员</p>
+							<p class="mb30" th:if="${userInfo.access==3}" th:text="组织机构账户">用户权限：系统管理员/普通管理员</p>
+							<h5 class="subtitle" style="font-size: 18px;">Connect</h5>
+							<ul class="profile-social-list">
+								<li><i class="fa fa-phone"></i>
+									<a href="#" style="pointer-events: none" th:text="${userInfo.tel}">18775645560</a>
+								</li>
+								<li><i class="fa fa-envelope"></i>
+									<a href="#" style="pointer-events: none"  th:text="${userInfo.email}">1712298221@qq.com</a>
+								</li>
+							</ul>
+
+							<div class="mb30"></div>
+
+							<h5 class="subtitle" style="font-size: 18px;" th:if="${userInfo.access==3}">Organization</h5>
+							<ul class="profile-social-list" th:if="${userInfo.access==3}">
+								<li><i class="fa fa-university"></i>
+									<a href="" th:if="${userInfo.access==3}" th:text="${userInfo.org.orgName}"></a>
+								</li>
+								<li><i class="glyphicon glyphicon-phone-alt" style="margin-right: 10px;"></i>
+									<a href="" th:if="${userInfo.access==3}" th:text="${userInfo.org.publicTel}"></a>
+								</li>
+							</ul>
+
+
+						</div>
+						<!-- col-sm-3 -->
+						<div class="col-sm-9">
+
+							<div class="profile-header">
+								<h2 class="profile-name" th:text="${userInfo.name}">用户名</h2>
+								<div class="profile-location" style="font-size: 15px;color: #1CAF9A;" th:if="${userInfo.status==true}"><i class="glyphicon glyphicon-ok" style="font-size: 20px;"></i> 正常</div>
+								<div class="profile-position" style="font-size: 15px;color: #d9534f;" th:if="${userInfo.status==false}"><i class="glyphicon glyphicon-remove" style="font-size: 20px;"></i> 已被禁用</div>
+
+								<div class="mb20"></div>
+
+								<button class="btn btn-success mr5" id="edit_info" type="button" onclick="changeInput()"><i id="edit_icon" class="fa fa-pencil"></i> 修改</button>
+								<button class="btn btn-primary" id="save_info" onclick="infoSubmit()"><i class="fa  fa-floppy-o" ></i> 保存</button>
+								
+								
+								<script type="text/javascript">
+									var old_name = "[[${userInfo.name}]]";
+									var old_tel = "[[${userInfo.tel}]]";
+									var old_email = "[[${userInfo.email}]]";
+									function changeInput(){
+											var edit = document.getElementById('edit_info');
+											var edit_icon = document.getElementById('edit_icon');
+											var name_input = document.getElementById('name');
+											var tel_input = document.getElementById('tel');
+											var email_input = document.getElementById('email');
+											if(edit.className=="btn btn-white mr5"){
+												var changeflag = checkChange();
+												if(changeflag==true){
+													var con = confirm("修改内容未保存，确认要退出编辑？");
+													if(con==true){
+														name_input.value = old_name
+														tel_input.value = old_tel
+														email_input.value = old_email
+														var i = document.createElement('i'); // 创建元素,
+														i.innerHTML = ""; // 创建文本;
+		            									i.className = "fa fa-pencil"
+														edit.innerHTML = ""
+														edit.appendChild(i)
+														edit.innerHTML+="修改"
+														edit.className = "btn btn-success mr5"
+														name_input.readOnly=true
+														tel_input.readOnly=true
+														email_input.readOnly=true
+													}
+												}else{
+													var i = document.createElement('i'); // 创建元素,
+													i.innerHTML = ""; // 创建文本;
+	            									i.className = "fa fa-pencil"
+													edit.innerHTML = ""
+													edit.appendChild(i)
+													edit.innerHTML+="修改"
+													edit.className = "btn btn-success mr5"
+													name_input.readOnly=true
+													tel_input.readOnly=true
+													email_input.readOnly=true
+												}
+            						
+											}else{
+												var i = document.createElement('i'); // 创建元素,
+            									i.innerHTML = ""; // 创建文本;
+            									i.className = "fa fa-reply"
+												edit.innerHTML = ""
+												edit.appendChild(i)
+												edit.innerHTML+="返回"
+												edit.className = "btn btn-white mr5"
+												name_input.readOnly=false
+												tel_input.readOnly=false
+												email_input.readOnly=false
+											}
+											
+									}
+
+									function checkChange(){
+										var name_input = document.getElementById('name');
+										var tel_input = document.getElementById('tel');
+										var email_input = document.getElementById('email');
+										var name = name_input.value
+										var tel = tel_input.value
+										var email = email_input.value
+										if(name==old_name&&tel==old_tel&&email==old_email){
+											return false;
+										}else{
+											return true
+										}
+									}
+									
+									function checkConfirmPassword(){
+										var passone = document.getElementById('passone')
+										var passwd = document.getElementById('passwd')
+										var error = document.getElementById("passwd_error")
+										var title = document.getElementById("passwd_title")
+										if(passwd.value != passone.value) {
+											error.innerHTML = "两次密码输入不一致！"
+											error.style.color = "#B94A48"
+											passwd.style.borderColor = "#B94A48"
+											title.style.color = "#B94A48"
+											return false;
+										}else {
+											passwd.style.borderColor = "#ccc"
+											title.style.color = "#4a535e"
+											error.innerHTML=""
+											return true;
+										}
+									}
+
+									function checkOldPassword(){
+										var passwd = "[[${userInfo.passwd}]]"
+										var oldPasswd = document.getElementById('oldPasswd')
+										var error = document.getElementById("old_error")
+										var title = document.getElementById("old_title")
+										if(oldPasswd.value!=passwd) {
+											error.innerHTML = "旧密码输入不正确！"
+											error.style.color = "#B94A48"
+											oldPasswd.style.borderColor = "#B94A48"
+											title.style.color = "#B94A48"
+											return false;
+										}else {
+											oldPasswd.style.borderColor = "#ccc"
+											title.style.color = "#4a535e"
+											error.innerHTML=""
+											return true;
+										}
+									}
+
+									function checkTel(){
+										var tel = document.getElementById("tel")
+										var error = document.getElementById("tel_error")
+										var title = document.getElementById("tel_title")
+										var namestr = tel.value
+										var regstr = /^[0-9]{11}$/;
+										if(!regstr.test(namestr)) {
+											error.innerHTML = "输入的手机号码不合法！"
+											error.style.color = "#B94A48"
+											tel.style.borderColor = "#B94A48"
+											title.style.color = "#B94A48"
+											return false;
+										}
+										tel.style.borderColor = "#ccc"
+										title.style.color = "#4a535e"
+										error.innerHTML=""
+										return true;
+									}
+
+									function infoSubmit() {
+										if (checkTel()==false){
+											alert("输入的手机号码不合法！")
+										}else {
+											document.getElementById("info-form").submit();
+										}
+									}
+									
+									function passSubmit() {
+										if(checkOldPassword()==false){
+											alert("旧密码输入不正确！")
+											return false
+										}else if(checkConfirmPassword()==false){
+											alert("两次密码输入不一致！")
+											return false
+										}else {
+											return true
+										}
+									}
+								</script>
+								
+							</div>
+							<!-- profile-header -->
+
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs nav-justified nav-profile">
+								<li class="active">
+									<a href="#activities" data-toggle="tab"><strong>基本信息修改</strong></a>
+								</li>
+								<li>
+									<a href="#events" data-toggle="tab"><strong>密码修改</strong></a>
+								</li>
+<!--								<li>-->
+<!--									<a href="#organization" data-toggle="tab"><strong>机构信息修改</strong></a>-->
+<!--								</li>-->
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div class="tab-pane active" id="activities">
+									<div class="activity-list" style="display: flex;flex-direction: column;">
+									<form id="info-form" action="/user/updateUser" method="post">
+										<input type="hidden" th:id="userID" th:name="userID" th:value="${userInfo.userID}">
+										<input type="hidden" th:id="access" th:name="access" th:value="${userInfo.access}">
+										<div style="display: flex;flex-direction: row;">
+											<div class="col-sm-4 col-md-5" >
+												<h4 class="subtitle mb5" >用户名</h4>
+												<input type="text" id="name" th:id="name" th:name="name" readonly="true" th:value="${userInfo.name}" value="王敬" class="form-control" />
+												<div class="mb20"></div>
+												<br />
+											</div>
+
+										</div>
+
+										<div style="display: flex;flex-direction: row;">
+											<div class="col-sm-4 col-md-5">
+												<h4 class="subtitle mb5" id="tel_title">手机号码</h4>
+												<input type="tel" id="tel" readonly="true" th:id="tel" th:name="tel" th:value="${userInfo.tel}" onblur="checkTel()" value="18775645560" class="form-control" />
+												<span id="tel_error"></span>
+												<div class="mb20"></div>
+												<br />
+											</div>
+											<div class="col-sm-4 col-md-5">
+												<h4 class="subtitle mb5">电子邮箱</h4>
+												<input type="email" id="email" readonly="true" th:id="email" th:name="email" th:value="${userInfo.email}" value="1712298221@qq.com" class="form-control" />
+												<div class="mb20"></div>
+												<br />
+											</div>
+										</div>
+										<!-- activity-list -->
+
+									</form>
+
+
+									</div>
+
+								</div>
+								<div class="tab-pane" id="events">
+									<div class="activity-list" style="display: flex;flex-direction: column;">
+										<form action="/user/updateUser" method="post" th:onsubmit="return passSubmit()">
+											<input type="hidden" th:id="userID" th:name="userID" th:value="${userInfo.userID}">
+											<div style="display: flex;flex-direction: row;">
+												<div class="col-sm-4 col-md-5" >
+													<h4 class="subtitle mb5" id="old_title">旧密码</h4>
+													<input type="password" th:id="oldPasswd" th:name="oldPasswd" onblur="checkOldPassword()" value="" placeholder="输入旧密码" class="form-control" />
+													<span id="old_error"></span>
+													<div class="mb20"></div>
+													<br />
+												</div>
+
+											</div>
+
+											<div style="display: flex;flex-direction: row;">
+												<div class="col-sm-4 col-md-5">
+													<h4 class="subtitle mb5">新密码</h4>
+													<input type="password" th:id="passone" th:name="passone" value="" placeholder="输入新密码" class="form-control" />
+													<div class="mb20"></div>
+													<br />
+												</div>
+												<div class="col-sm-4 col-md-5">
+													<h4 class="subtitle mb5" id="passwd_title">确认密码</h4>
+													<input type="password" th:id="passwd" th:name="passwd" onblur="checkConfirmPassword()" value="" placeholder="确认你的密码" class="form-control" />
+													<span id="passwd_error"></span>
+													<div class="mb20"></div>
+													<br />
+												</div>
+											</div>
+											<!-- activity-list -->
+
+											<div class="col-sm-4 col-md-5">
+												<button class="btn btn-success mr5" style="width: 50%;" id="password" type="submit" ><i  class="glyphicon glyphicon-saved"></i> 确认修改</button>
+												<br />
+											</div>
+
+										</form>
+
+
+									</div>
+
+							</div>
+						</div>
+						<!-- tab-content -->
+
+					</div>
+					<!-- col-sm-9 -->
+				</div>
+				<!-- row -->
+
+			</div>
+			<!-- contentpanel -->
+
+			</div>
+			<!-- mainpanel -->
+
+			<div class="rightpanel">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs nav-justified">
+					<li class="active">
+						<a href="#rp-alluser" data-toggle="tab"><i class="fa fa-users"></i></a>
+					</li>
+					<li>
+						<a href="#rp-favorites" data-toggle="tab"><i class="fa fa-heart"></i></a>
+					</li>
+					<li>
+						<a href="#rp-history" data-toggle="tab"><i class="fa fa-clock-o"></i></a>
+					</li>
+					<li>
+						<a href="#rp-settings" data-toggle="tab"><i class="fa fa-gear"></i></a>
+					</li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div class="tab-pane active" id="rp-alluser">
+						<h5 class="sidebartitle">Online Users</h5>
+						<ul class="chatuserlist">
+							<li class="online">
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/userprofile.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Eileen Sideways</strong>
+										<small>Los Angeles, CA</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li class="online">
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user1.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<span class="pull-right badge badge-danger">2</span>
+										<strong>Zaham Sindilmaca</strong>
+										<small>San Francisco, CA</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li class="online">
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user2.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Nusja Nawancali</strong>
+										<small>Bangkok, Thailand</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li class="online">
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user3.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Renov Leongal</strong>
+										<small>Cebu City, Philippines</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li class="online">
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user4.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Weno Carasbong</strong>
+										<small>Tokyo, Japan</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+						</ul>
+
+						<div class="mb30"></div>
+
+						<h5 class="sidebartitle">Offline Users</h5>
+						<ul class="chatuserlist">
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user5.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Eileen Sideways</strong>
+										<small>Los Angeles, CA</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user2.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Zaham Sindilmaca</strong>
+										<small>San Francisco, CA</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user3.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Nusja Nawancali</strong>
+										<small>Bangkok, Thailand</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user4.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Renov Leongal</strong>
+										<small>Cebu City, Philippines</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user5.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Weno Carasbong</strong>
+										<small>Tokyo, Japan</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user4.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Renov Leongal</strong>
+										<small>Cebu City, Philippines</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user5.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Weno Carasbong</strong>
+										<small>Tokyo, Japan</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+						</ul>
+					</div>
+					<div class="tab-pane" id="rp-favorites">
+						<h5 class="sidebartitle">Favorites</h5>
+						<ul class="chatuserlist">
+							<li class="online">
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user2.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Eileen Sideways</strong>
+										<small>Los Angeles, CA</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user1.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Zaham Sindilmaca</strong>
+										<small>San Francisco, CA</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user3.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Nusja Nawancali</strong>
+										<small>Bangkok, Thailand</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li class="online">
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user4.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Renov Leongal</strong>
+										<small>Cebu City, Philippines</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li class="online">
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user5.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Weno Carasbong</strong>
+										<small>Tokyo, Japan</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+						</ul>
+					</div>
+					<div class="tab-pane" id="rp-history">
+						<h5 class="sidebartitle">History</h5>
+						<ul class="chatuserlist">
+							<li class="online">
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user4.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Eileen Sideways</strong>
+										<small>Hi hello, ctc?... would you mind if I go to your...</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user2.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Zaham Sindilmaca</strong>
+										<small>This is to inform you that your product that we...</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user3.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Nusja Nawancali</strong>
+										<small>Are you willing to have a long term relat...</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+						</ul>
+					</div>
+					<div class="tab-pane pane-settings" id="rp-settings">
+
+						<h5 class="sidebartitle mb20">Settings</h5>
+						<div class="form-group">
+							<label class="col-xs-8 control-label">Show Offline Users</label>
+							<div class="col-xs-4 control-label">
+								<div class="toggle toggle-success"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-xs-8 control-label">Enable History</label>
+							<div class="col-xs-4 control-label">
+								<div class="toggle toggle-success"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-xs-8 control-label">Show Full Name</label>
+							<div class="col-xs-4 control-label">
+								<div class="toggle-chat1 toggle-success"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-xs-8 control-label">Show Location</label>
+							<div class="col-xs-4 control-label">
+								<div class="toggle toggle-success"></div>
+							</div>
+						</div>
+
+					</div>
+					<!-- tab-pane -->
+
+				</div>
+				<!-- tab-content -->
+			</div>
+			<!-- rightpanel -->
+
+		</section>
+
+		<script src="/admin/js/jquery-1.11.1.min.js"></script>
+		<script src="/admin/js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="/admin/js/bootstrap.min.js"></script>
+		<script src="/admin/js/modernizr.min.js"></script>
+		<script src="/admin/js/jquery.sparkline.min.js"></script>
+		<script src="/admin/js/toggles.min.js"></script>
+		<script src="/admin/js/retina.min.js"></script>
+		<script src="/admin/js/jquery.cookies.js"></script>
+
+		<script src="/admin/js/jquery.datatables.min.js"></script>
+		<script src="/admin/js/select2.min.js"></script>
+
+		<script src="/admin/js/custom.js"></script>
+		<script>
+			jQuery(document).ready(function() {
+
+				"use strict";
+
+				jQuery('#table1').dataTable();
+
+				jQuery('#table2').dataTable({
+					"sPaginationType": "full_numbers"
+				});
+
+				// Select2
+				jQuery('select').select2({
+					minimumResultsForSearch: -1
+				});
+
+				jQuery('select').removeClass('form-control');
+
+				// Delete row in a table
+				jQuery('.delete-row').click(function() {
+					var c = confirm("Continue delete?");
+					if(c)
+						jQuery(this).closest('tr').fadeOut(function() {
+							jQuery(this).remove();
+						});
+
+					return false;
+				});
+
+				// Show aciton upon row hover
+				jQuery('.table-hidaction tbody tr').hover(function() {
+					jQuery(this).find('.table-action-hide a').animate({
+						opacity: 1
+					});
+				}, function() {
+					jQuery(this).find('.table-action-hide a').animate({
+						opacity: 0
+					});
+				});
+
+			});
+		</script>
+
+	</body>
+
+</html>

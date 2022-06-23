@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicon icons -->
+    <link href="visitor/images/favicon.png" rel="shortcut icon">
+
+    <!-- All CSS -->
+    <link rel="stylesheet" href="visitor/css/bootstrap.min.css">
+    <link rel="stylesheet" href="visitor/css/themify-icons.css">
+    <link rel="stylesheet" href="visitor/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="visitor/css/style.css">
+    <link rel="stylesheet" href="visitor/css/myself.css">
+
+    <title>[[${newInfo.title}]]</title>
+  </head>
+  <body>
+
+    <!-- Preloader -->
+    <div id="preloader">
+      <div id="status"></div>
+    </div>
+    
+    <!-- Header strat -->
+    <header class="header">
+      <div class="container">
+        <nav class="navbar">
+          <!-- Site logo -->
+          <a href="index.html" class="logo">
+            <img src="/visitor/images/logo.png" alt="">
+          </a>
+          <a href="javascript:void(0);" id="mobile-menu-toggler">
+            <i class="ti-align-justify"></i>
+          </a>
+          <ul class="navbar-nav">
+            <li><a href="/index">首页</a></li>
+            <li><a href="/searchlist">定位搜索</a></li>
+            <li class="has-menu-child" style="margin-right: 10px;">
+              <a href="javascript:void(0);">曝光台</a>
+              <ul class="sub-menu">
+                <li><a href="/whitelists">白名单</a></li>
+                <li><a href="/blocklists">黑名单</a></li>
+              </ul>
+            </li>
+            <li class="has-menu-child" style="margin-right: 10px;">
+              <a href="javascript:void(0);">信息公示</a>
+              <ul class="sub-menu">
+                <li><a href="/policylist">政策法规</a></li>
+                <li><a href="/newslist">通知公告</a></li>
+              </ul>
+            </li>
+            <li><a href="/report.html">监督反馈</a></li>
+            <li class="has-menu-child" style="margin-right: 10px;">
+              <a href="javascript:void(0);">用户登录</a>
+              <ul class="sub-menu">
+                <li><a href="/login">用户登录</a></li>
+                <li><a href="/orgApply/toSubmit">机构申请</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- Header strat -->
+
+    <!-- Page feature start -->
+    <section class="page-feature">
+      <div class="container text-center">
+        <h2>通知公告</h2>
+        <div class="breadcrumb">
+          <a href="javascript:history.go(-1)">返回列表</a>
+          <span>/ 通知公告</span>
+        </div>
+      </div>
+    </section>
+    <!-- Page feature end -->
+
+    <!-- Terms & Conditions start -->
+    <section class="terms-condition">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="entry-content">
+                <h3 style="text-align: center; margin-top: 20px;">[[${newInfo.title}]]</h3>
+          
+                <div class="split-line" style="margin-top: 20px;">
+                  <span class="line" style="width: 37%;"></span>
+                  <span class="txt" style="vertical-align: 0; font-size: medium; color: #0c2e60" th:text="'发布时间: ' + ${#strings.substring(newInfo.date,0,10)}">发布时间: </span>
+                  <span class="txt" style="vertical-align: 0; font-size: medium; color: #0c2e60">来源: 本站</span>
+                  <span class="line" style="width: 37%;"></span>
+                </div>
+             
+                <p class="news-content" th:utext="${newInfo.event}">自实施“行政许可事项划转”工作以来，市南区教体局积极贯彻落实中央、省市关于民办教育工作的部署和要求，不断研判新形势下进一步推进民办教育发展的新思路，努力探索深化教育体制机制改革动态，以“协同发展，合力育人，各尽其责”为宗旨，紧密结合“减轻中小学生课外负担”工作和“校外培训机构专项治理行动”，通过年检这项常态化重点工作，完善机制建设，加强监管力度，促进了民办学校向着更加规范、健康、稳定的方向不断发展。</p>
+<!--                <p class="news-content">2019年1-5月份，市南区教体局对区属261所民办学校进行了2018年度年检工作。通过“自查自纠”“材料验审”“实地查看”三个阶段开展，重点围绕党建工作、资产管理、安全环境、教师队伍建设、教育教学管理等情况进行深入督查，全面了解学校办学情况。市南区教体局拟定了《市南区民办学校规范办学承诺书》《2019年安全工作目标责任书》和《党建工作台账》，要求各学校落实法人主体责任、严格履行承诺、依法依规办学。市南区教体局还结合前期开展的实地普查行动、日常检查及投诉案件等反馈情况，对存在私自变更地址和变更其他事项的办学机构不予通过年检，并下达整改通知，责令限期整改。</p>-->
+<!--                <ul style="color:black; font-size:1rem; line-height:2;">-->
+<!--                  <li>1. Urem ipsum dolor sit amet consectetur adipisicing elit. Veritatis mollitia quis esse ad.</li>-->
+<!--                  <li>2. Eleniti porro voluptates tempora molestiae dolores dignissimos odio? Tenetur, quo quidem.</li>-->
+<!--                  <li>3. Sunt suscipit ad est aliquam quibusdam voluptate!</li>-->
+<!--                  <li>4. Ad porro nobis placeat natus minima nisi temporibus sint veritatis deserunt nulla.</li>-->
+<!--                  <li>5. Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis mollitia quis esse ad.</li>-->
+<!--                </ul>-->
+<!--                <h6 style="font-size:1.2rem; line-height:2;">Dolor sit amet consectetur adipisicing elit. Unde, quasi.</h6>-->
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Terms & Conditions end -->
+    
+    <!-- Footer strat -->
+    <footer class="footer">
+      <div class="foo-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 col-sm-6">
+              <div class="widget widget-navigation">
+                <h4 class="widget-title">联系方式</h4>
+                <ul>                  
+                  <li><a href="tel:+6119XXXXXXX" >咨询方式：010-6119XXXX-XXX</a></li>
+                  <li><a href="mailto:XXXX@cse.edu.cn" >客服邮箱：XXXX@cse.edu.cn</a></li>
+                  <li><a href="" style="pointer-events: none;">官方微信：XXXX机构规范平台</a></li>
+                  <li><a href="" style="pointer-events: none;">微信公众号：gh-76ba7712XXXX</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="widget widget-navigation">
+                <h4 class="widget-title">友情链接</h4>
+                <ul>                  
+                  <li><a href="http://www.moe.gov.cn/">中国人民共和国教育部</a></li>
+                  <li><a href="http://www.scedu.net/">四川省教育厅</a></li>
+                  <li><a href="http://edu.chengdu.gov.cn/">成都市教育局</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  
+      <div class="foo-btm">
+        <div class="container">
+          <p class="copyright">Copyright &copy; 2019.Company name All rights reserved.</p>
+        </div>
+      </div>
+      
+    </footer>
+    <!-- Footer end -->
+
+    <!-- JS -->
+    <script src="visitor/js/jquery-3.3.1.min.js"></script>
+    <script src="visitor/js/jquery-ui.min.js"></script>
+    <script src="visitor/js/bootstrap.min.js"></script>
+    <script src="visitor/js/owl.carousel.min.js"></script>
+    <script src="visitor/js/scripts.js"></script>
+  </body>
+</html>

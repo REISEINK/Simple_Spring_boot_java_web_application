@@ -1,0 +1,1319 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="shortcut icon" href="/admin/images/favicon.png" type="image/png">
+
+		<title>Admin</title>
+
+		<link href="/admin/css/bootstrap-editable.css" rel="stylesheet">
+
+		<link href="/admin/css/style.default.css" rel="stylesheet">
+		<link href="/admin/css/jquery.datatables.css" rel="stylesheet">
+		<link rel="stylesheet" href="/admin/css/bootstrap-wysihtml5.css" />
+		<link rel="stylesheet" href="/layui/css/layui.css" media="all">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+  		<script src="/admin/js/html5shiv.js"></script>
+  		<script src="/admin/js/respond.min.js"></script>
+  <![endif]-->
+	</head>
+
+	<body>
+	<script th:inline="javascript">
+		window.onload = orgCheck();
+		addEventListener("load", function() {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+
+		function orgCheck() {
+			if([[${addNewsFlag}]]==false){
+				alert("新增咨询失败！请检查字段是否为空或正确。");
+			}
+			if([[${addNewsFlag}]]==true){
+				alert("新增咨询成功！")
+			}
+		}
+	</script>
+
+		<!-- Preloader -->
+		<div id="preloader">
+			<div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+		</div>
+
+		<section>
+
+			<div class="leftpanel">
+
+				<div class="logopanel">
+					<h1><span>[</span> Admin <span>]</span></h1>
+				</div>
+				<!-- logopanel -->
+
+				<div class="leftpanelinner">
+
+					<!-- This is only visible to small devices -->
+					<div class="visible-xs hidden-sm hidden-md hidden-lg">
+						<div class="media userlogged">
+							<img alt="" src="/admin/images/photos/loggeduser.png" class="media-object">
+							<div class="media-body">
+								<h4 th:text="${session.loginUser.name}">用户名</h4>
+								<span>"Life is so..."</span>
+							</div>
+						</div>
+
+						<h5 class="sidebartitle actitle">Account</h5>
+						<ul class="nav nav-pills nav-stacked nav-bracket mb30">
+							<li>
+								<a href="profile.html"><i class="fa fa-user"></i> <span>Profile</span></a>
+							</li>
+							<li>
+								<a href=""><i class="fa fa-cog"></i> <span>Account Settings</span></a>
+							</li>
+							<li>
+								<a href=""><i class="fa fa-question-circle"></i> <span>Help</span></a>
+							</li>
+							<li>
+								<a href="signout.html"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a>
+							</li>
+						</ul>
+					</div>
+
+					<h5 class="sidebartitle">Navigation</h5>
+					<ul class="nav nav-pills nav-stacked nav-bracket">
+						<span class="glyphicon glyphicon-iconname"></span>
+						<li >
+							<a href="/user/getUserList"><i class="fa fa-users"></i> <span>管理员列表</span></a>
+						</li>
+						<li th:if="${session.accessLevel==1}">
+							<a href="/user/toInsertUser"><i class="fa fa-plus-square"></i> <span>添加管理员</span></a>
+						</li>
+						<li class="nav-parent"><a href=""><i class="fa fa-list"></i> <span>审核管理</span></a>
+							<ul class="children" style="display: none">
+								<li ><a href="/user/getOrgApplyList"><i class="fa fa-caret-right"></i>审核机构账户申请</a></li>
+								<li ><a href="/user/modifyApplyList"><i class="fa fa-caret-right"></i>审核机构信息修改申请</a></li>
+							</ul>
+						</li>
+						<li class="nav-parent"><a href=""><i class="fa fa-bank"></i> <span>机构管理</span></a>
+							<ul class="children" style="display: none">
+								<li ><a href="/user/toInsertOrg"><i class="fa fa-caret-right"></i>新增组织机构</a></li>
+								<li ><a href="/user/getOrgList"><i class="fa fa-caret-right"></i>组织机构列表</a></li>
+							</ul>
+						</li>
+						<li class="nav-parent nav-active active">
+							<a href=""><i class="fa fa-folder-open"></i> <span>资讯管理</span></a>
+							<ul class="children" style="display: block">
+								<li class="active">
+									<a href="/user/toInsertNews"><i class="fa fa-caret-right"></i>新增辅助资讯</a>
+								</li>
+								<li >
+									<a href="/user/getNewsList"><i class="fa fa-caret-right"></i>辅助资讯列表</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="/user/getUserInfo"><i class="fa fa-user"></i> <span>我的个人信息</span></a>
+						</li>
+					</ul>
+
+
+				</div>
+				<!-- leftpanelinner -->
+			</div>
+			<!-- leftpanel -->
+
+			<div class="mainpanel">
+
+				<div class="headerbar">
+
+					<a class="menutoggle"><i class="fa fa-bars"></i></a>
+
+					<div class="header-right">
+						<ul class="headermenu">
+							<li>
+								<div class="btn-group">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <img src="/admin/images/photos/loggeduser.png" alt="" />
+										[[${session.loginUser.name}]]
+                <span class="caret"></span>
+              </button>
+									<ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+										<li><a href="/user/getUserInfo"><i class="glyphicon glyphicon-user"></i> 我的个人信息</a></li>
+										<li><a href="/login"><i class="glyphicon glyphicon-log-out"></i> 退出登录</a></li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<!-- header-right -->
+
+				</div>
+				<!-- headerbar -->
+
+				<div class="pageheader">
+					<h2><i class="fa fa-folder-open"></i> 新增辅助资讯 <span>新增相关通知公告以及政策法规...</span></h2>
+					<div class="breadcrumb-wrapper">
+						<span class="label">You are here:</span>
+						<ol class="breadcrumb">
+							<li>
+								资讯管理
+							</li>
+							<li class="active">新增辅助资讯</li>
+						</ol>
+					</div>
+				</div>
+
+				<div class="contentpanel">
+
+					<div class="row">
+
+						<div class="col-md-10">
+							<form action="/user/insertSingleNews" method="post" id="basicForm" class="form-horizontal">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<div class="panel-btns">
+											<a href="" class="panel-close">&times;</a>
+											<a href="" class="minimize">&minus;</a>
+										</div>
+										<h4 class="panel-title">新增辅助资讯</h4>
+										<p>填写新增的辅助资讯的信息并提交</p>
+									</div>
+									<div class="panel-body">
+										<div class="form-group" style="margin-bottom: 35px;">
+											<label class="col-sm-1 control-label">资讯标题 <span class="asterisk">*</span></label>
+											<div class="col-sm-10">
+												<input th:id="title" th:name="title" type="text" value="" class="form-control" placeholder="填写资讯标题..." required />
+											</div>
+										</div>
+
+										<div class="form-group" style="margin-bottom: 35px;">
+											<label class="col-sm-1 control-label">资讯链接 <span class="asterisk">*</span></label>
+											<div class="col-sm-10">
+												<input th:id="fileSrc" th:name="fileSrc" type="text" value="" class="form-control" placeholder="粘贴资讯链接..." required />
+											</div>
+										</div>
+
+										<div class="form-group" style="margin-bottom: 35px;">
+											<label class="col-sm-1 control-label">资讯类别 <span class="asterisk">*</span></label>
+											<div class="col-sm-5">
+												<select th:id="category" th:name="category" class="select2" data-placeholder="选择资讯类别...">
+													<option value=""></option>
+													<option value="通知公告">通知公告</option>
+													<option value="政府法规">政府法规</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="form-group" style="margin-bottom: 35px;">
+											<label class="col-sm-1 control-label">资讯内容 <span class="asterisk">*</span></label>
+											<div class="col-sm-10">
+												<div class="panel-body" style="padding: 0;">
+													<textarea th:name="event" id="wysiwyg" value="" placeholder="填写资讯内容..." class="form-control" rows="10"></textarea>
+												</div>
+											</div>
+										</div>
+
+									</div>
+									<!-- panel-body -->
+									<div class="panel-footer">
+										<div class="row">
+											<div class="col-sm-3">
+												<button class="btn btn-primary" style="margin-right: 15px;">确认新增</button>
+												<button type="reset" class="btn btn-default">重置</button>
+											</div>
+										</div>
+									</div>
+
+								</div>
+								<!-- panel -->
+							</form>
+
+						</div>
+						<!-- col-md-6 -->
+
+					</div>
+					<!--row -->
+
+				</div>
+				<!-- contentpanel -->
+
+				<div class="contentpanel">
+
+					<div class="row">
+
+						<div class="col-md-10">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="panel-btns">
+										<a href="" class="panel-close">&times;</a>
+										<a href="" class="minimize">&minus;</a>
+									</div>
+									<h4 class="panel-title">批量新增辅助咨讯</h4>
+									<p>将多条新增的辅助咨询信息以Excel文件的形式导入至系统。注：必须使用我们提供的Excel模板，每次最多1000条数据！</p>
+								</div>
+								<div class="panel-body">
+									<div class="layui-upload">
+										<button type="button" class="layui-btn" id="download" onclick="downloadNews()">下载咨讯Excel模板</button>
+										<button type="button" class="layui-btn" id="testList">选择多文件</button>
+										<div class="layui-upload-list">
+											<table class="layui-table">
+												<thead>
+													<th>文件名</th>
+													<th>大小</th>
+													<th>状态</th>
+													<th>操作</th>
+												</thead>
+												<tbody id="demoList"></tbody>
+											</table>
+										</div>
+										<!--<button type="button" class="layui-btn" id="testListAction">开始上传</button>-->
+									</div>
+									<script type="text/javascript">
+										function downloadNews(){
+											location.href="/user/downloadNewsExcel"
+										}
+									</script>
+
+								</div>
+								<!-- panel-body -->
+								<div class="panel-footer">
+									<button class="btn btn-primary" id="testListAction">开始导入</button>
+								</div>
+							</div>
+						</div>
+						<!-- col-md-6 -->
+
+					</div>
+					<!--row -->
+
+				</div>
+				<!-- contentpanel -->
+
+			</div>
+			<!-- mainpanel -->
+
+			<div class="rightpanel">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs nav-justified">
+					<li class="active">
+						<a href="#rp-alluser" data-toggle="tab"><i class="fa fa-users"></i></a>
+					</li>
+					<li>
+						<a href="#rp-favorites" data-toggle="tab"><i class="fa fa-heart"></i></a>
+					</li>
+					<li>
+						<a href="#rp-history" data-toggle="tab"><i class="fa fa-clock-o"></i></a>
+					</li>
+					<li>
+						<a href="#rp-settings" data-toggle="tab"><i class="fa fa-gear"></i></a>
+					</li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div class="tab-pane active" id="rp-alluser">
+						<h5 class="sidebartitle">Online Users</h5>
+						<ul class="chatuserlist">
+							<li class="online">
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/userprofile.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Eileen Sideways</strong>
+										<small>Los Angeles, CA</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li class="online">
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user1.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<span class="pull-right badge badge-danger">2</span>
+										<strong>Zaham Sindilmaca</strong>
+										<small>San Francisco, CA</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li class="online">
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user2.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Nusja Nawancali</strong>
+										<small>Bangkok, Thailand</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li class="online">
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user3.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Renov Leongal</strong>
+										<small>Cebu City, Philippines</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li class="online">
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user4.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Weno Carasbong</strong>
+										<small>Tokyo, Japan</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+						</ul>
+
+						<div class="mb30"></div>
+
+						<h5 class="sidebartitle">Offline Users</h5>
+						<ul class="chatuserlist">
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user5.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Eileen Sideways</strong>
+										<small>Los Angeles, CA</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user2.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Zaham Sindilmaca</strong>
+										<small>San Francisco, CA</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user3.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Nusja Nawancali</strong>
+										<small>Bangkok, Thailand</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user4.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Renov Leongal</strong>
+										<small>Cebu City, Philippines</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user5.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Weno Carasbong</strong>
+										<small>Tokyo, Japan</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user4.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Renov Leongal</strong>
+										<small>Cebu City, Philippines</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user5.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Weno Carasbong</strong>
+										<small>Tokyo, Japan</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+						</ul>
+					</div>
+					<div class="tab-pane" id="rp-favorites">
+						<h5 class="sidebartitle">Favorites</h5>
+						<ul class="chatuserlist">
+							<li class="online">
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user2.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Eileen Sideways</strong>
+										<small>Los Angeles, CA</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user1.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Zaham Sindilmaca</strong>
+										<small>San Francisco, CA</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user3.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Nusja Nawancali</strong>
+										<small>Bangkok, Thailand</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li class="online">
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user4.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Renov Leongal</strong>
+										<small>Cebu City, Philippines</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li class="online">
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user5.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Weno Carasbong</strong>
+										<small>Tokyo, Japan</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+						</ul>
+					</div>
+					<div class="tab-pane" id="rp-history">
+						<h5 class="sidebartitle">History</h5>
+						<ul class="chatuserlist">
+							<li class="online">
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user4.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Eileen Sideways</strong>
+										<small>Hi hello, ctc?... would you mind if I go to your...</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user2.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Zaham Sindilmaca</strong>
+										<small>This is to inform you that your product that we...</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+							<li>
+								<div class="media">
+									<a href="#" class="pull-left media-thumb">
+										<img alt="" src="/admin/images/photos/user3.png" class="media-object">
+									</a>
+									<div class="media-body">
+										<strong>Nusja Nawancali</strong>
+										<small>Are you willing to have a long term relat...</small>
+									</div>
+								</div>
+								<!-- media -->
+							</li>
+						</ul>
+					</div>
+					<div class="tab-pane pane-settings" id="rp-settings">
+
+						<h5 class="sidebartitle mb20">Settings</h5>
+						<div class="form-group">
+							<label class="col-xs-8 control-label">Show Offline Users</label>
+							<div class="col-xs-4 control-label">
+								<div class="toggle toggle-success"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-xs-8 control-label">Enable History</label>
+							<div class="col-xs-4 control-label">
+								<div class="toggle toggle-success"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-xs-8 control-label">Show Full Name</label>
+							<div class="col-xs-4 control-label">
+								<div class="toggle-chat1 toggle-success"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-xs-8 control-label">Show Location</label>
+							<div class="col-xs-4 control-label">
+								<div class="toggle toggle-success"></div>
+							</div>
+						</div>
+
+					</div>
+					<!-- tab-pane -->
+
+				</div>
+				<!-- tab-content -->
+			</div>
+			<!-- rightpanel -->
+
+		</section>
+
+		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+						<h4 class="modal-title">反馈驳回原因</h4>
+					</div>
+					<div class="modal-body">
+						<textarea id="autoResizeTA" style="margin-bottom: 20px;" class="form-control" rows="5"></textarea>
+						<a class="btn btn-danger" style="margin-right: 10px;">确认驳回</a>
+						<a class="btn btn-white" aria-hidden="true" data-dismiss="modal">取消</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+						<h4 class="modal-title">Small Modal</h4>
+					</div>
+					<div class="modal-body">...</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade bs-example-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content"></div>
+			</div>
+		</div>
+
+		<div class="modal fade bs-example-modal-static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+						<h4 class="modal-title">Static Background</h4>
+					</div>
+					<div class="modal-body">
+						Specify static for a backdrop which doesn't close the modal on click.
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade bs-example-modal-tabs" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content"></div>
+			</div>
+		</div>
+
+		<div class="modal fade bs-example-modal-accordion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content"></div>
+			</div>
+		</div>
+
+		<div class="modal fade bs-example-modal-panel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content"></div>
+			</div>
+		</div>
+
+		<div class="modal fade bs-example-modal-photo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-photo-viewer">
+				<div class="modal-content"></div>
+			</div>
+		</div>
+
+		<script src="/admin/js/jquery-1.11.1.min.js"></script>
+		<script src="/admin/js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="/admin/js/bootstrap.min.js"></script>
+		<script src="/admin/js/modernizr.min.js"></script>
+		<script src="/admin/js/jquery.sparkline.min.js"></script>
+		<script src="/admin/js/toggles.min.js"></script>
+		<script src="/admin/js/retina.min.js"></script>
+		<script src="/admin/js/jquery.cookies.js"></script>
+
+		<script src="/admin/js/wysihtml5-0.3.0.min.js"></script>
+		<script src="/admin/js/bootstrap-wysihtml5.js"></script>
+		<script src="/admin/js/ckeditor/ckeditor.js"></script>
+		<script src="/admin/js/ckeditor/adapters/jquery.js"></script>
+
+		<script src="/admin/js/jquery.datatables.min.js"></script>
+		<script src="/admin/js/select2.min.js"></script>
+		<script src="/admin/js/bootstrap-editable.min.js"></script>
+		<script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
+		<script src="/admin/js/moment.js"></script>
+
+		<script src="/admin/js/custom.js"></script>
+
+		<script>
+			jQuery(document).ready(function() {
+
+				"use strict";
+
+				// HTML5 WYSIWYG Editor
+				jQuery('#wysiwyg').wysihtml5({
+					color: true,
+					html: true
+				});
+
+				// CKEditor
+				jQuery('#ckeditor').ckeditor();
+
+				jQuery('#inlineedit1, #inlineedit2').ckeditor();
+
+				// Uncomment the following code to test the "Timeout Loading Method".
+				// CKEDITOR.loadFullCoreTimeout = 5;
+
+				window.onload = function() {
+					// Listen to the double click event.
+					if(window.addEventListener)
+						document.body.addEventListener('dblclick', onDoubleClick, false);
+					else if(window.attachEvent)
+						document.body.attachEvent('ondblclick', onDoubleClick);
+				};
+
+				function onDoubleClick(ev) {
+					// Get the element which fired the event. This is not necessarily the
+					// element to which the event has been attached.
+					var element = ev.target || ev.srcElement;
+
+					// Find out the div that holds this element.
+					var name;
+
+					do {
+						element = element.parentNode;
+					}
+					while (element && (name = element.nodeName.toLowerCase()) &&
+						(name != 'div' || element.className.indexOf('editable') == -1) && name != 'body');
+
+					if(name == 'div' && element.className.indexOf('editable') != -1)
+						replaceDiv(element);
+				}
+
+				var editor;
+
+				function replaceDiv(div) {
+					if(editor)
+						editor.destroy();
+					editor = CKEDITOR.replace(div);
+				}
+
+			});
+		</script>
+
+		<script>
+			jQuery(document).ready(function() {
+
+				"use strict";
+
+				jQuery('#table1').dataTable();
+
+				jQuery('#table2').dataTable({
+					"sPaginationType": "full_numbers"
+				});
+
+				// Select2
+				jQuery('select').select2({
+					minimumResultsForSearch: -1
+				});
+
+				jQuery('select').removeClass('form-control');
+
+				// Delete row in a table
+				jQuery('.delete-row').click(function() {
+					var c = confirm("Continue delete?");
+					if(c)
+						jQuery(this).closest('tr').fadeOut(function() {
+							jQuery(this).remove();
+						});
+
+					return false;
+				});
+
+				// Show aciton upon row hover
+				jQuery('.table-hidaction tbody tr').hover(function() {
+					jQuery(this).find('.table-action-hide a').animate({
+						opacity: 1
+					});
+				}, function() {
+					jQuery(this).find('.table-action-hide a').animate({
+						opacity: 0
+					});
+				});
+
+			});
+		</script>
+
+		<script>
+			jQuery(document).ready(function() {
+
+				// Basic Popup Example
+				jQuery('#basicPopup').editable();
+
+				// Basic Inline Example
+				jQuery('#basicInline').editable({
+					type: 'text',
+					mode: 'inline',
+					url: 'http://www.baidu.com',
+					validate: function(value) { //字段验证
+						if(!$.trim(value)) {
+							return '不能为空';
+						}
+					}
+				});
+
+				// Popup With Title
+				jQuery('#popupTitle').editable({
+					title: 'Enter Text'
+				});
+
+				// Empty text field, required
+				jQuery('#emptyText').editable({
+					validate: function(value) {
+						if($.trim(value) == '') return 'This field is required';
+					}
+				});
+
+				// Select with no buttons
+				jQuery('#selectNoBtns').editable({
+					source: [{
+							value: "1",
+							text: "Guest"
+						},
+						{
+							value: "2",
+							text: "Service"
+						},
+						{
+							value: "3",
+							text: "Customer"
+						},
+						{
+							value: "4",
+							text: "Operator"
+						},
+						{
+							value: "5",
+							text: "Admin"
+						}
+					]
+				});
+
+				// Combo Date
+				jQuery('#comboDate').editable({
+					inputclass: 'sel',
+					template: 'MM /DD / YYYY',
+					viewformat: 'MM / DD / YYYY'
+				});
+
+				// Combo DateTime
+				jQuery('#comboDateTime').editable({
+					template: 'MM / DD / YYYY HH:mm',
+					viewformat: 'MM / DD / YYYY HH:mm',
+					combodate: {
+						firstItem: 'name'
+					}
+				});
+
+				// Checklist
+				jQuery('#checkList').editable({
+					limit: 3,
+					title: 'Select Fruits',
+					source: [{
+							value: 1,
+							text: 'banana'
+						},
+						{
+							value: 2,
+							text: 'peach'
+						},
+						{
+							value: 3,
+							text: 'apple'
+						},
+						{
+							value: 4,
+							text: 'watermelon'
+						},
+						{
+							value: 5,
+							text: 'orange'
+						}
+					]
+				});
+
+				// Select 2 (tags mode)
+				jQuery('#tags').editable({
+					inputclass: 'sel-sm',
+					select2: {
+						tags: ['html', 'javascript', 'css', 'ajax'],
+						tokenSeparators: [",", " "]
+					}
+				});
+
+				// Select 2 (dropdown mode)
+				var countries = [];
+
+				$.each({
+					"BD": "Bangladesh",
+					"BE": "Belgium",
+					"BF": "Burkina Faso",
+					"BG": "Bulgaria",
+					"BA": "Bosnia and Herzegovina",
+					"BB": "Barbados",
+					"WF": "Wallis and Futuna",
+					"BL": "Saint Bartelemey",
+					"BM": "Bermuda",
+					"BN": "Brunei Darussalam",
+					"BO": "Bolivia",
+					"BH": "Bahrain",
+					"BI": "Burundi",
+					"BJ": "Benin",
+					"BT": "Bhutan",
+					"JM": "Jamaica",
+					"BV": "Bouvet Island",
+					"BW": "Botswana",
+					"WS": "Samoa",
+					"BR": "Brazil",
+					"BS": "Bahamas",
+					"JE": "Jersey",
+					"BY": "Belarus",
+					"O1": "Other Country",
+					"LV": "Latvia",
+					"RW": "Rwanda",
+					"RS": "Serbia",
+					"TL": "Timor-Leste",
+					"RE": "Reunion",
+					"LU": "Luxembourg",
+					"TJ": "Tajikistan",
+					"RO": "Romania",
+					"PG": "Papua New Guinea",
+					"GW": "Guinea-Bissau",
+					"GU": "Guam",
+					"GT": "Guatemala",
+					"GS": "South Georgia and the South Sandwich Islands",
+					"GR": "Greece",
+					"GQ": "Equatorial Guinea",
+					"GP": "Guadeloupe",
+					"JP": "Japan",
+					"GY": "Guyana",
+					"GG": "Guernsey",
+					"GF": "French Guiana",
+					"GE": "Georgia",
+					"GD": "Grenada",
+					"GB": "United Kingdom",
+					"GA": "Gabon",
+					"SV": "El Salvador",
+					"GN": "Guinea",
+					"GM": "Gambia",
+					"GL": "Greenland",
+					"GI": "Gibraltar",
+					"GH": "Ghana",
+					"OM": "Oman",
+					"TN": "Tunisia",
+					"JO": "Jordan",
+					"HR": "Croatia",
+					"HT": "Haiti",
+					"HU": "Hungary",
+					"HK": "Hong Kong",
+					"HN": "Honduras",
+					"HM": "Heard Island and McDonald Islands",
+					"VE": "Venezuela",
+					"PR": "Puerto Rico",
+					"PS": "Palestinian Territory",
+					"PW": "Palau",
+					"PT": "Portugal",
+					"SJ": "Svalbard and Jan Mayen",
+					"PY": "Paraguay",
+					"IQ": "Iraq",
+					"PA": "Panama",
+					"PF": "French Polynesia",
+					"BZ": "Belize",
+					"PE": "Peru",
+					"PK": "Pakistan",
+					"PH": "Philippines",
+					"PN": "Pitcairn",
+					"TM": "Turkmenistan",
+					"PL": "Poland",
+					"PM": "Saint Pierre and Miquelon",
+					"ZM": "Zambia",
+					"EH": "Western Sahara",
+					"RU": "Russian Federation",
+					"EE": "Estonia",
+					"EG": "Egypt",
+					"TK": "Tokelau",
+					"ZA": "South Africa",
+					"EC": "Ecuador",
+					"IT": "Italy",
+					"VN": "Vietnam",
+					"SB": "Solomon Islands",
+					"EU": "Europe",
+					"ET": "Ethiopia",
+					"SO": "Somalia",
+					"ZW": "Zimbabwe",
+					"SA": "Saudi Arabia",
+					"ES": "Spain",
+					"ER": "Eritrea",
+					"ME": "Montenegro",
+					"MD": "Moldova, Republic of",
+					"MG": "Madagascar",
+					"MF": "Saint Martin",
+					"MA": "Morocco",
+					"MC": "Monaco",
+					"UZ": "Uzbekistan",
+					"MM": "Myanmar",
+					"ML": "Mali",
+					"MO": "Macao",
+					"MN": "Mongolia",
+					"MH": "Marshall Islands",
+					"MK": "Macedonia",
+					"MU": "Mauritius",
+					"MT": "Malta",
+					"MW": "Malawi",
+					"MV": "Maldives",
+					"MQ": "Martinique",
+					"MP": "Northern Mariana Islands",
+					"MS": "Montserrat",
+					"MR": "Mauritania",
+					"IM": "Isle of Man",
+					"UG": "Uganda",
+					"TZ": "Tanzania, United Republic of",
+					"MY": "Malaysia",
+					"MX": "Mexico",
+					"IL": "Israel",
+					"FR": "France",
+					"IO": "British Indian Ocean Territory",
+					"FX": "France, Metropolitan",
+					"SH": "Saint Helena",
+					"FI": "Finland",
+					"FJ": "Fiji",
+					"FK": "Falkland Islands (Malvinas)",
+					"FM": "Micronesia, Federated States of",
+					"FO": "Faroe Islands",
+					"NI": "Nicaragua",
+					"NL": "Netherlands",
+					"NO": "Norway",
+					"NA": "Namibia",
+					"VU": "Vanuatu",
+					"NC": "New Caledonia",
+					"NE": "Niger",
+					"NF": "Norfolk Island",
+					"NG": "Nigeria",
+					"NZ": "New Zealand",
+					"NP": "Nepal",
+					"NR": "Nauru",
+					"NU": "Niue",
+					"CK": "Cook Islands",
+					"CI": "Cote d'Ivoire",
+					"CH": "Switzerland",
+					"CO": "Colombia",
+					"CN": "China",
+					"CM": "Cameroon",
+					"CL": "Chile",
+					"CC": "Cocos (Keeling) Islands",
+					"CA": "Canada",
+					"CG": "Congo",
+					"CF": "Central African Republic",
+					"CD": "Congo, The Democratic Republic of the",
+					"CZ": "Czech Republic",
+					"CY": "Cyprus",
+					"CX": "Christmas Island",
+					"CR": "Costa Rica",
+					"CV": "Cape Verde",
+					"CU": "Cuba",
+					"SZ": "Swaziland",
+					"SY": "Syrian Arab Republic",
+					"KG": "Kyrgyzstan",
+					"KE": "Kenya",
+					"SR": "Suriname",
+					"KI": "Kiribati",
+					"KH": "Cambodia",
+					"KN": "Saint Kitts and Nevis",
+					"KM": "Comoros",
+					"ST": "Sao Tome and Principe",
+					"SK": "Slovakia",
+					"KR": "Korea, Republic of",
+					"SI": "Slovenia",
+					"KP": "Korea, Democratic People's Republic of",
+					"KW": "Kuwait",
+					"SN": "Senegal",
+					"SM": "San Marino",
+					"SL": "Sierra Leone",
+					"SC": "Seychelles",
+					"KZ": "Kazakhstan",
+					"KY": "Cayman Islands",
+					"SG": "Singapore",
+					"SE": "Sweden",
+					"SD": "Sudan",
+					"DO": "Dominican Republic",
+					"DM": "Dominica",
+					"DJ": "Djibouti",
+					"DK": "Denmark",
+					"VG": "Virgin Islands, British",
+					"DE": "Germany",
+					"YE": "Yemen",
+					"DZ": "Algeria",
+					"US": "United States",
+					"UY": "Uruguay",
+					"YT": "Mayotte",
+					"UM": "United States Minor Outlying Islands",
+					"LB": "Lebanon",
+					"LC": "Saint Lucia",
+					"LA": "Lao People's Democratic Republic",
+					"TV": "Tuvalu",
+					"TW": "Taiwan",
+					"TT": "Trinidad and Tobago",
+					"TR": "Turkey",
+					"LK": "Sri Lanka",
+					"LI": "Liechtenstein",
+					"A1": "Anonymous Proxy",
+					"TO": "Tonga",
+					"LT": "Lithuania",
+					"A2": "Satellite Provider",
+					"LR": "Liberia",
+					"LS": "Lesotho",
+					"TH": "Thailand",
+					"TF": "French Southern Territories",
+					"TG": "Togo",
+					"TD": "Chad",
+					"TC": "Turks and Caicos Islands",
+					"LY": "Libyan Arab Jamahiriya",
+					"VA": "Holy See (Vatican City State)",
+					"VC": "Saint Vincent and the Grenadines",
+					"AE": "United Arab Emirates",
+					"AD": "Andorra",
+					"AG": "Antigua and Barbuda",
+					"AF": "Afghanistan",
+					"AI": "Anguilla",
+					"VI": "Virgin Islands, U.S.",
+					"IS": "Iceland",
+					"IR": "Iran, Islamic Republic of",
+					"AM": "Armenia",
+					"AL": "Albania",
+					"AO": "Angola",
+					"AN": "Netherlands Antilles",
+					"AQ": "Antarctica",
+					"AP": "Asia/Pacific Region",
+					"AS": "American Samoa",
+					"AR": "Argentina",
+					"AU": "Australia",
+					"AT": "Austria",
+					"AW": "Aruba",
+					"IN": "India",
+					"AX": "Aland Islands",
+					"AZ": "Azerbaijan",
+					"IE": "Ireland",
+					"ID": "Indonesia",
+					"UA": "Ukraine",
+					"QA": "Qatar",
+					"MZ": "Mozambique"
+				}, function(k, v) {
+					countries.push({
+						id: k,
+						text: v
+					});
+				});
+
+				jQuery('#country').editable({
+					inputclass: 'sel-xs',
+					source: countries,
+					select2: {
+						width: 200,
+						placeholder: 'Select country',
+						allowClear: true
+					}
+				});
+
+			});
+		</script>
+		<script src="/layui/layui.js"></script>
+		<script>
+			window.global = {
+				pageType: 'demo',
+				preview: function() {
+					var preview = document.getElementById('LAY_preview');
+					return preview ? preview.innerHTML : '';
+				}()
+			};
+			layui.config({
+				base: '//res.layui.com/static/lay/modules/layui/',
+				version: '1591673027433'
+			}).use('global');
+		</script>
+
+		<script>
+			var _hmt = _hmt || [];
+			(function() {
+				var hm = document.createElement("script");
+				hm.src = "https://hm.baidu.com/hm.js?d214947968792b839fd669a4decaaffc";
+				var s = document.getElementsByTagName("script")[0];
+				s.parentNode.insertBefore(hm, s);
+			})();
+		</script>
+
+		</div>
+		<div id="LAY_democodejs">
+			<script>
+				layui.use('upload', function() {
+					var $ = layui.jquery,
+						upload = layui.upload;
+
+					//拖拽上传
+					upload.render({
+						elem: '#test10',
+						url: '/user/uploadOrgImg' //改成您自己的上传接口
+							,
+						method: 'POST',
+						done: function(res) {
+							if(res.code == 0) {
+								layer.msg('上传成功');
+								layui.$('#uploadDemoView').removeClass('layui-hide').find('img').attr('src', res.data.src);
+								document.getElementById("licenseFile").value = res.data.src
+								console.log(res)
+							} else {
+								layer.msg('上传失败');
+							}
+
+						}
+					});
+
+					//多文件列表示例
+					var demoListView = $('#demoList'),
+						uploadListIns = upload.render({
+							elem: '#testList',
+							url: '/user/insertNews' //改成您自己的上传接口
+								,
+							exts: 'xlsx',
+							size: 200,
+							accept: 'file',
+							multiple: true,
+							auto: false,
+							bindAction: '#testListAction',
+							choose: function(obj) {
+								var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+								//读取本地文件
+								obj.preview(function(index, file, result) {
+									var tr = $(['<tr id="upload-' + index + '">', '<td>' + file.name + '</td>', '<td>' + (file.size / 1024).toFixed(1) + 'kb</td>', '<td>等待导入</td>', '<td>', '<button class="layui-btn layui-btn-xs demo-reload layui-hide">重新导入</button>', '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>', '</td>', '</tr>'].join(''));
+
+									//单个重传
+									tr.find('.demo-reload').on('click', function() {
+										obj.upload(index, file);
+									});
+
+									//删除
+									tr.find('.demo-delete').on('click', function() {
+										delete files[index]; //删除对应的文件
+										tr.remove();
+										uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+									});
+
+									demoListView.append(tr);
+								});
+							},
+							done: function(res, index, upload) {
+								if(res.code == 0) { //上传成功
+									var tr = demoListView.find('tr#upload-' + index),
+										tds = tr.children(),
+										count = res.count;
+									tds.eq(2).html('<span style="color: #5FB878;">成功导入' + count + '条数据</span>');
+									tds.eq(3).html(''); //清空操作
+									return delete this.files[index]; //删除文件队列已经上传成功的文件
+								}
+								this.error(index, upload);
+							},
+							error: function(index, upload) {
+								var tr = demoListView.find('tr#upload-' + index),
+									tds = tr.children();
+								tds.eq(2).html('<span style="color: #FF5722;">导入失败</span>');
+								tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+							}
+						});
+
+					//绑定原始文件域
+					upload.render({
+						elem: '#test20',
+						url: 'https://httpbin.org/post' //改成您自己的上传接口
+							,
+						done: function(res) {
+							layer.msg('导入成功');
+							console.log(res)
+						}
+					});
+
+				});
+			</script>
+	</body>
+
+</html>

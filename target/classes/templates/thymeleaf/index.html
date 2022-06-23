@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicon icons -->
+    <link href="/visitor/images/favicon.png" rel="shortcut icon">
+
+    <!-- All CSS -->
+    <link rel="stylesheet" href="/visitor/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/visitor/css/themify-icons.css">
+    <link rel="stylesheet" href="/visitor/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/visitor/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/visitor/css/nice-select.css">
+    <link rel="stylesheet" href="/visitor/css/style.css">
+    <link rel="stylesheet" href="/visitor/css/anime.css">
+    <link rel="stylesheet" href="/visitor/css/myself.css">
+
+    <title>民办教育信息服务监管平台</title>
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"></div>
+</div>
+
+<!-- Header strat -->
+<header class="header">
+    <div class="container">
+        <nav class="navbar">
+            <!-- Site logo -->
+            <a href="index.html" class="logo">
+                <img src="/visitor/images/logo.png" alt="">
+            </a>
+            <a href="javascript:void(0);" id="mobile-menu-toggler">
+                <i class="ti-align-justify"></i>
+            </a>
+            <ul class="navbar-nav">
+                <li><a href="/index">首页</a></li>
+                <li><a href="/searchlist">定位搜索</a></li>
+                <li class="has-menu-child" style="margin-right: 10px;">
+                    <a href="javascript:void(0);">曝光台</a>
+                    <ul class="sub-menu">
+                        <li><a href="/whitelists">白名单</a></li>
+                        <li><a href="/blocklists">黑名单</a></li>
+                    </ul>
+                </li>
+                <li class="has-menu-child" style="margin-right: 10px;">
+                    <a href="javascript:void(0);">信息公示</a>
+                    <ul class="sub-menu">
+                        <li><a href="/policylist">政策法规</a></li>
+                        <li><a href="/newslist">通知公告</a></li>
+                    </ul>
+                </li>
+                <li><a href="/report.html">监督反馈</a></li>
+                <li class="has-menu-child" style="margin-right: 10px;">
+                    <a href="javascript:void(0);">用户登录</a>
+                    <ul class="sub-menu">
+                        <li><a href="/login">用户登录</a></li>
+                        <li><a href="/orgApply/toSubmit">机构申请</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<!-- Header strat -->
+
+<!-- Slider section start -->
+<section class="slider-banner p-0">
+    <div class="slider-carousel owl-carousel">
+        <div class="slide slide-3" style="background-image: url(/visitor/images/slider/3.jpg);"></div>
+        <div class="slide slide-1" style="background-image: url(/visitor/images/slider/2.jpg);"></div>
+        <div class="slide slide-2" style="background-image: url(/visitor/images/slider/1.jpg);"></div>
+    </div>
+    <div class="container">
+        <div class="col-md-11 slider-content m-auto text-center">
+            <h2><span>民办教育</span> 信息服务监管平台</h2>
+            <form class="search-form">
+                <select name="searchItem" id="searchItem">
+                    <option value="orgName">机构名称</option>
+                    <option value="licenseKey">许可证号</option>
+                </select>
+                <input name="context" id="context" type="text" placeholder="请选择所需的查询项并输入相应的查询内容">
+                <button type="button" onclick="indexSearch()"><i class="ti-search"></i></button>
+            </form>
+        </div>
+    </div>
+</section>
+<!-- Slider section end -->
+
+<!-- Feature Box section start -->
+<section class="featureBox">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="sfBox">
+                    <i class="fas fa-drafting-compass"></i>
+                    <strong>交流互动</strong>
+                    <span style="padding-top: 3px;">提供机构与民众交流的平台</span>
+                </div>
+            </div>
+            <div class="col-md-4 d-md-flex justify-content-center">
+                <div class="sfBox">
+                    <i class="far fa-user-circle"></i>
+                    <strong>机构信息公示</strong>
+                    <span style="padding-top: 3px;">网罗全市合法民办教育机构</span>
+                </div>
+            </div>
+            <div class="col-md-4 d-md-flex justify-content-md-end">
+                <div class="sfBox mb-0">
+                    <i class="fas fa-history"></i>
+                    <strong>周期更新</strong>
+                    <span style="padding-top: 3px;">为用户提供更多优质内容</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Feature Box section end -->
+
+<!-- Categories sectiion start -->
+<section class="categories bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-9 m-auto text-center">
+                <div class="sec-heading">
+                    <div class="scrollcontainer" onclick="ScrollTop(700, 450)">
+                        <div class="chevron"></div>
+                        <div class="chevron"></div>
+                        <div class="chevron"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <a href="/searchlist" class="icon-list-block">
+                    <img src="/visitor/images/icons/categories/search.png" alt="">
+                    <span class="cateText">定位搜索</span>
+                    <span class="cateSubText">地图定位组织机构</span>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <a href="/whitelists" class="icon-list-block">
+                    <img src="/visitor/images/icons/categories/expose.png" alt="">
+                    <span class="cateText">曝光台</span>
+                    <span class="cateSubText">公示机构白名单/黑名单</span>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <a href="/newslist" class="icon-list-block">
+                    <img src="/visitor/images/icons/categories/news.png" alt="">
+                    <span class="cateText">通知公告</span>
+                    <span class="cateSubText">政策法规信息速递</span>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <a href="report.html" class="icon-list-block">
+                    <img src="/visitor/images/icons/categories/report.png" alt="">
+                    <span class="cateText">监督反馈</span>
+                    <span class="cateSubText">反馈机构办学问题</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Categories sectiion end -->
+
+<!-- Courses section start -->
+<section class="courses">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-9 m-auto text-center">
+                <div class="sec-heading">
+                    <h3 class="sec-title" style="margin-top: 20px;">精品课程</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="course-caro owl-carousel">
+                <div class="col-12" th:each="course: ${courseRecommend1}">
+                    <div class="single-course">
+                        <figure class="course-thumb">
+                            <img src="visitor/images/course/1.jpg" alt="">
+                            <strong class="ribbon">评分：[[${course.cozscore}]]</strong>
+                        </figure>
+                        <div class="course-content">
+                            <h3><a href="course-details.html">[[${course.cozname}]]</a></h3>
+                            <p>授课内容：[[${course.cozcontent}]]</p>
+                            <div class="enroll">
+                                <div class="ratings" style="font-size: medium">
+                                    <span class="total-students"><i class="ti-user" style="margin-right: 10px;"></i>学生规模：[[${course.studentsize}]]</span>
+                                </div>
+                                <div class="course-meta text-right">
+                                    <a th:href="@{/orgDetail(orgid=${course.orgid})}" class="btn btn-filled">查看详情</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Courses section end -->
+
+<!-- Footer strat -->
+<footer class="footer">
+    <div class="foo-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="widget widget-navigation">
+                        <h4 class="widget-title">联系方式</h4>
+                        <ul>
+                            <li><a href="" style="pointer-events: none;">咨询方式：010-6119XXXX-XXX</a></li>
+                            <li><a href="" style="pointer-events: none;">客服邮箱：XXXX@cse.edu.cn</a></li>
+                            <li><a href="" style="pointer-events: none;">官方微信：XXXX机构规范平台</a></li>
+                            <li><a href="" style="pointer-events: none;">微信公众号：gh-76ba7712XXXX</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="widget widget-navigation">
+                        <h4 class="widget-title">友情链接</h4>
+                        <ul>
+                            <li><a href="http://www.moe.gov.cn/">中国人民共和国教育部</a></li>
+                            <li><a href="http://www.scedu.net/">四川省教育厅</a></li>
+                            <li><a href="http://edu.chengdu.gov.cn/">成都市教育局</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="foo-btm">
+        <div class="container">
+            <p class="copyright">Copyright &copy; 2019.Company name All rights reserved.</p>
+        </div>
+    </div>
+
+</footer>
+<!-- Footer end -->
+
+<!-- JS -->
+<script src="/visitor/js/jquery-3.3.1.min.js"></script>
+<script src="/visitor/js/jquery-ui.min.js"></script>
+<script src="/visitor/js/bootstrap.min.js"></script>
+<script src="/visitor/js/owl.carousel.min.js"></script>
+<script src="/visitor/js/jquery.countdown.min.js"></script>
+<script src="/visitor/js/jquery.nice-select.min.js"></script>
+<!--<script src="https://ditu.google.cn/maps/api/js?key=AIzaSyCxYLtelXg0PGjeTiFDtlN7nrH_47buDWo"></script>-->
+<script src="/visitor/js/scripts.js"></script>
+
+<script language=javascript>
+    /* 页面向下滑动指定的像素点 */
+    const ScrollTop = (number = 0, time) => {
+        if (!time) {
+            document.body.scrollTop = document.documentElement.scrollTop = number;
+            return number;
+        }
+        const spacingTime = 15; // 设置循环的间隔时间  值越小消耗性能越高
+        let spacingInex = time / spacingTime; // 计算循环的次数
+        let nowTop = document.body.scrollTop + document.documentElement.scrollTop; // 获取当前滚动条位置
+        let everTop = (number - nowTop) / spacingInex; // 计算每次滑动的距离
+        let scrollTimer = setInterval(() => {
+            if (spacingInex > 0) {
+                spacingInex--;
+                ScrollTop(nowTop += everTop);
+            } else {
+                clearInterval(scrollTimer); // 清除计时器
+            }
+        }, spacingTime);
+    };
+</script>
+
+<script>
+    function indexSearch(){
+        var index = document.getElementById("searchItem");
+        var value = document.getElementById("context");
+        if(index.value == "orgName"){
+            window.location.href = "/searchlist?licenseKey=&orgName=" + value.value + "&address=&orgType=allType&operationType=0#";
+        }
+        if(index.value == "licenseKey"){
+            window.location.href = "/searchlist?licenseKey=" + value.value + "&orgName=&address=&orgType=allType&operationType=0#"
+        }
+    }
+</script>
+</body>
+</html>

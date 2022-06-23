@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Favicon icons -->
+  <link href="visitor/images/favicon.png" rel="shortcut icon">
+
+  <!-- All CSS -->
+  <link rel="stylesheet" href="visitor/css/bootstrap.min.css">
+  <link rel="stylesheet" href="visitor/css/themify-icons.css">
+  <link rel="stylesheet" href="visitor/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="visitor/css/style.css">
+  <link rel="stylesheet" href="visitor/css/myself.css">
+
+  <title>信息公示-通知公告</title>
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="preloader">
+  <div id="status"></div>
+</div>
+
+<!-- Header strat -->
+<header class="header">
+  <div class="container">
+    <nav class="navbar">
+      <!-- Site logo -->
+      <a href="index.html" class="logo">
+        <img src="/visitor/images/logo.png" alt="">
+      </a>
+      <a href="javascript:void(0);" id="mobile-menu-toggler">
+        <i class="ti-align-justify"></i>
+      </a>
+      <ul class="navbar-nav">
+        <li><a href="/index">首页</a></li>
+        <li><a href="/searchlist">定位搜索</a></li>
+        <li class="has-menu-child" style="margin-right: 10px;">
+          <a href="javascript:void(0);">曝光台</a>
+          <ul class="sub-menu">
+            <li><a href="/whitelists">白名单</a></li>
+            <li><a href="/blocklists">黑名单</a></li>
+          </ul>
+        </li>
+        <li class="has-menu-child" style="margin-right: 10px;">
+          <a href="javascript:void(0);">信息公示</a>
+          <ul class="sub-menu">
+            <li><a href="/policylist">政策法规</a></li>
+            <li><a href="/newslist">通知公告</a></li>
+          </ul>
+        </li>
+        <li><a href="/report.html">监督反馈</a></li>
+        <li class="has-menu-child" style="margin-right: 10px;">
+          <a href="javascript:void(0);">用户登录</a>
+          <ul class="sub-menu">
+            <li><a href="/login">用户登录</a></li>
+            <li><a href="/orgApply/toSubmit">机构申请</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- Header strat -->
+
+<!-- Page feature start -->
+<section class="page-feature">
+  <div class="container text-center">
+    <h2>信息公示</h2>
+    <div class="breadcrumb">
+      <a href="index.html">首页</a>
+      <span>/ 信息公示</span>
+    </div>
+  </div>
+</section>
+<!-- Page feature end -->
+
+<!-- Blog Posts section start -->
+<section class="blog-posts">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <aside class="sidebar">
+          <div class="widget widget_search">
+            <form action="#">
+              <input type="text" name="title" placeholder="搜索" required="">
+              <i class="ti-search" ></i>
+          </div>
+          <div class="widget categories">
+            <h3 class="widget-title">信息类别</h3>
+            <ul>
+              <li><a href="/policylist" style="font-size: 1.1rem; padding-top: 10px; padding-bottom: 10px; border-bottom: white;">政策法规 <span></span></a></li>
+              <hr style="margin: 0.5rem 0;"/>
+              <li><a href="/newslist" style="font-size: 1.1rem; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; color: #0c2e60; border-left: 4px #0c2e60 solid;">通知公告 <span >([[${newslistPageInfo.total}]])</span></a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+      <div class="col-lg-9">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="split-line" style="text-align: left; margin-top: 20px;">
+              <span class="line" style="width: 86%;"></span>
+              <span class="txt" style="vertical-align: 0; font-size: x-large; margin-right: 0; color: #0c2e60">通知公告</span>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="main-right">
+              <ul class="list">
+                <li th:each="news : ${newslistPageInfo.list}">
+                  <div class="date-block">
+                    <p class="date-year" th:text="${#strings.substring(news.date,0,7)}">2020-06</p>
+                    <p class="date-day" th:text="${#strings.substring(news.date,8,10)}">04</p>
+                  </div>
+                  <a style="color: red;" th:if="${news.top} eq true ">【置顶】</a>
+                  <a th:href="@{/newsDetail(newsid=${news.newsID})}"  th:text="${news.title}">四川大学2020届毕业生派遣、离校须知</a>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div class="pagination" th:switch="${newslistPageInfo.pageNum}">
+                <div th:case="1">
+                  <span href="$" class="current-page" th:text="${newslistPageInfo.pageNum}"></span>
+                  <a href="$" th:if="${newslistPageInfo.pageNum+1 le newslistPageInfo.pages}" th:text="${newslistPageInfo.pageNum}+1"></a>
+                  <a href="$" th:if="${newslistPageInfo.pageNum+2 le newslistPageInfo.pages}" th:text="${newslistPageInfo.pageNum}+2"></a>
+                  <a href="$">Next</a>
+                </div>
+                <div th:case="${newslistPageInfo.pages}">
+                  <a href="$">prev</a>
+                  <a href="$" th:if="${newslistPageInfo.pageNum-2 ge 1}" th:text="${newslistPageInfo.pageNum}-2"></a>
+                  <a href="$" th:if="${newslistPageInfo.pageNum-1 ge 1}" th:text="${newslistPageInfo.pageNum}-1"></a>
+                  <span href="$" class="current-page" th:text="${newslistPageInfo.pageNum}"></span>
+                </div>
+                <div th:case="*">
+                  <a href="$">prev</a>
+                  <a href="$" th:if="${newslistPageInfo.pageNum-1 ge 1}" th:text="${newslistPageInfo.pageNum}-1"></a>
+                  <span href="$" class="current-page" th:text="${newslistPageInfo.pageNum}"></span>
+                  <a href="$" th:if="${newslistPageInfo.pageNum+1 le newslistPageInfo.pages}" th:text="${newslistPageInfo.pageNum}+1"></a>
+                  <a href="$">Next</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+</section>
+<!-- Blog Posts section end -->
+
+<!-- Footer strat -->
+<footer class="footer">
+  <div class="foo-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-sm-6">
+          <div class="widget widget-navigation">
+            <h4 class="widget-title">联系方式</h4>
+            <ul>
+              <li><a href="tel:+6119XXXXXXX" >咨询方式：010-6119XXXX-XXX</a></li>
+              <li><a href="mailto:XXXX@cse.edu.cn" >客服邮箱：XXXX@cse.edu.cn</a></li>
+              <li><a href="" style="pointer-events: none;">官方微信：XXXX机构规范平台</a></li>
+              <li><a href="" style="pointer-events: none;">微信公众号：gh-76ba7712XXXX</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <div class="widget widget-navigation">
+            <h4 class="widget-title">友情链接</h4>
+            <ul>
+              <li><a href="http://www.moe.gov.cn/">中国人民共和国教育部</a></li>
+              <li><a href="http://www.scedu.net/">四川省教育厅</a></li>
+              <li><a href="http://edu.chengdu.gov.cn/">成都市教育局</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="foo-btm">
+    <div class="container">
+      <p class="copyright">Copyright &copy; 2019.Company name All rights reserved.</p>
+    </div>
+  </div>
+
+</footer>
+<!-- Footer end -->
+
+<!-- JS -->
+<script src="visitor/js/jquery-3.3.1.min.js"></script>
+<script src="visitor/js/jquery-ui.min.js"></script>
+<script src="visitor/js/bootstrap.min.js"></script>
+<script src="visitor/js/owl.carousel.min.js"></script>
+<script src="visitor/js/scripts.js"></script>
+</body>
+</html>

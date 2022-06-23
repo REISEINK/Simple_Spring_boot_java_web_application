@@ -1,0 +1,927 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/admin/images/favicon.png" type="image/png">
+
+    <title>Admin</title>
+
+    <link href="/admin/css/style.default.css" rel="stylesheet">
+    <link href="/admin/css/jquery.datatables.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/admin/js/html5shiv.js"></script>
+    <script src="/admin/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<script th:inline="javascript">
+    window.onload = orgCheck();
+    addEventListener("load", function() {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    }
+
+    function orgCheck() {
+        if([[${verifyModifyApplyFlag}]]==false){
+            alert("通过机构信息修改申请失败！");
+        }
+        if([[${backModifyApplyFlag}]]==false){
+            alert("驳回机构信息修改申请失败！")
+        }
+        if([[${deleteModifyApplyFlag}]]==false){
+            alert("删除机构信息修改申请失败！")
+        }
+    }
+</script>
+
+
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+    <div class="leftpanel">
+
+        <div class="logopanel">
+            <h1><span>[</span> Admin <span>]</span></h1>
+        </div>
+        <!-- logopanel -->
+
+        <div class="leftpanelinner">
+
+            <!-- This is only visible to small devices -->
+            <div class="visible-xs hidden-sm hidden-md hidden-lg">
+                <div class="media userlogged">
+                    <img alt="" src="/admin/images/photos/loggeduser.png" class="media-object">
+                    <div class="media-body">
+                        <h4 th:text="${session.loginUser.name}">用户名</h4>
+                        <span>"Life is so..."</span>
+                    </div>
+                </div>
+
+                <h5 class="sidebartitle actitle">Account</h5>
+                <ul class="nav nav-pills nav-stacked nav-bracket mb30">
+                    <li>
+                        <a href="profile.html"><i class="fa fa-user"></i> <span>Profile</span></a>
+                    </li>
+                    <li>
+                        <a href=""><i class="fa fa-cog"></i> <span>Account Settings</span></a>
+                    </li>
+                    <li>
+                        <a href=""><i class="fa fa-question-circle"></i> <span>Help</span></a>
+                    </li>
+                    <li>
+                        <a href="signout.html"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a>
+                    </li>
+                </ul>
+            </div>
+
+            <h5 class="sidebartitle">Navigation</h5>
+            <ul class="nav nav-pills nav-stacked nav-bracket">
+                <span class="glyphicon glyphicon-iconname"></span>
+                <li>
+                    <a href="/user/getUserList"><i class="fa fa-users"></i> <span>管理员列表</span></a>
+                </li>
+                <li th:if="${session.accessLevel==1}">
+                    <a href="/user/toInsertUser"><i class="fa fa-plus-square"></i> <span>添加管理员</span></a>
+                </li>
+                <li class="nav-parent  nav-active active"><a href=""><i class="fa fa-list"></i> <span>审核管理</span></a>
+                    <ul class="children" style="display: block">
+                        <li ><a href="/user/getOrgApplyList"><i class="fa fa-caret-right"></i>审核机构账户申请</a></li>
+                        <li class="active"><a href="/user/modifyApplyList"><i class="fa fa-caret-right"></i>审核机构信息修改申请</a></li>
+                    </ul>
+                </li>
+                <li class="nav-parent"><a href=""><i class="fa fa-bank"></i> <span>机构管理</span></a>
+                    <ul class="children" style="display: none">
+                        <li ><a href="/user/toInsertOrg"><i class="fa fa-caret-right"></i>新增组织机构</a></li>
+                        <li ><a href="/user/getOrgList"><i class="fa fa-caret-right"></i>组织机构列表</a></li>
+                    </ul>
+                </li>
+                <li class="nav-parent">
+                    <a href=""><i class="fa fa-folder-open"></i> <span>资讯管理</span></a>
+                    <ul class="children" style="display: none">
+                        <li >
+                            <a href="/user/toInsertNews"><i class="fa fa-caret-right"></i>新增辅助资讯</a>
+                        </li>
+                        <li >
+                            <a href="/user/getNewsList"><i class="fa fa-caret-right"></i>辅助资讯列表</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/user/getUserInfo"><i class="fa fa-user"></i> <span>我的个人信息</span></a>
+                </li>
+            </ul>
+
+        </div>
+        <!-- leftpanelinner -->
+    </div>
+    <!-- leftpanel -->
+
+    <div class="mainpanel">
+
+        <div class="headerbar">
+
+            <a class="menutoggle"><i class="fa fa-bars"></i></a>
+
+            <div class="header-right">
+                <ul class="headermenu">
+                    <li>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <img src="/admin/images/photos/loggeduser.png" alt=""/>
+                                [[${session.loginUser.name}]]
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                                <li><a href="/user/getUserInfo"><i class="glyphicon glyphicon-user"></i> 我的个人信息</a></li>
+                                <li><a href="/login"><i class="glyphicon glyphicon-log-out"></i> 退出登录</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- header-right -->
+
+        </div>
+        <!-- headerbar -->
+
+        <div class="pageheader">
+            <h2><i class="fa fa-list"></i> 审核机构信息修改申请 <span>审核机构人员对机构信息修改的申请...</span></h2>
+            <div class="breadcrumb-wrapper">
+                <span class="label">You are here:</span>
+                <ol class="breadcrumb">
+                    <li>
+                      审核管理
+                    </li>
+                    <li class="active">审核机构信息修改申请</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="contentpanel">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-btns">
+                        <a href="" class="panel-close">&times;</a>
+                        <a href="" class="minimize">&minus;</a>
+                    </div>
+                    <!-- panel-btns -->
+                    <h3 class="panel-title">机构信息修改申请列表</h3>
+                    <p>您可以下列修改申请进行操作</p>
+                </div>
+                <div class="panel-body">
+                    <h5 class="subtitle mb20">提供了搜索功能和控制显示数量功能</h5>
+                    <br/>
+                    <div class="table-responsive">
+                        <table class="table" id="table1">
+
+                            <thead>
+                            <tr>
+                                <th style="width:5%;background-color: #F0AD4E;color: #FFFFFF;">序号</th>
+                                <th style="width:12%;background-color:#F0AD4E;color: #FFFFFF;">组织机构全称</th>
+                                <th style="width:10%;background-color:#F0AD4E;color: #FFFFFF;">法人代表</th>
+                                <th style="width:10%;background-color: #F0AD4E;color: #FFFFFF;">机构校长</th>
+                                <th style="width:10%;background-color: #F0AD4E;color: #FFFFFF;">机构公开电话</th>
+                                <th style="width:18%;background-color:#F0AD4E;color: #FFFFFF;">机构具体地址</th>
+                                <th style="width:20%;background-color:#F0AD4E;color: #FFFFFF;">办学内容</th>
+                                <th style="width:15%;background-color:#F0AD4E;color: #FFFFFF;">申请状态</th>
+                            </tr>
+                            </thead>
+
+                            <style>
+                                .table > tbody > tr:hover .table-action-hide a {
+                                    opacity: 1;
+                                }
+                            </style>
+
+                            <tbody>
+                            <tr th:each="modify, modifyitem:${modifyApplyList}" class="odd gradeX" style="height: 50px;align-items: center;">
+                                <td th:text="${modifyitem.count}" style="width:5%;vertical-align: middle;"></td>
+                                <td th:text="${modify.org.orgName}" style="width:12%;white-space: pre-line;vertical-align: middle;"></td>
+                                <td style="width:12%;vertical-align: middle;">
+                                    <div th:if="${modify.legalPerson == null}" th:text="${modify.org.legalPerson}"
+                                         class="table-responsive"></div>
+                                    <!-- table-responsive -->
+                                    <div th:if="${modify.legalPerson != null}" class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 50%;background-color: #428BCA;color: #FFFFFF;text-align: center;">
+                                                    Before
+                                                </th>
+                                                <th style="width: 50%;background-color: #428BCA;color: #FFFFFF;text-align: center;">
+                                                    After
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td th:text="${modify.org.legalPerson}"
+                                                    style="width: 50%;white-space: pre-line;"></td>
+                                                <td th:text="${modify.legalPerson}"
+                                                    style="width: 50%;white-space: pre-line;"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+
+                                <td style="width:12%;vertical-align: middle;">
+                                    <div th:if="${modify.principal == null}" th:text="${modify.org.principal}"
+                                         class="table-responsive"></div>
+                                    <!-- table-responsive -->
+                                    <div th:if="${modify.principal!= null} " class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 50%;background-color: #428BCA;color: #FFFFFF;text-align: center;">
+                                                    Before
+                                                </th>
+                                                <th style="width: 50%;background-color: #428BCA;color: #FFFFFF;text-align: center;">
+                                                    After
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td th:text="${modify.org.principal}"
+                                                    style="width: 50%;white-space: pre-line;"></td>
+                                                <td th:text="${modify.principal}"
+                                                    style="width: 50%;white-space: pre-line;"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+
+                                <td style="width:12%;vertical-align: middle;">
+                                    <div th:if="${modify.publicTel == null}" th:text="${modify.org.publicTel}"
+                                         class="table-responsive"></div>
+                                    <!-- table-responsive -->
+                                    <div th:if="${modify.publicTel != null}" class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 50%;background-color: #428BCA;color: #FFFFFF;text-align: center;">
+                                                    Before
+                                                </th>
+                                                <th style="width: 50%;background-color: #428BCA;color: #FFFFFF;text-align: center;">
+                                                    After
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td th:text="${modify.org.publicTel}"
+                                                    style="width: 50%;white-space: pre-line;"></td>
+                                                <td th:text="${modify.publicTel}"
+                                                    style="width: 50%;white-space: pre-line;"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+
+                                <td style="width:15%;vertical-align: middle;">
+                                    <div th:if="${modify.address == null}" th:text="${modify.org.address}"
+                                         class="table-responsive"></div>
+                                    <!-- table-responsive -->
+                                    <div th:if="${modify.address != null}" class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 50%;background-color: #428BCA;color: #FFFFFF;text-align: center;">
+                                                    Before
+                                                </th>
+                                                <th style="width: 50%;background-color: #428BCA;color: #FFFFFF;text-align: center;">
+                                                    After
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td th:text="${modify.org.address}"
+                                                    style="width: 50%;white-space: pre-line;"></td>
+                                                <td th:text="${modify.address}"
+                                                    style="width: 50%;white-space: pre-line;"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+
+                                <td style="width:17%;vertical-align: middle;">
+                                    <div th:if="${modify.operationInfo == null}" th:text="${modify.org.operationInfo}"
+                                         class="table-responsive"></div>
+                                    <!-- table-responsive -->
+                                    <div th:if="${modify.operationInfo != null}" class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 50%;background-color: #428BCA;color: #FFFFFF;text-align: center;">
+                                                    Before
+                                                </th>
+                                                <th style="width: 50%;background-color: #428BCA;color: #FFFFFF;text-align: center;">
+                                                    After
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td th:text="${modify.org.operationInfo}"
+                                                    style="width: 50%;white-space: pre-line;"></td>
+                                                <td th:text="${modify.operationInfo}"
+                                                    style="width: 50%;white-space: pre-line;"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+
+                                <td style="width:15%;text-align: center;vertical-align: middle;"
+                                    class="table-action-hide">
+                                    <div style="display: flex;flex-direction: row;justify-content: space-between;align-items: center;">
+                                        <a th:text="${modify.modStatus==0?'待审核':(modify.modStatus==1?'已同意':'已驳回')}" style="opacity: 1;color: #636e7b;text-decoration:none;margin-right: 5px;"></a>
+                                        <div style="white-space: nowrap;">
+                                            <a th:if="${modify.modStatus==0}" th:onclick="updateStatus([[${modify.modID}]],[[${modify.org.orgID}]],[[${modify.modStatus}]],[[${modify.legalPerson}]],[[${modify.principal}]],[[${modify.publicTel}]],[[${modify.address}]],[[${modify.operationInfo}]])" class="btn btn-success" style="color: #FFFFFF;margin-right: 5px;">通过</a>
+                                            <a th:if="${modify.modStatus==0}" th:onclick="setValueToModal([[${modify.modID}]],[[${modify.modStatus}]])" class="btn btn-danger" style="color: #FFFFFF;" data-toggle="modal" data-target=".bs-example-modal-lg">驳回</a>
+                                            <a th:if="${modify.modStatus==1||modify.modStatus==2}" th:text="${modify.modStatus==1?'已同意':'已驳回'}" class="btn btn-black" readonly style="color: #FFFFFF;margin-right: 5px;" ></a>
+                                            <a th:if="${modify.modStatus!=0}" th:onclick="deleteModifyApply([[${modify.modID}]])" class="btn btn-danger" style="color: #FFFFFF;" >删除</a>
+                                        </div>
+
+                                    </div>
+
+                                    <script type="text/javascript">
+                                        function updateStatus(modID, orgID, status, legalPerson, principal, publicTel, address, operationInfo) {
+                                            if (status == 0) {
+                                                var firm = confirm("确认审核通过该机构信息修改的申请吗")
+                                                if (firm == true) {
+                                                    location.href = "/user/verifyModifyApply?modID="+ modID + "&orgID=" + orgID + "&status=" + status + "&legalPerson=" + legalPerson
+                                                        + "&principal=" + principal + "&publicTel=" + publicTel + "&address=" + address + "&operationInfo=" + operationInfo
+                                                }
+                                            }
+                                        }
+                                    </script>
+
+                                    <script type="text/javascript">
+                                        function setValueToModal(modID,modStatus) {
+                                            if(modStatus == 0){
+                                                document.getElementById("modID").value=modID;
+                                                document.getElementById("modStatus").value=modStatus;
+                                            }
+                                        }
+                                        function deleteModifyApply(id) {
+                                            if (id > 0) {
+                                                var firm = confirm("确认删除该机构信息修改的申请吗？")
+                                                if (firm == true) {
+                                                    location.href = "/user/deleteModifyApply?id=" + id
+                                                }
+                                            }
+                                        }
+                                    </script>
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- table-responsive -->
+
+                </div>
+                <!-- panel-body -->
+            </div>
+            <!-- panel -->
+
+        </div>
+        <!-- contentpanel -->
+
+    </div>
+    <!-- mainpanel -->
+
+    <div class="rightpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active">
+                <a href="#rp-alluser" data-toggle="tab"><i class="fa fa-users"></i></a>
+            </li>
+            <li>
+                <a href="#rp-favorites" data-toggle="tab"><i class="fa fa-heart"></i></a>
+            </li>
+            <li>
+                <a href="#rp-history" data-toggle="tab"><i class="fa fa-clock-o"></i></a>
+            </li>
+            <li>
+                <a href="#rp-settings" data-toggle="tab"><i class="fa fa-gear"></i></a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="rp-alluser">
+                <h5 class="sidebartitle">Online Users</h5>
+                <ul class="chatuserlist">
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/userprofile.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Eileen Sideways</strong>
+                                <small>Los Angeles, CA</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user1.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <span class="pull-right badge badge-danger">2</span>
+                                <strong>Zaham Sindilmaca</strong>
+                                <small>San Francisco, CA</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user2.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Nusja Nawancali</strong>
+                                <small>Bangkok, Thailand</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user3.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Renov Leongal</strong>
+                                <small>Cebu City, Philippines</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user4.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Weno Carasbong</strong>
+                                <small>Tokyo, Japan</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                </ul>
+
+                <div class="mb30"></div>
+
+                <h5 class="sidebartitle">Offline Users</h5>
+                <ul class="chatuserlist">
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user5.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Eileen Sideways</strong>
+                                <small>Los Angeles, CA</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user2.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Zaham Sindilmaca</strong>
+                                <small>San Francisco, CA</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user3.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Nusja Nawancali</strong>
+                                <small>Bangkok, Thailand</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user4.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Renov Leongal</strong>
+                                <small>Cebu City, Philippines</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user5.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Weno Carasbong</strong>
+                                <small>Tokyo, Japan</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user4.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Renov Leongal</strong>
+                                <small>Cebu City, Philippines</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user5.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Weno Carasbong</strong>
+                                <small>Tokyo, Japan</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane" id="rp-favorites">
+                <h5 class="sidebartitle">Favorites</h5>
+                <ul class="chatuserlist">
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user2.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Eileen Sideways</strong>
+                                <small>Los Angeles, CA</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user1.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Zaham Sindilmaca</strong>
+                                <small>San Francisco, CA</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user3.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Nusja Nawancali</strong>
+                                <small>Bangkok, Thailand</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user4.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Renov Leongal</strong>
+                                <small>Cebu City, Philippines</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user5.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Weno Carasbong</strong>
+                                <small>Tokyo, Japan</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane" id="rp-history">
+                <h5 class="sidebartitle">History</h5>
+                <ul class="chatuserlist">
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user4.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Eileen Sideways</strong>
+                                <small>Hi hello, ctc?... would you mind if I go to your...</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user2.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Zaham Sindilmaca</strong>
+                                <small>This is to inform you that your product that we...</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="/admin/images/photos/user3.png" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <strong>Nusja Nawancali</strong>
+                                <small>Are you willing to have a long term relat...</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane pane-settings" id="rp-settings">
+
+                <h5 class="sidebartitle mb20">Settings</h5>
+                <div class="form-group">
+                    <label class="col-xs-8 control-label">Show Offline Users</label>
+                    <div class="col-xs-4 control-label">
+                        <div class="toggle toggle-success"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-8 control-label">Enable History</label>
+                    <div class="col-xs-4 control-label">
+                        <div class="toggle toggle-success"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-8 control-label">Show Full Name</label>
+                    <div class="col-xs-4 control-label">
+                        <div class="toggle-chat1 toggle-success"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-8 control-label">Show Location</label>
+                    <div class="col-xs-4 control-label">
+                        <div class="toggle toggle-success"></div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- tab-pane -->
+
+        </div>
+        <!-- tab-content -->
+    </div>
+    <!-- rightpanel -->
+
+</section>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                <h4 class="modal-title">反馈驳回原因</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/user/backModifyApply" method="get">
+                    <input type="hidden" id="modID" name="modID" required value="">
+                    <input type="hidden" id="modStatus" name="modStatus" required value="">
+                    <textarea id="feedback" name="feedback" style="margin-bottom: 20px;" class="form-control" required rows="5"></textarea>
+                    <button class="btn btn-danger" type="submit" style="margin-right: 10px;">确认驳回</button>
+                    <a class="btn btn-white" aria-hidden="true" data-dismiss="modal">取消</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                <h4 class="modal-title">Small Modal</h4>
+            </div>
+            <div class="modal-body">...</div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content"></div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                <h4 class="modal-title">Static Background</h4>
+            </div>
+            <div class="modal-body">
+                Specify static for a backdrop which doesn't close the modal on click.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-tabs" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content"></div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-accordion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content"></div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-panel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content"></div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-photo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-photo-viewer">
+        <div class="modal-content"></div>
+    </div>
+</div>
+
+<script src="/admin/js/jquery-1.11.1.min.js"></script>
+<script src="/admin/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="/admin/js/bootstrap.min.js"></script>
+<script src="/admin/js/modernizr.min.js"></script>
+<script src="/admin/js/jquery.sparkline.min.js"></script>
+<script src="/admin/js/toggles.min.js"></script>
+<script src="/admin/js/retina.min.js"></script>
+<script src="/admin/js/jquery.cookies.js"></script>
+
+<script src="/admin/js/jquery.datatables.min.js"></script>
+<script src="/admin/js/select2.min.js"></script>
+
+<script src="/admin/js/custom.js"></script>
+<script>
+    jQuery(document).ready(function () {
+
+        "use strict";
+
+        jQuery('#table1').dataTable({
+            language: {
+                "sProcessing": "处理中...",
+                "sLengthMenu": "显示 _MENU_ 项结果",
+                "sZeroRecords": "没有匹配结果",
+                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                "sInfoPostFix": "",
+                "sSearch": "搜索:",
+                "sUrl": "",
+                "sEmptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "sInfoThousands": ",",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "上页",
+                    "sNext": "下页",
+                    "sLast": "末页"
+                },
+                "oAria": {
+                    "sSortAscending": ": 以升序排列此列",
+                    "sSortDescending": ": 以降序排列此列"
+                }
+            }
+        });
+
+        jQuery('#table2').dataTable({
+            language: {
+                "sProcessing": "处理中...",
+                "sLengthMenu": "显示 _MENU_ 项结果",
+                "sZeroRecords": "没有匹配结果",
+                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                "sInfoPostFix": "",
+                "sSearch": "搜索:",
+                "sUrl": "",
+                "sEmptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "sInfoThousands": ",",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "上页",
+                    "sNext": "下页",
+                    "sLast": "末页"
+                },
+                "oAria": {
+                    "sSortAscending": ": 以升序排列此列",
+                    "sSortDescending": ": 以降序排列此列"
+                }
+            }
+        });
+
+        // Select2
+        jQuery('select').select2({
+            minimumResultsForSearch: -1
+        });
+
+        jQuery('select').removeClass('form-control');
+
+        // Delete row in a table
+        jQuery('.delete-row').click(function () {
+            var c = confirm("Continue delete?");
+            if (c)
+                jQuery(this).closest('tr').fadeOut(function () {
+                    jQuery(this).remove();
+                });
+
+            return false;
+        });
+
+        // Show aciton upon row hover
+        jQuery('.table-hidaction tbody tr').hover(function () {
+            jQuery(this).find('.table-action-hide a').animate({
+                opacity: 1
+            });
+        }, function () {
+            jQuery(this).find('.table-action-hide a').animate({
+                opacity: 0
+            });
+        });
+
+    });
+</script>
+
+</body>
+
+</html>

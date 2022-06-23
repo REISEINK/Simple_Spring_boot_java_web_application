@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/admin/images/favicon.png" type="image/png">
+
+    <title>课程管理</title>
+
+    <link href="/admin/css/style.default.css" rel="stylesheet">
+
+    <!--    &lt;!&ndash; HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries &ndash;&gt;-->
+    <!--    &lt;!&ndash;[if lt IE 9]>-->
+    <!--    -->
+    <!--    <script src="/admin/js/html5shiv.js"></script>-->
+    <!--    <script src="/admin/js/respond.min.js"></script>-->
+    <!--    -->
+    <!--    <![endif]&ndash;&gt;-->
+</head>
+
+<body>
+
+
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+    <div class="leftpanel">
+
+        <div class="logopanel">
+            <h1><span>[</span> Organization <span>]</span></h1>
+        </div><!-- logopanel -->
+
+        <div class="leftpanelinner">
+
+            <!-- This is only visible to small devices -->
+            <div class="visible-xs hidden-sm hidden-md hidden-lg">
+                <div class="media userlogged">
+                    <img alt="" src="../../static/admin/images/photos/loggeduser.png" class="media-object">
+                    <div class="media-body">
+                        <h4>John Doe</h4>
+                        <span>"Life is so..."</span>
+                    </div>
+                </div>
+
+                <h5 class="sidebartitle actitle">Account</h5>
+                <ul class="nav nav-pills nav-stacked nav-bracket mb30">
+                    <li><a href="profile.html"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+                    <li><a href=""><i class="fa fa-cog"></i> <span>Account Settings</span></a></li>
+                    <li><a href=""><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
+                    <li><a href="signout.html"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+                </ul>
+            </div>
+
+            <h5 class="sidebartitle">导航</h5>
+            <ul class="nav nav-pills nav-stacked nav-bracket">
+                <li><a href="/getModifyApply"><i class="fa fa-pencil-square-o"></i> <span>资料更改</span></a></li>
+                <li><a href="/getCurrentApply"><i class="fa fa-bell"></i> <span>我的申请</span></a></li>
+                <li class="active"><a href="/getCourse"><i class="fa fa-book"></i> <span>课程管理</span></a></li>
+                <li><a href="/getLecturer"><i class="fa fa-graduation-cap"></i> <span>教师管理</span></a></li>
+            </ul>
+
+
+        </div><!-- leftpanelinner -->
+    </div><!-- leftpanel -->
+
+    <div class="mainpanel">
+
+        <div class="headerbar">
+
+            <a class="menutoggle"><i class="fa fa-bars"></i></a>
+
+
+            <div class="header-right">
+                <ul class="headermenu">
+                    <li>
+                        <div class="btn-group">
+                            <div type="button" class="btn btn-default dropdown-toggle">
+                                <i class="fa  fa-group" style="margin-right: 10px;float: left;margin-top: 2px"></i>
+                                <div th:text="${orgName}" style="margin-right: 30px"></div>
+                            </div>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <p th:text="${userName}" style="float: left"></p>
+                                <img src="../../static/admin/images/photos/loggeduser.png" alt="" />
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                                <li><a class="logOutBtn"><i class="glyphicon glyphicon-log-out"></i>登出</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- header-right -->
+
+        </div><!-- headerbar -->
+
+        <div class="pageheader">
+            <h2><i class="fa fa-home"></i> 课程管理<span>添加课程</span></h2>
+            <div class="breadcrumb-wrapper">
+                <span class="label">你的位置:</span>
+                <ol class="breadcrumb">
+                    <li class="active">课程管理</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="contentpanel">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-btns">
+                        <a href="" class="minimize">&minus;</a>
+                    </div>
+                    <h4 class="panel-title">添加课程</h4>
+                    <p>
+                        请输入课程基本信息
+                    </p>
+                </div>
+                <div class="panel-body panel-body-nopadding">
+
+                    <form class="form-horizontal form-bordered" th:action="@{/addCourse}" method="post">
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">课程名</label>
+                            <div class="col-sm-6">
+                                <input name="cozname" required="required" type="text" placeholder="请输入课程名" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" >课程类型</label>
+                            <div class="col-sm-6" style="width: 260px">
+<!--                                <input type="text" placeholder="请输入课程类型" class="form-control" />-->
+                                <select class="form-control" name="coztype">
+                                    <option value ="1">文理类</option>
+                                    <option value ="2">艺术类</option>
+                                    <option value="3">语言类</option>
+                                    <option value="4">科技类</option>
+                                    <option value="5">其他</option>
+                                </select>
+                            </div>
+                            <label class="col-sm-3 control-label" style="width: 100px">班次</label>
+                            <div class="col-sm-6" style="width: 260px">
+                                <input name="shift" type="text" placeholder="请输入班次" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" >开始时间</label>
+                            <div class="col-sm-6" style="width: 260px">
+                                <!--                                <input type="text" placeholder="Default Input" class="form-control" />-->
+                                <input name="starttime" type="date" value="2020-06-17" class="form-control" style="height: 40.4px"/>
+                            </div>
+                            <label class="col-sm-3 control-label" style="width: 100px">结束时间</label>
+                            <div class="col-sm-6" style="width: 260px">
+<!--                                <input type="text" placeholder="Default Input" class="form-control" />-->
+                                <input name="endtime" type="date" value="2020-06-17" class="form-control" style="height: 40.4px"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">授课教师</label>
+                            <div class="col-sm-6" style="width: 260px">
+                                <!--                                <input type="text" placeholder="Default Input" class="form-control" />-->
+                                <input name="teacher" type="text" placeholder="请输入授课教师" class="form-control" />
+                            </div>
+                            <label class="col-sm-3 control-label"  style="width: 100px">学时</label>
+                            <div class="col-sm-6" style="width: 260px">
+                                <!--                                <input type="text" placeholder="Default Input" class="form-control" />-->
+                                <input name="hours" type="text" placeholder="请输入学时" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">授课形式</label>
+                            <div class="col-sm-6">
+                                <input name="teachingform" required="required" type="text" placeholder="请输入授课形式" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">学生规模</label>
+                            <div class="col-sm-6" style="width: 260px">
+                                <input name="studentsize" type="text" placeholder="请输入学生规模" class="form-control" />
+                            </div>
+                            <label class="col-sm-3 control-label"  style="width: 100px">招生对象</label>
+                            <div class="col-sm-6" style="width: 260px">
+                                <input name="enrltarget" type="text" placeholder="请输入招生对象" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">收费标准</label>
+                            <div class="col-sm-6">
+                                <input required="required" name="cozcharges" type="text" placeholder="请输入收费标准" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">授课内容</label>
+                            <div class="col-sm-6">
+                                <input name="cozcontent" type="text" placeholder="请输入授课内容" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">教学内容</label>
+                            <div class="col-sm-6">
+                                <input name="cozobjective" type="text" placeholder="请输入教学目标" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">课程特色</label>
+                                <div class="col-sm-6">
+                                    <textarea name="cozfeature" placeholder="请输入课程特色" class="form-control" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <button type="submit" class="btn btn-primary">添加</button>&nbsp;
+                                    <button type="reset" class="btn btn-default">清空</button>
+                                </div>
+                            </div>
+                        </div><!-- panel-footer -->
+
+                    </form>
+
+                </div><!-- panel-body -->
+
+
+            </div><!-- panel -->
+
+
+        </div><!-- contentpanel -->
+    </div><!-- mainpanel -->
+
+
+</section>
+
+
+<script src="/admin/js/jquery-1.11.1.min.js"></script>
+<script src="/admin/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="/admin/js/jquery-ui-1.10.3.min.js"></script>
+<script src="/admin/js/bootstrap.min.js"></script>
+<script src="/admin/js/modernizr.min.js"></script>
+<script src="/admin/js/jquery.sparkline.min.js"></script>
+<script src="/admin/js/toggles.min.js"></script>
+<script src="/admin/js/retina.min.js"></script>
+<script src="/admin/js/jquery.cookies.js"></script>
+
+<script src="/admin/js/flot/jquery.flot.min.js"></script>
+<script src="/admin/js/flot/jquery.flot.resize.min.js"></script>
+<script src="/admin/js/flot/jquery.flot.spline.min.js"></script>
+<script src="/admin/js/morris.min.js"></script>
+<script src="/admin/js/raphael-2.1.0.min.js"></script>
+
+<script src="/admin/js/custom.js"></script>
+<script src="/admin/js/dashboard.js"></script>
+<script src="/admin/js/logOut.js"></script>
+
+<div style="text-align:center;">
+    <p></p>
+</div>
+</body>
+</html>

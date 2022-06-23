@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huadi.education.mapper.CourseMapper">
+    <resultMap id="BaseResultMap" type="com.huadi.education.entity.Course">
+        <id column="cozID" jdbcType="INTEGER" property="cozid" />
+        <result column="orgID" jdbcType="INTEGER" property="orgid" />
+        <result column="cozName" jdbcType="VARCHAR" property="cozname" />
+        <result column="cozType" jdbcType="INTEGER" property="coztype" />
+        <result column="shift" jdbcType="VARCHAR" property="shift" />
+        <result column="teacher" jdbcType="VARCHAR" property="teacher" />
+        <result column="hours" jdbcType="VARCHAR" property="hours" />
+        <result column="teachingForm" jdbcType="VARCHAR" property="teachingform" />
+        <result column="startTime" jdbcType="VARCHAR" property="starttime" />
+        <result column="endTime" jdbcType="VARCHAR" property="endtime" />
+        <result column="studentSize" jdbcType="INTEGER" property="studentsize" />
+        <result column="enrlTarget" jdbcType="VARCHAR" property="enrltarget" />
+        <result column="cozCharges" jdbcType="INTEGER" property="cozcharges" />
+        <result column="cozContent" jdbcType="VARCHAR" property="cozcontent" />
+        <result column="cozObjective" jdbcType="VARCHAR" property="cozobjective" />
+        <result column="cozFeature" jdbcType="VARCHAR" property="cozfeature" />
+        <result column="cozScore" jdbcType="FLOAT" property="cozscore" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    cozID,orgID,cozName,cozType,shift,teacher,hours,teachingForm,
+    startTime,endTime,studentSize,enrlTarget,cozCharges,cozContent,cozObjective,cozFeature,cozScore
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from org_course
+        where cozID = #{cozid,jdbcType=INTEGER}
+    </select>
+    <select id="selectByForeignKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from org_course
+        where orgID = #{orgid,jdbcType=INTEGER}
+    </select>
+    <select id="selectOrder" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from org_course
+        <where>
+         orgID = #{orgid,jdbcType=INTEGER}
+            <if test="search != null">
+            and cozName like concat('%', #{search}, '%')
+            </if>
+         </where>
+        <if test="orderby != null">
+        ORDER BY ${orderby}
+        <if test="order">desc</if>
+        </if>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from org_course
+    where cozID = #{cozid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.huadi.education.entity.Course" keyProperty="cozid" useGeneratedKeys="true">
+    insert into org_course ( orgID,cozName,cozType,shift,teacher,hours,teachingForm,
+    startTime,endTime,studentSize,enrlTarget,cozCharges,cozContent,cozObjective,cozFeature,cozScore)
+    values (#{orgid,jdbcType=INTEGER}, #{cozname,jdbcType=VARCHAR},
+      #{coztype,jdbcType=INTEGER}, #{shift,jdbcType=VARCHAR}, #{teacher,jdbcType=VARCHAR},
+      #{hours,jdbcType=VARCHAR}, #{teachingform,jdbcType=VARCHAR},
+      #{starttime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR},
+      #{studentsize,jdbcType=INTEGER}, #{enrltarget,jdbcType=VARCHAR},
+      #{cozcharges,jdbcType=INTEGER}, #{cozcontent,jdbcType=VARCHAR},
+      #{cozobjective,jdbcType=VARCHAR}, #{cozfeature,jdbcType=VARCHAR},
+      #{cozscore,jdbcType=FLOAT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.huadi.education.entity.Course" keyProperty="cozid" useGeneratedKeys="true">
+        insert into org_course
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orgid != null">
+                orgID,
+            </if>
+            <if test="cozname != null">
+                cozName,
+            </if>
+            <if test="coztype != null">
+                cozType,
+            </if>
+            <if test="shift != null">
+               shift,
+            </if>
+            <if test="teacher != null">
+                teacher,
+            </if>
+            <if test="hours != null">
+                hours,
+            </if>
+            <if test=" teachingform != null">
+                teachingForm,
+            </if>
+            <if test="starttime != null">
+                startTime,
+            </if>
+            <if test="endtime != null">
+                endTime,
+            </if>
+            <if test="studentsize != null">
+                studentSize,
+            </if>
+            <if test="enrltarget != null">
+                enrlTarget,
+            </if>
+            <if test="cozcharges  != null">
+                cozCharges,
+            </if>
+            <if test="cozcontent != null">
+                cozContent,
+            </if>
+            <if test="cozobjective != null">
+                cozObjective,
+            </if>
+            <if test="cozfeature != null">
+                cozFeature,
+            </if>
+            <if test="cozscore != null">
+                cozScore
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orgid != null">
+                #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="cozname != null">
+                #{cozname,jdbcType=VARCHAR},
+            </if>
+            <if test="coztype != null">
+                #{coztype,jdbcType=INTEGER},
+            </if>
+            <if test="shift != null">
+                #{shift,jdbcType=VARCHAR},
+            </if>
+            <if test="teacher != null">
+                #{teacher,jdbcType=VARCHAR},
+            </if>
+            <if test="hours != null">
+                #{hours,jdbcType=VARCHAR},
+            </if>
+            <if test="teachingform != null">
+                #{teachingform,jdbcType=INTEGER},
+            </if>
+            <if test="starttime != null">
+                #{starttime,jdbcType=VARCHAR},
+            </if>
+            <if test="endtime != null">
+                #{endtime,jdbcType=VARCHAR},
+            </if>
+            <if test="studentsize != null">
+                #{studentsize,jdbcType=INTEGER},
+            </if>
+            <if test="enrltarget != null">
+                #{enrltarget,jdbcType=VARCHAR},
+            </if>
+            <if test="cozcharges  != null">
+                #{cozcharges,jdbcType=INTEGER},
+            </if>
+            <if test="cozcontent != null">
+                #{cozcontent,jdbcType=VARCHAR},
+            </if>
+            <if test="cozobjective != null">
+                #{cozobjective,jdbcType=VARCHAR},
+            </if>
+            <if test="cozfeature != null">
+               #{cozfeature,jdbcType=VARCHAR},
+            </if>
+            <if test="cozscore != null">
+                #{cozscore,jdbcType=FLOAT}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huadi.education.entity.Course">
+        update org_course
+        <set>
+            <if test="orgid != null">
+                orgID = #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="cozname != null">
+                cozName = #{cozname,jdbcType=VARCHAR},
+            </if>
+            <if test="coztype != null">
+                cozType = #{coztype,jdbcType=INTEGER},
+            </if>
+            <if test="shift != null">
+                shift = #{shift,jdbcType=VARCHAR},
+            </if>
+            <if test="teacher != null">
+                teacher = #{teacher,jdbcType=VARCHAR},
+            </if>
+            <if test="hours != null">
+                hours = #{hours,jdbcType=VARCHAR},
+            </if>
+            <if test="teachingform != null">
+                teachingForm = #{teachingform,jdbcType=VARCHAR},
+            </if>
+            <if test="starttime != null">
+                startTime = #{starttime,jdbcType=VARCHAR},
+            </if>
+            <if test="endtime != null">
+                endTime = #{endtime,jdbcType=VARCHAR},
+            </if>
+            <if test="studentsize != null">
+                studentSize = #{studentsize,jdbcType=INTEGER},
+            </if>
+            <if test="enrltarget != null">
+                enrlTarget = #{enrltarget,jdbcType=VARCHAR},
+            </if>
+            <if test="cozcharges  != null">
+                cozCharges = #{cozcharges,jdbcType=INTEGER},
+            </if>
+            <if test="cozcontent != null">
+                cozContent = #{cozcontent,jdbcType=VARCHAR},
+            </if>
+            <if test="cozobjective != null">
+                cozObjective = #{cozobjective,jdbcType=VARCHAR},
+            </if>
+            <if test="cozfeature != null">
+                cozFeature = #{cozfeature,jdbcType=VARCHAR},
+            </if>
+            <if test="cozscore != null">
+                cozScore = #{cozscore,jdbcType=FLOAT}
+            </if>
+        </set>
+        where cozID = #{cozid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huadi.education.entity.Course">
+    update org_course
+    set
+        orgID = #{orgid,jdbcType=INTEGER},
+        cozName = #{cozname,jdbcType=VARCHAR},
+        cozType =#{coztype,jdbcType=INTEGER},
+        shift = #{shift,jdbcType=VARCHAR},
+        teacher = #{teacher,jdbcType=VARCHAR},
+        hours = #{hours,jdbcType=VARCHAR},
+        teachingForm = #{teachingform,jdbcType=VARCHAR},
+        startTime = #{starttime,jdbcType=VARCHAR},
+        endTime = #{endtime,jdbcType=VARCHAR},
+        studentSize = #{studentsize,jdbcType=INTEGER},
+        enrlTarget = #{enrltarget,jdbcType=VARCHAR},
+        cozCharges = #{cozcharges,jdbcType=INTEGER},
+        cozContent = #{cozcontent,jdbcType=VARCHAR},
+        cozObjective = #{cozobjective,jdbcType=VARCHAR},
+        cozFeature = #{cozfeature,jdbcType=VARCHAR},
+        cozScore = #{cozscore,jdbcType=FLOAT}
+    where cozID = #{cozid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huadi.education.mapper.ModifyApplyMapper">
+    <resultMap id="modifyApplyWithOrg" type="com.huadi.education.entity.ModifyApply">
+        <id property="modID" column="modID"></id>
+        <result property="modStatus" column="modStatus"></result>
+        <result property="legalPerson" column="legalPerson"></result>
+        <result property="principal" column="principal"></result>
+        <result property="publicTel" column="publicTel"></result>
+        <result property="address" column="address"></result>
+        <result property="operationInfo" column="operationInfo"></result>
+        <result property="feedback" column="feedback"></result>
+        <association property="org" column="orgID" javaType="com.huadi.education.entity.Org">
+            <id property="orgID" column="orgID"></id>
+            <result property="orgName" column="orgName"></result>
+            <result property="licenseKey" column="licenseKey" ></result>
+            <result property="licenseFile" column="licenseFile"></result>
+            <result property="orgType" column="orgType"></result>
+            <result property="legalPerson" column="legalPerson"></result>
+            <result property="principal" column="principal"></result>
+            <result property="operationType" column="operationType"></result>
+            <result property="publicTel" column="publicTel"></result>
+            <result property="regStatus" column="regStatus"></result>
+            <result property="address" column="address"></result>
+            <result property="complainNum" column="complainNum"></result>
+            <result property="blackReason" column="blackReason"></result>
+            <result property="haveAdm" column="haveAdm"></result>
+            <result property="operationInfo" column="operationInfo"></result>
+        </association>
+    </resultMap>
+    <select id="findModify" parameterType="java.lang.Integer" resultMap="modifyApplyWithOrg">
+    select * from org_modify_apply m join org o where m.orgID = o.orgID and m.orgID=#{orgid,jdbcType=INTEGER}
+
+    </select>
+    <insert id="applyModify" parameterType="com.huadi.education.entity.ModifyApply" keyProperty="modID" useGeneratedKeys="true">
+    insert into org_modify_apply (orgID,modStatus,legalPerson,principal,publicTel,address,operationInfo)
+    values (#{org.orgID,jdbcType=INTEGER}, 0,
+     #{legalPerson,jdbcType=VARCHAR}, #{principal,jdbcType=VARCHAR},
+     #{publicTel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+     #{operationInfo,jdbcType=VARCHAR})
+    </insert>
+    <insert id="applyModifySelective" parameterType="com.huadi.education.entity.ModifyApply" keyProperty="modID" useGeneratedKeys="true">
+        insert into org_modify_apply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                orgID,
+                modStatus,
+            <if test="legalPerson != null">
+                legalPerson,
+            </if>
+            <if test="principal != null">
+                principal,
+            </if>
+            <if test="publicTel != null">
+                publicTel,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="operationInfo != null">
+                operationInfo
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                #{org.orgID,jdbcType=INTEGER},
+                0，
+            <if test="legalPerson != null">
+                #{legalPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="principal != null">
+                #{principal,jdbcType=VARCHAR},
+            </if>
+            <if test="publicTel != null">
+                #{publicTel,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="operationInfo != null">
+                #{operationInfo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="reApplyModify" parameterType="com.huadi.education.entity.ModifyApply">
+        update org_modify_apply
+        <set>
+            modStatus = 0,feedback ="",
+            <if test="legalPerson != null">
+                legalPerson = #{legalPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="principal != null">
+                principal = #{principal,jdbcType=VARCHAR},
+            </if>
+            <if test="publicTel != null">
+                publicTel = #{publicTel,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="operationInfo != null">
+                operationInfo = #{operationInfo,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where orgID = #{org.orgID,jdbcType=INTEGER}
+    </update>
+</mapper>

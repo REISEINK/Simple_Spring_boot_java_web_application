@@ -1,0 +1,844 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="/admin/images/favicon.png" type="image/png">
+
+  <title>Bracket Responsive Bootstrap3 Admin</title>
+
+  <link href="/admin/css/style.default.css" rel="stylesheet">
+  <link rel="stylesheet" href="/layui/css/layui.css"  media="all">
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="/admin/js/html5shiv.js"></script>
+  <script src="/admin/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+<script th:inline="javascript">
+    window.onload = orgCheck();
+    addEventListener("load", function() {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    }
+
+    function orgCheck() {
+        if([[${addOrgFlag}]]==false){
+            alert("新增机构失败！请检查字段是否为空或正确。");
+        }
+        if([[${addOrgFlag}]]==true){
+            alert("新增机构成功！")
+        }
+        if([[${addressFlag}]]==false){
+            alert("新增机构地址有误！")
+        }
+        if([[${haveOrgFlag}]]==true){
+            alert("机构已存在，请检查机构许可证号！")
+        }
+    }
+</script>
+
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+
+<section>
+
+    <div class="leftpanel">
+
+        <div class="logopanel">
+            <h1><span>[</span> Admin <span>]</span></h1>
+        </div><!-- logopanel -->
+
+        <div class="leftpanelinner">
+
+            <!-- This is only visible to small devices -->
+            <div class="visible-xs hidden-sm hidden-md hidden-lg">
+                <div class="media userlogged">
+                    <img alt="" src="/admin/images/photos/loggeduser.png" class="media-object">
+                    <div class="media-body">
+                        <h4 th:text="${session.loginUser.name}"></h4>
+                        <span>"Life is so..."</span>
+                    </div>
+                </div>
+
+                <h5 class="sidebartitle actitle">Account</h5>
+                <ul class="nav nav-pills nav-stacked nav-bracket mb30">
+                    <li><a href="profile.html"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+                    <li><a href=""><i class="fa fa-cog"></i> <span>Account Settings</span></a></li>
+                    <li><a href=""><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
+                    <li><a href="signout.html"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+                </ul>
+            </div>
+
+            <h5 class="sidebartitle">Navigation</h5>
+            <ul class="nav nav-pills nav-stacked nav-bracket">
+                <span class="glyphicon glyphicon-iconname"></span>
+                <li ><a href="/user/getUserList"><i class="fa fa-users"></i> <span>管理员列表</span></a></li>
+                <li th:if="${session.accessLevel==1}"><a href="/user/toInsertUser"><i class="fa fa-plus-square"></i> <span>添加管理员</span></a></li>
+                <li class="nav-parent"><a href=""><i class="fa fa-list"></i> <span>审核管理</span></a>
+                    <ul class="children" style="display: none">
+                        <li ><a href="/user/getOrgApplyList"><i class="fa fa-caret-right"></i>审核机构账户申请</a></li>
+                        <li ><a href="/user/modifyApplyList"><i class="fa fa-caret-right"></i>审核机构信息修改申请</a></li>
+                    </ul>
+                </li>
+                <li class="nav-parent nav-active active"><a href=""><i class="fa fa-bank"></i> <span>机构管理</span></a>
+                    <ul class="children" style="display: block">
+                        <li class="active"><a href="/user/toInsertOrg"><i class="fa fa-caret-right"></i>新增组织机构</a></li>
+                        <li ><a href="/user/getOrgList"><i class="fa fa-caret-right"></i>组织机构列表</a></li>
+                    </ul>
+                </li>
+                <li class="nav-parent">
+                    <a href=""><i class="fa fa-folder-open"></i> <span>资讯管理</span></a>
+                    <ul class="children" style="display: none">
+                        <li >
+                            <a href="/user/toInsertNews"><i class="fa fa-caret-right"></i>新增辅助资讯</a>
+                        </li>
+                        <li >
+                            <a href="/user/getNewsList"><i class="fa fa-caret-right"></i>辅助资讯列表</a>
+                        </li>
+                    </ul>
+                </li>
+                <li ><a href="/user/getUserInfo"><i class="fa fa-user"></i> <span>我的个人信息</span></a></li>
+            </ul>
+
+
+        </div><!-- leftpanelinner -->
+    </div><!-- leftpanel -->
+
+    <div class="mainpanel">
+
+        <div class="headerbar">
+
+            <a class="menutoggle"><i class="fa fa-bars"></i></a>
+
+            <div class="header-right">
+                <ul class="headermenu">
+                    <li>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <img src="/admin/images/photos/loggeduser.png" alt="" />
+                                [[${session.loginUser.name}]]
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                                <li><a href="/user/getUserInfo"><i class="glyphicon glyphicon-user"></i> 我的个人信息</a></li>
+                                <li><a href="/login"><i class="glyphicon glyphicon-log-out"></i> 退出登录</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- header-right -->
+
+        </div><!-- headerbar -->
+        
+    <div class="pageheader">
+      <h2><i class="fa fa-bank"></i> 新增组织机构 <span>将新的组织机构信息添加至系统中</span></h2>
+      <div class="breadcrumb-wrapper">
+        <span class="label">You are here:</span>
+        <ol class="breadcrumb">
+          <li>机构管理</li>
+          <li class="active">新增组织机构</li>
+        </ol>
+      </div>
+    </div>
+    
+    <div class="contentpanel">
+      
+      <div class="row">
+            <div class="col-md-12">
+                <form action="/user/insertSingleOrg" method="post" id="basicForm4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <div class="panel-btns">
+                    <a href="" class="panel-close">&times;</a>
+                    <a href="" class="minimize">&minus;</a>
+                  </div>
+                  <h4 class="panel-title">新增组织机构</h4>
+                  <p>将新增的组织机构信息填入下表中并提交。</p>
+                </div>
+                <div class="panel-body">
+                    <div class="row" style="margin-bottom: 40px;">
+                        <div class="col-sm-3" style="margin-right: 20px;">
+                            <div class="form-group">
+                                <label class="control-label">机构全称</label>
+                                <input type="text" th:id="orgName" th:name="orgName" class="form-control" onblur="" required />
+                            </div>
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-3" style="margin-right: 20px;">
+                            <div class="form-group">
+                                <label class="control-label">许可证号</label>
+                                <input type="text" th:id="licenseKey" th:name="licenseKey" class="form-control" required />
+                            </div>
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-3" style="margin-right: 20px;">
+                            <div class="form-group">
+                                <label class="control-label">地址</label>
+                                <input type="text" th:id="address" th:name="address" class="form-control" required />
+                            </div>
+                        </div><!-- col-sm-6 -->
+
+                    </div><!-- row -->
+
+                    <div class="row" style="margin-bottom: 40px;">
+
+                        <div class="col-sm-2" style="margin-right: 20px;">
+                            <div class="form-group">
+                                <label class="control-label">机构类型</label>
+                                <input type="text" th:id="orgType" th:name="orgType" class="form-control" required />
+                            </div>
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-2" style="margin-right: 20px;">
+                            <div class="form-group">
+                                <label class="control-label">法人代表</label>
+                                <input type="text" th:id="legalPerson" th:name="legalPerson" class="form-control" required />
+                            </div>
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-2" style="margin-right: 20px;">
+                            <div class="form-group">
+                                <label class="control-label">校长</label>
+                                <input type="text" th:id="principal" th:name="principal" class="form-control" required />
+                            </div>
+                        </div><!-- col-sm-6 -->
+
+                        <div class="col-sm-2" style="margin-right: 20px;">
+                            <div class="form-group">
+                                <label class="control-label">公开电话</label>
+                                <input type="tel" th:id="publicTel" th:name="publicTel" class="form-control" required />
+                            </div>
+                        </div><!-- col-sm-6 -->
+                    </div><!-- row -->
+
+                    <div class="row" style="margin-bottom: 40px;">
+                        <div class="col-sm-2" style="margin-right: 20px;">
+                            <div class="form-group">
+                                <label class="control-label">办学类型</label>
+                                <select class="select2" th:id="operationType" th:name="operationType" required data-placeholder="选择办学类型">
+                                    <option value=""></option>
+                                    <option value="1">文理类</option>
+                                    <option value="2">艺术类</option>
+                                    <option value="3">语言类</option>
+                                    <option value="4">科技类</option>
+                                    <option value="5">其他</option>
+                                    <option value="6">综合</option>
+                                </select>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-2" style="margin-right: 20px;">
+                            <div class="form-group">
+                                <label class="control-label">办学状态</label>
+                                <select class="select2" th:id="regStatus" th:name="regStatus" required data-placeholder="选择办学状态">
+                                    <option value=""></option>
+                                    <option value="1">正常办学</option>
+                                    <option value="2">限期整改</option>
+                                    <option value="3">非法办学</option>
+                                </select>
+                            </div>
+                        </div><!-- col-sm-6 -->
+
+
+
+                    </div><!-- row -->
+
+                    <div class="row" style="display:flex;flex-direction: row;">
+                        <div class="col-sm-2" style="margin-right: 20px;">
+                            <div class="form-group">
+                                <label class="control-label">许可证文件</label>
+                                <div class="layui-upload-drag" id="test10">
+                                    <i class="layui-icon">&#xe67c;</i>
+                                    <p>点击上传，或将文件拖拽到此处</p>
+                                    <div class="layui-hide" id="uploadDemoView">
+                                        <hr>
+                                        <img src="" alt="上传成功后渲染" style="max-width: 196px">
+                                        <input type="hidden" th:id="licenseFile" th:name="licenseFile" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-7" style="margin-left: 20px;">
+                            <div class="form-group">
+                                <label class="control-label">办学内容</label>
+                                <textarea id="autoResizeTA" th:name="operationInfo" class="form-control" rows="5" required></textarea>
+                            </div>
+                        </div><!-- col-sm-6 -->
+
+                    </div><!-- row -->
+                </div><!-- panel-body -->
+                  <div class="panel-footer">
+                      <button class="btn btn-primary"  type="submit" style="margin-right: 10px;">确认新增</button>
+                      <button type="reset" class="btn btn-default">重置</button>
+                  </div>
+              </div>
+                </form>
+            </div><!-- col-md-12 -->
+
+        
+      </div><!--row -->
+      
+      
+    </div><!-- contentpanel -->
+    
+    <div class="contentpanel" style="padding-top: 5px;">
+      
+      <div class="row">
+        
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="panel-btns">
+                <a href="" class="panel-close">&times;</a>
+                <a href="" class="minimize">&minus;</a>
+              </div>
+              <h4 class="panel-title">批量新增组织机构</h4>
+              <p>将多条新增的组织机构信息以Excel文件的形式导入至系统。注：必须使用我们提供的Excel模板，每次最多1000条数据！</p>
+            </div>
+            <div class="panel-body">
+              <div class="layui-upload">
+                  <button type="button" class="layui-btn" id="download" onclick="download()">下载Excel模板</button>
+                  <button type="button" class="layui-btn" id="testList">选择多文件</button>
+							  <div class="layui-upload-list">
+							    <table class="layui-table">
+							      <thead>
+							        <th>文件名</th>
+							        <th>大小</th>
+							        <th>状态</th>
+							        <th>操作</th>
+							      </thead>
+							      <tbody id="demoList"></tbody>
+							    </table>
+							  </div>
+							  <!--<button type="button" class="layui-btn" id="testListAction">开始上传</button>-->
+							</div>
+                <script type="text/javascript">
+                    function download() {
+                        location.href="/user/downloadExcel";
+                    }
+                </script>
+              
+            </div><!-- panel-body -->
+            <div class="panel-footer">
+              <button class="btn btn-primary" id="testListAction" onclick="loading()">开始导入</button>
+            </div>
+          </div>
+        </div><!-- col-md-6 -->
+        <script type="text/javascript">
+            function loading() {
+                var btn = document.getElementById("testListAction")
+                btn.className="btn btn-default"
+                btn.disabled = true
+            }
+        </script>
+        
+      </div><!--row -->
+      
+      
+    </div><!-- contentpanel -->
+    
+  </div><!-- mainpanel -->
+  
+  <div class="rightpanel">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs nav-justified">
+        <li class="active"><a href="#rp-alluser" data-toggle="tab"><i class="fa fa-users"></i></a></li>
+        <li><a href="#rp-favorites" data-toggle="tab"><i class="fa fa-heart"></i></a></li>
+        <li><a href="#rp-history" data-toggle="tab"><i class="fa fa-clock-o"></i></a></li>
+        <li><a href="#rp-settings" data-toggle="tab"><i class="fa fa-gear"></i></a></li>
+    </ul>
+        
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="rp-alluser">
+            <h5 class="sidebartitle">Online Users</h5>
+            <ul class="chatuserlist">
+                <li class="online">
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/userprofile.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Eileen Sideways</strong>
+                            <small>Los Angeles, CA</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+                <li class="online">
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user1.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <span class="pull-right badge badge-danger">2</span>
+                            <strong>Zaham Sindilmaca</strong>
+                            <small>San Francisco, CA</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+                <li class="online">
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user2.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Nusja Nawancali</strong>
+                            <small>Bangkok, Thailand</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+                <li class="online">
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user3.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Renov Leongal</strong>
+                            <small>Cebu City, Philippines</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+                <li class="online">
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user4.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Weno Carasbong</strong>
+                            <small>Tokyo, Japan</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+            </ul>
+            
+            <div class="mb30"></div>
+            
+            <h5 class="sidebartitle">Offline Users</h5>
+            <ul class="chatuserlist">
+                <li>
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user5.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Eileen Sideways</strong>
+                            <small>Los Angeles, CA</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+                <li>
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user2.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Zaham Sindilmaca</strong>
+                            <small>San Francisco, CA</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+                <li>
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user3.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Nusja Nawancali</strong>
+                            <small>Bangkok, Thailand</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+                <li>
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user4.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Renov Leongal</strong>
+                            <small>Cebu City, Philippines</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+                <li>
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user5.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Weno Carasbong</strong>
+                            <small>Tokyo, Japan</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+                <li>
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user4.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Renov Leongal</strong>
+                            <small>Cebu City, Philippines</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+                <li>
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user5.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Weno Carasbong</strong>
+                            <small>Tokyo, Japan</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+            </ul>
+        </div>
+        <div class="tab-pane" id="rp-favorites">
+            <h5 class="sidebartitle">Favorites</h5>
+            <ul class="chatuserlist">
+                <li class="online">
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user2.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Eileen Sideways</strong>
+                            <small>Los Angeles, CA</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+                <li>
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user1.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Zaham Sindilmaca</strong>
+                            <small>San Francisco, CA</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+                <li>
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user3.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Nusja Nawancali</strong>
+                            <small>Bangkok, Thailand</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+                <li class="online">
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user4.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Renov Leongal</strong>
+                            <small>Cebu City, Philippines</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+                <li class="online">
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user5.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Weno Carasbong</strong>
+                            <small>Tokyo, Japan</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+            </ul>
+        </div>
+        <div class="tab-pane" id="rp-history">
+            <h5 class="sidebartitle">History</h5>
+            <ul class="chatuserlist">
+                <li class="online">
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user4.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Eileen Sideways</strong>
+                            <small>Hi hello, ctc?... would you mind if I go to your...</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+                <li>
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user2.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Zaham Sindilmaca</strong>
+                            <small>This is to inform you that your product that we...</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+                <li>
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="/admin/images/photos/user3.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <strong>Nusja Nawancali</strong>
+                            <small>Are you willing to have a long term relat...</small>
+                        </div>
+                    </div><!-- media -->
+                </li>
+            </ul>
+        </div>
+        <div class="tab-pane pane-settings" id="rp-settings">
+            
+            <h5 class="sidebartitle mb20">Settings</h5>
+            <div class="form-group">
+                <label class="col-xs-8 control-label">Show Offline Users</label>
+                <div class="col-xs-4 control-label">
+                    <div class="toggle toggle-success"></div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-xs-8 control-label">Enable History</label>
+                <div class="col-xs-4 control-label">
+                    <div class="toggle toggle-success"></div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-xs-8 control-label">Show Full Name</label>
+                <div class="col-xs-4 control-label">
+                    <div class="toggle-chat1 toggle-success"></div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-xs-8 control-label">Show Location</label>
+                <div class="col-xs-4 control-label">
+                    <div class="toggle toggle-success"></div>
+                </div>
+            </div>
+            
+        </div><!-- tab-pane -->
+        
+    </div><!-- tab-content -->
+  </div><!-- rightpanel -->
+  
+</section>
+
+
+<script src="/admin/js/jquery-1.11.1.min.js"></script>
+<script src="/admin/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="/admin/js/bootstrap.min.js"></script>
+<script src="/admin/js/modernizr.min.js"></script>
+<script src="/admin/js/jquery.sparkline.min.js"></script>
+<script src="/admin/js/toggles.min.js"></script>
+<script src="/admin/js/retina.min.js"></script>
+<script src="/admin/js/jquery.cookies.js"></script>
+
+
+<script src="/admin/js/select2.min.js"></script>
+<script src="/admin/js/jquery.validate.min.js"></script>
+
+<script src="/admin/js/custom.js"></script>
+
+<script>
+jQuery(document).ready(function(){
+    
+    "use strict";
+    
+    // Select2
+  jQuery(".select2").select2({
+    width: '100%',
+    minimumResultsForSearch: -1
+  });
+  
+  // Basic Form
+  jQuery("#basicForm").validate({
+    highlight: function(element) {
+      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+    },
+    success: function(element) {
+      jQuery(element).closest('.form-group').removeClass('has-error');
+    }
+  });
+  
+  // Error Message In One Container
+  jQuery("#basicForm2").validate({
+	 errorLabelContainer: jQuery("#basicForm2 div.error")
+  });
+  
+  // With Checkboxes and Radio Buttons
+  jQuery("#basicForm3").validate({
+    highlight: function(element) {
+      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+    },
+    success: function(element) {
+      jQuery(element).closest('.form-group').removeClass('has-error');
+    }
+  });
+  
+  // Validation with select boxes
+  jQuery("#basicForm4").validate({
+    highlight: function(element) {
+      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+    },
+    success: function(element) {
+      jQuery(element).closest('.form-group').removeClass('has-error');
+    }
+  });
+  
+  
+});
+</script>
+
+<script src="/layui/layui.js"></script>
+<script>
+window.global = {
+  pageType: 'demo'
+  ,preview: function(){
+    var preview = document.getElementById('LAY_preview');
+    return preview ? preview.innerHTML : '';
+  }()
+};
+layui.config({
+  base: '//res.layui.com/static/lay/modules/layui/'
+  ,version: '1591673027433'
+}).use('global');
+</script>
+ 
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d214947968792b839fd669a4decaaffc";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</div>
+<div id="LAY_democodejs">
+<script>
+layui.use('upload', function(){
+  var $ = layui.jquery
+  ,upload = layui.upload;
+
+  
+  //拖拽上传
+  upload.render({
+    elem: '#test10'
+    ,url: '/user/uploadOrgImg' //改成您自己的上传接口
+      ,size: 10000
+    ,method:'POST'
+    ,done: function(res){
+        if(res.code==0){
+            layer.msg('上传成功');
+            layui.$('#uploadDemoView').removeClass('layui-hide').find('img').attr('src', res.data.src);
+            document.getElementById("licenseFile").value = res.data.src
+            console.log(res)
+        }else {
+            layer.msg('上传失败');
+        }
+
+    }
+  });
+  
+  //多文件列表示例
+  var demoListView = $('#demoList')
+  ,uploadListIns = upload.render({
+    elem: '#testList'
+      ,url: '/user/insertOrg' //改成您自己的上传接口
+      ,exts: 'xlsx'
+      ,size: 200
+      ,accept: 'file'
+      ,multiple: true
+      ,auto: false
+    ,bindAction: '#testListAction'
+    ,choose: function(obj){   
+      var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+      //读取本地文件
+      obj.preview(function(index, file, result){
+        var tr = $(['<tr id="upload-'+ index +'">'
+          ,'<td>'+ file.name +'</td>'
+          ,'<td>'+ (file.size/1024).toFixed(1) +'kb</td>'
+          ,'<td>等待导入</td>'
+          ,'<td>'
+            ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重新导入</button>'
+            ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+          ,'</td>'
+        ,'</tr>'].join(''));
+        
+        //单个重传
+        tr.find('.demo-reload').on('click', function(){
+          obj.upload(index, file);
+        });
+        
+        //删除
+        tr.find('.demo-delete').on('click', function(){
+          delete files[index]; //删除对应的文件
+          tr.remove();
+          uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+        });
+        
+        demoListView.append(tr);
+      });
+      }
+      ,progress: function(n, elem){
+          //之后直接执行下面代码，
+          var percent = n + '%' //获取进度百分比
+          element.progress('demo', percent);
+      }
+    ,done: function(res, index, upload){
+      if(res.code==0){ //上传成功
+          var btn = document.getElementById("testListAction")
+          btn.className="btn btn-success"
+          btn.disabled = false
+        var tr = demoListView.find('tr#upload-'+ index)
+        ,tds = tr.children()
+        ,count = res.count;
+        tds.eq(2).html('<span style="color: #5FB878;">成功导入'+count+'条数据</span>');
+        tds.eq(3).html(''); //清空操作
+          alert(res.msg)
+        return delete this.files[index]; //删除文件队列已经上传成功的文件
+      }
+      this.error(index, upload);
+    }
+    ,error: function(index, upload){
+          var btn = document.getElementById("testListAction")
+          btn.className="btn btn-success"
+          btn.disabled = false
+      var tr = demoListView.find('tr#upload-'+ index)
+      ,tds = tr.children();
+      tds.eq(2).html('<span style="color: #FF5722;">导入失败，请检查文件内是否有字段为空或地址信息是否正确</span>');
+      tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+    }
+  });
+  
+  //绑定原始文件域
+  upload.render({
+    elem: '#test20'
+    ,url: 'https://httpbin.org/post' //改成您自己的上传接口
+    ,done: function(res){
+      layer.msg('导入成功');
+      console.log(res)
+    }
+  });
+  
+});
+</script>
+
+</body>
+</html>

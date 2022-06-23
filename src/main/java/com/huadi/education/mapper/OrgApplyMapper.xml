@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace表示命名空间 -->
+<mapper namespace="com.huadi.education.mapper.OrgApplyMapper">
+
+    <resultMap id="orgApplyWithOrg" type="com.huadi.education.entity.OrgApply">
+        <id property="applyID" column="applyID"></id>
+        <result property="applicantName" column="applicantName"></result>
+        <result property="applicantID" column="applicantID"></result>
+        <result property="applicantEmail" column="applicantEmail"></result>
+        <result property="applicantTel" column="applicantTel"></result>
+        <result property="applyStatus" column="applyStatus"></result>
+        <association property="org" column="orgID" javaType="com.huadi.education.entity.Org">
+            <id property="orgID" column="orgID"></id>
+            <result property="orgName" column="orgName"></result>
+            <result property="licenseKey" column="licenseKey" ></result>
+            <result property="licenseFile" column="licenseFile"></result>
+            <result property="orgType" column="orgType"></result>
+            <result property="legalPerson" column="legalPerson"></result>
+            <result property="principal" column="principal"></result>
+            <result property="operationType" column="operationType"></result>
+            <result property="publicTel" column="publicTel"></result>
+            <result property="regStatus" column="regStatus"></result>
+            <result property="address" column="address"></result>
+            <result property="complainNum" column="complainNum"></result>
+            <result property="blackReason" column="blackReason"></result>
+            <result property="haveAdm" column="haveAdm"></result>
+            <result property="operationInfo" column="operationInfo"></result>
+        </association>
+    </resultMap>
+    <select id="findAllOrgApply" resultMap="orgApplyWithOrg">
+        select * from org_apply natural join org ORDER BY applyStatus ASC, applyID DESC
+    </select>
+
+    <insert id="orgApplyCreate" parameterType="com.huadi.education.entity.OrgApply" keyProperty="applyID" useGeneratedKeys="true">
+        insert into org_apply (orgID,applicantName,applicantID,applicantEmail,applicantTel,applyStatus)
+        values(#{org.orgID},#{applicantName},#{applicantID},#{applicantEmail},#{applicantTel},0)
+    </insert>
+
+    <select id="queryLicense" parameterType="String" resultType="java.lang.Long">
+        select IFNULL(orgID,0) from org where licenseKey = #{ilicense}
+    </select>
+
+
+</mapper>

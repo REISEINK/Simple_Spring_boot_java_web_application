@@ -1,0 +1,218 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicon icons -->
+    <link href="/visitor/images/favicon.png" rel="shortcut icon">
+
+    <!-- All CSS -->
+    <link rel="stylesheet" href="/visitor/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/visitor/css/themify-icons.css">
+    <link rel="stylesheet" href="/visitor/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/visitor/css/style.css">
+
+    <title>机构申请</title>
+</head>
+<script th:inline="javascript">
+    window.onload = orgCheck();
+    addEventListener("load", function() {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    }
+
+    function orgCheck() {
+        if([[${orgflag}]]==false){
+            alert("机构不存在！");
+        }
+        if([[${orgflag}]]==true){
+            alert("申请成功！等待审核...")
+        }
+    }
+</script>
+<body>
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"></div>
+</div>
+
+<!-- Header strat -->
+<header class="header">
+    <div class="container">
+        <nav class="navbar">
+            <!-- Site logo -->
+            <a href="index.html" class="logo">
+                <img src="/visitor/images/logo.png" alt="">
+            </a>
+            <a href="javascript:void(0);" id="mobile-menu-toggler">
+                <i class="ti-align-justify"></i>
+            </a>
+            <ul class="navbar-nav">
+                <li><a href="/index">首页</a></li>
+                <li><a href="/searchlist">定位搜索</a></li>
+                <li class="has-menu-child" style="margin-right: 10px;">
+                    <a href="javascript:void(0);">曝光台</a>
+                    <ul class="sub-menu">
+                        <li><a href="/whitelists">白名单</a></li>
+                        <li><a href="/blocklists">黑名单</a></li>
+                    </ul>
+                </li>
+                <li class="has-menu-child" style="margin-right: 10px;">
+                    <a href="javascript:void(0);">信息公示</a>
+                    <ul class="sub-menu">
+                        <li><a href="/policylist">政策法规</a></li>
+                        <li><a href="/newslist">通知公告</a></li>
+                    </ul>
+                </li>
+                <li><a href="/report.html">监督反馈</a></li>
+                <li class="has-menu-child" style="margin-right: 10px;">
+                    <a href="javascript:void(0);">用户登录</a>
+                    <ul class="sub-menu">
+                        <li><a href="/login">用户登录</a></li>
+                        <li><a href="/orgApply/toSubmit">机构申请</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<!-- Header strat -->
+
+<!-- Login / Registration start -->
+<section class="banner login-registration">
+    <div class="vector-img">
+        <img src="/visitor/images/vector.png" alt="">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="content-box">
+                    <h2>机构申请账户</h2>
+                    <p>教育机构的内部管理者可提交账户申请，申请对应组织机构的管理账户<br>2个工作日内审核通过后，将会通过邮件或电话的形式反馈申请结果</p>
+                </div>
+                <form th:method="post" th:action="@{/orgApply/submit}" class="sl-form">
+                    <div class="form-group">
+                      <label>所任职机构许可证号</label>
+                      <input type="text" th:id="license" th:name="license" placeholder="请输入15位办学许可证号" required>
+                      <span></span>
+                    </div>
+                    <div class="form-group">
+                      <label>申请人员</label>
+                      <input type="text" th:id="applicantName" th:name="applicantName" placeholder="请输入申请人姓名" required>
+                      <span></span>
+                    </div>
+                    <div class="form-group">
+                        <label>身份证号</label>
+                        <input type="text" th:id="applicantID" th:name="applicantID" placeholder="请输入18位身份证号" required>
+                        <span></span>
+                    </div>
+                    <div class="form-group">
+                        <label>联系电话</label>
+                        <input type="text" th:id="applicantTel" th:name="applicantTel" placeholder="请输入11位联系电话" required>
+                        <span></span>
+                    </div>
+                    <div class="form-group">
+                        <label>邮箱地址</label>
+                        <input type="email" th:id="applicantEmail" th:name="applicantEmail" placeholder="请输入邮箱地址" required>
+                        <span></span>
+                    </div>
+                    <button class="btn btn-filled btn-round" type="submit" style="margin-top: 20px; font-size: 16px;"><span class="bh"></span> <span>提交申请</span></button>
+                    <p class="notice">已有账户? <a href="/login">立即登录</a></p>
+                  </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Login / Registration end -->
+
+<!-- Footer strat -->
+<footer class="footer">
+    <div class="foo-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-6">
+            <div class="widget widget-navigation">
+              <h4 class="widget-title">联系方式</h4>
+              <ul>                  
+                <li><a href="" style="pointer-events: none;">咨询方式：010-6119XXXX-XXX</a></li>
+                <li><a href="" style="pointer-events: none;">客服邮箱：XXXX@cse.edu.cn</a></li>
+                <li><a href="" style="pointer-events: none;">官方微信：XXXX机构规范平台</a></li>
+                <li><a href="" style="pointer-events: none;">微信公众号：gh-76ba7712XXXX</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <div class="widget widget-navigation">
+              <h4 class="widget-title">友情链接</h4>
+              <ul>                  
+                <li><a href="http://www.moe.gov.cn/">中国人民共和国教育部</a></li>
+                <li><a href="http://www.scedu.net/">四川省教育厅</a></li>
+                <li><a href="http://edu.chengdu.gov.cn/">成都市教育局</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="foo-btm">
+      <div class="container">
+        <p class="copyright">Copyright &copy; 2019.Company name All rights reserved.</p>
+      </div>
+    </div>
+    
+  </footer>
+<!-- Footer end -->
+
+<!-- JS -->
+<script src="/visitor/js/jquery-3.3.1.min.js"></script>
+<script src="/visitor/js/jquery-ui.min.js"></script>
+<script src="/visitor/js/bootstrap.min.js"></script>
+<script src="/visitor/js/owl.carousel.min.js"></script>
+<script src="/visitor/js/scripts.js"></script>
+
+<script>
+    $(function() {
+      $("input[name='license']").blur(function() { //失去焦点
+            var namestr = $(this).val();
+            var regstr = /^[0-9]{15}$/;
+            if(!regstr.test(namestr)) {
+                $(this).next().html("输入许可证号不合法").css("color", "red");
+                return false;
+            }
+            $(this).next().html("");
+            return true;
+        });
+      $("input[name='applicantID']").blur(function() { //失去焦点
+          var namestr = $(this).val();
+          var regstr = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+          if(!regstr.test(namestr)) {
+              $(this).next().html("输入身份证号不合法").css("color", "red");
+              return false;
+          }
+          $(this).next().html("");
+          return true;
+      });
+      $("input[name='applicantTel']").blur(function() { //失去焦点
+            var namestr = $(this).val();
+            var regstr = /^[0-9]{11}$/;
+            if(!regstr.test(namestr)) {
+                $(this).next().html("输入联系电话不合法").css("color", "red");
+                return false;
+            }
+            $(this).next().html("");
+            return true;
+        });
+    });
+</script>
+    
+</body>
+</html>

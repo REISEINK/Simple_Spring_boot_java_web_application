@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huadi.education.mapper.TeacherMapper">
+    <resultMap id="BaseResultMap" type="com.huadi.education.entity.Teacher">
+        <id column="tchID" jdbcType="INTEGER" property="tchid" />
+        <result column="orgID" jdbcType="INTEGER" property="orgid" />
+        <result column="tchName" jdbcType="VARCHAR" property="tchname" />
+        <result column="tchGender" jdbcType="VARCHAR" property="tchgender" />
+        <result column="tchCertNum" jdbcType="VARCHAR" property="tchcertnum" />
+        <result column="tchEntryTime" jdbcType="VARCHAR" property="tchentrytime" />
+        <result column="tchEducation" jdbcType="VARCHAR" property="tcheducation" />
+        <result column="tchSchool" jdbcType="VARCHAR" property="tchschool" />
+        <result column="tchIsForeign" jdbcType="VARCHAR" property="tchisforeign" />
+        <result column="tchPermitNumInChina" jdbcType="VARCHAR" property="tchpermitnuminchina" />
+        <result column="tchContent" jdbcType="VARCHAR" property="tchcontent" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    tchID,orgID,tchName,tchGender,tchCertNum,tchEntryTime,tchEducation,
+    tchSchool,tchIsForeign,tchPermitNumInChina,tchContent
+</sql>
+    <select id="selectTchByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from org_lecturer
+        where tchID = #{tchid,jdbcType=INTEGER}
+    </select>
+    <select id="selectTchByForeignKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from org_lecturer
+        where orgID = #{orgid,jdbcType=INTEGER}
+    </select>
+    <select id="selectOrder" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from org_lecturer
+        <where>
+            orgID = #{orgid,jdbcType=INTEGER}
+            <if test="search != null">
+                and tchName like concat('%', #{search}, '%')
+            </if>
+        </where>
+        <if test="orderby != null">
+            ORDER BY ${orderby}
+            <if test="order">desc</if>
+        </if>
+    </select>
+    <delete id="deleteTchByPrimaryKey" parameterType="java.lang.Integer">
+    delete from org_lecturer
+    where tchID = #{tchid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insertTch" parameterType="com.huadi.education.entity.Teacher" keyProperty="tchid" useGeneratedKeys="true">
+    insert into org_lecturer (orgID,tchName,tchGender,tchCertNum,tchEntryTime,tchEducation,
+    tchSchool,tchIsForeign,tchPermitNumInChina,tchContent)
+    values (#{orgid,jdbcType=INTEGER}, #{tchname,jdbcType=VARCHAR},
+      #{tchgender,jdbcType=VARCHAR}, #{tchcertnum,jdbcType=VARCHAR}, #{tchentrytime,jdbcType=VARCHAR},
+      #{tcheducation,jdbcType=VARCHAR}, #{tchschool,jdbcType=VARCHAR}, #{tchisforeign,jdbcType=VARCHAR},
+      #{tchpermitnuminchina,jdbcType=VARCHAR}, #{tchcontent,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertTchSelective" parameterType="com.huadi.education.entity.Teacher" keyProperty="tchid" useGeneratedKeys="true">
+        insert into org_lecturer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orgid != null">
+                orgID,
+            </if>
+            <if test="tchname != null">
+                tchName,
+            </if>
+            <if test="tchgender != null">
+                tchGender,
+            </if>
+            <if test="tchcertnum != null">
+                tchCertNum,
+            </if>
+            <if test="tchentrytime != null">
+                tchEntryTime,
+            </if>
+            <if test="tcheducation != null">
+                tchEducation,
+            </if>
+            <if test=" tchschool != null">
+                tchSchool,
+            </if>
+            <if test="tchisforeign != null">
+                tchIsForeign,
+            </if>
+            <if test="tchpermitnuminchina != null">
+                tchPermitNumInChina,
+            </if>
+            <if test="tchcontent != null">
+                tchContent
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orgid != null">
+                #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="tchname != null">
+                #{tchname,jdbcType=VARCHAR},
+            </if>
+            <if test="tchgender != null">
+                #{tchgender,jdbcType=VARCHAR},
+            </if>
+            <if test="tchcertnum != null">
+                #{tchcertnum,jdbcType=VARCHAR},
+            </if>
+            <if test="tchentrytime != null">
+                #{tchentrytime,jdbcType=VARCHAR},
+            </if>
+            <if test="tcheducation != null">
+                #{tcheducation,jdbcType=VARCHAR},
+            </if>
+            <if test="tchschool != null">
+                #{tchschool,jdbcType=VARCHAR},
+            </if>
+            <if test="tchisforeign != null">
+                #{tchisforeign,jdbcType=VARCHAR},
+            </if>
+            <if test="tchpermitnuminchina != null">
+                #{tchpermitnuminchina,jdbcType=VARCHAR},
+            </if>
+            <if test="tchcontent!= null">
+                #{tchcontent,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateTchByPrimaryKeySelective" parameterType="com.huadi.education.entity.Teacher">
+        update org_lecturer
+        <set>
+            <if test="orgid != null">
+                orgID = #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="tchname != null">
+                tchName = #{tchname,jdbcType=VARCHAR},
+            </if>
+            <if test="tchgender != null">
+                tchGender = #{tchgender,jdbcType=VARCHAR},
+            </if>
+            <if test="tchcertnum != null">
+                tchCertNum = #{tchcertnum,jdbcType=VARCHAR},
+            </if>
+            <if test="tchentrytime  != null">
+                tchEntryTime = #{tchentrytime,jdbcType=VARCHAR},
+            </if>
+            <if test="tcheducation != null">
+                tchEducation = #{tcheducation,jdbcType=VARCHAR},
+            </if>
+            <if test="tchschool != null">
+                tchSchool = #{tchschool,jdbcType=VARCHAR},
+            </if>
+            <if test="tchisforeign != null">
+                tchIsForeign = #{tchisforeign,jdbcType=VARCHAR},
+            </if>
+            <if test="tchpermitnuminchina != null">
+                tchPermitNumInChina = #{tchpermitnuminchina,jdbcType=VARCHAR},
+            </if>
+            <if test="tchcontent != null">
+                tchContent = #{tchcontent,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where tchID = #{tchid,jdbcType=INTEGER}
+    </update>
+    <update id="updateTchByPrimaryKey" parameterType="com.huadi.education.entity.Teacher">
+    update org_lecturer
+    set
+        orgID = #{orgid,jdbcType=INTEGER},
+        tchName = #{tchname,jdbcType=VARCHAR},
+        tchGender = #{tchgender,jdbcType=VARCHAR},
+        tchCertNum = #{tchcertnum,jdbcType=VARCHAR},
+        tchEntryTime = #{tchentrytime,jdbcType=VARCHAR},
+        tchEducation = #{tcheducation,jdbcType=VARCHAR},
+        tchSchool = #{tchschool,jdbcType=VARCHAR},
+        tchIsForeign = #{tchisforeign,jdbcType=VARCHAR},
+        tchPermitNumInChina = #{tchpermitnuminchina,jdbcType=VARCHAR},
+        tchContent = #{tchcontent,jdbcType=VARCHAR}
+    where tchID = #{tchid,jdbcType=INTEGER}
+  </update>
+</mapper>

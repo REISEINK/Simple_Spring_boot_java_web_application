@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicon icons -->
+    <link href="/visitor/images/favicon.png" rel="shortcut icon">
+
+    <!-- All CSS -->
+    <link rel="stylesheet" href="/visitor/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/visitor/css/themify-icons.css">
+    <link rel="stylesheet" href="/visitor/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/visitor/css/style.css">
+    <link rel="stylesheet" href="/visitor/css/myself.css">
+
+    <title>定位搜索</title>
+  </head>
+  <body>
+
+    <!-- Preloader -->
+    <div id="preloader">
+      <div id="status"></div>
+    </div>
+    
+    <!-- Header strat -->
+    <header class="header">
+      <div class="container">
+        <nav class="navbar">
+          <!-- Site logo -->
+          <a href="index.html" class="logo">
+            <img src="/visitor/images/logo.png" alt="">
+          </a>
+          <a href="javascript:void(0);" id="mobile-menu-toggler">
+            <i class="ti-align-justify"></i>
+          </a>
+          <ul class="navbar-nav">
+            <li><a href="/index">首页</a></li>
+            <li><a href="/searchlist">定位搜索</a></li>
+            <li class="has-menu-child" style="margin-right: 10px;">
+              <a href="javascript:void(0);">曝光台</a>
+              <ul class="sub-menu">
+                <li><a href="/whitelists">白名单</a></li>
+                <li><a href="/blocklists">黑名单</a></li>
+              </ul>
+            </li>
+            <li class="has-menu-child" style="margin-right: 10px;">
+              <a href="javascript:void(0);">信息公示</a>
+              <ul class="sub-menu">
+                <li><a href="/policylist">政策法规</a></li>
+                <li><a href="/newslist">通知公告</a></li>
+              </ul>
+            </li>
+            <li><a href="/report.html">监督反馈</a></li>
+            <li class="has-menu-child" style="margin-right: 10px;">
+              <a href="javascript:void(0);">用户登录</a>
+              <ul class="sub-menu">
+                <li><a href="/login">用户登录</a></li>
+                <li><a href="/orgApply/toSubmit">机构申请</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- Header strat -->
+
+    <!-- Page feature start -->
+    <section class="page-feature">
+      <div class="container text-center">
+        <h2>定位搜索</h2>
+        <div class="breadcrumb">
+          <a href="index.html">首页</a>
+          <span>/ 定位搜索</span>
+        </div>
+      </div>
+    </section>
+    <!-- Page feature end -->
+
+    <!-- Main form start -->
+    <section class="main-form" style="padding: 70px 0 20px 0;">
+      <div class="container">
+        <div class="m-search-form nm-top-130">
+          <form action="#">
+            <input name="licenseKey" type="text" placeholder="许可证号" style="font-size: inherit; font-weight: 400; width: 10%;">
+            <input name="orgName" type="text" placeholder="机构名称关键字" style="font-size: inherit; font-weight: 400; width: 15%;">
+            <input name="address" type="text" placeholder="机构地址关键字" style="font-size: inherit; font-weight: 400; width: 15%;">
+            <select name="orgType" style="font-size: inherit; font-weight: 400; width: 8%;">
+              <option value="allType">所有机构类型</option>
+              <option value="营利性">营利性</option>
+              <option value="非营利性">非营利性</option>
+            </select>
+            <select name="operationType" style="font-size: inherit; font-weight: 400; width: 8%;">
+              <option value=0>所有办学类型</option>
+              <option value=1>文理类</option>
+              <option value=2>艺术类</option>
+              <option value=3>语言类</option>
+              <option value=4>科技类</option>
+              <option value=5>其他</option>
+              <option value=6>综合</option>
+            </select>
+            <button type="submit">查询</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- Main form end -->
+
+    <!-- Tutor section start -->
+    <section class="tutor">
+      <div class="container">
+        <div class="event-group" style="margin-bottom: 0;">
+          <h3 class="title" style="width: 50%; display: inline-block; font-size: 1.75rem;">地图定位</h3>
+          <h5 class="title" style="width: 49%; border-left: 0px; border-right: 3px solid #0c2e60; display: inline-block; text-align: right; padding-right: 10px;">为您找到共<span style="color: red;"> [[${maplist.size()}]] </span>家符合条件的机构</h5>
+        </div>
+        <div class="row">
+          <div class="col-md-9">
+            <div id="map">
+              <iframe src="/map" id="baiduMap" width="825" height="600" frameborder="0" scrolling="no"></iframe>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="tutor-list bg-light" style="height: 600px;">
+              <ul>
+                <li style="min-height: 0;" th:each="map:${maplist}"><a href="javascript:void(0)" th:onclick="selectOrg([[${map.orgID}]]);" class="org-list" ><h5 th:text="${map.orgName}">成都市龙泉驿区神墨博艺文化艺术培训学校有限公司</h5></a></li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Tutor section end -->
+    
+    <!-- Footer strat -->
+    <footer class="footer">
+      <div class="foo-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 col-sm-6">
+              <div class="widget widget-navigation">
+                <h4 class="widget-title">联系方式</h4>
+                <ul>                  
+                  <li><a href="tel:+6119XXXXXXX" >咨询方式：010-6119XXXX-XXX</a></li>
+                  <li><a href="mailto:XXXX@cse.edu.cn" >客服邮箱：XXXX@cse.edu.cn</a></li>
+                  <li><a href="" style="pointer-events: none;">官方微信：XXXX机构规范平台</a></li>
+                  <li><a href="" style="pointer-events: none;">微信公众号：gh-76ba7712XXXX</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="widget widget-navigation">
+                <h4 class="widget-title">友情链接</h4>
+                <ul>                  
+                  <li><a href="http://www.moe.gov.cn/">中国人民共和国教育部</a></li>
+                  <li><a href="http://www.scedu.net/">四川省教育厅</a></li>
+                  <li><a href="http://edu.chengdu.gov.cn/">成都市教育局</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  
+      <div class="foo-btm">
+        <div class="container">
+          <p class="copyright">Copyright &copy; 2019.Company name All rights reserved.</p>
+        </div>
+      </div>
+      
+    </footer>
+    <!-- Footer end -->
+
+    <!-- JS -->
+    <script src="/visitor/js/jquery-3.3.1.min.js"></script>
+    <script src="/visitor/js/jquery-ui.min.js"></script>
+    <script src="/visitor/js/bootstrap.min.js"></script>
+    <script src="/visitor/js/owl.carousel.min.js"></script>
+    <script src="/visitor/js/scripts.js"></script>
+
+    <script>
+      function selectOrg(id) {
+        $("#baiduMap").attr('src','/mapShowById?id=' + id);
+      }
+    </script>
+  </body>
+</html>

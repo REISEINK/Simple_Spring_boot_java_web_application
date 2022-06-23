@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace表示命名空间 -->
+<mapper namespace="com.huadi.education.mapper.AddressMapper">
+    <resultMap id="addressWithOrg" type="com.huadi.education.entity.Address">
+        <id property="addressID" column="userID"></id>
+        <result property="longitude" column="longitude"></result>
+        <result property="latitude" column="latitude"></result>
+        <result property="city" column="city"></result>
+        <result property="area" column="area"></result>
+        <result property="street" column="street"></result>
+        <result property="detailInfo" column="detailInfo"></result>
+        <association property="org" column="orgID" javaType="com.huadi.education.entity.Org">
+            <id property="orgID" column="orgID"></id>
+            <result property="orgName" column="orgName"></result>
+            <result property="licenseKey" column="licenseKey" ></result>
+            <result property="licenseFile" column="licenseFile"></result>
+            <result property="orgType" column="orgType"></result>
+            <result property="legalPerson" column="legalPerson"></result>
+            <result property="principal" column="principal"></result>
+            <result property="operationType" column="operationType"></result>
+            <result property="publicTel" column="publicTel"></result>
+            <result property="regStatus" column="regStatus"></result>
+            <result property="address" column="address"></result>
+            <result property="complainNum" column="complainNum"></result>
+            <result property="blackReason" column="blackReason"></result>
+            <result property="haveAdm" column="haveAdm"></result>
+            <result property="operationInfo" column="operationInfo"></result>
+        </association>
+    </resultMap>
+
+    <insert id="insertOrgAddress" parameterType="com.huadi.education.entity.Address" keyProperty="addressID" useGeneratedKeys="true">
+        insert into address (orgID,longitude,latitude,city,area,street,detailInfo)
+        values(#{org.orgID},#{longitude},#{latitude},#{city},#{area},#{street},#{detailInfo})
+    </insert>
+
+
+</mapper>

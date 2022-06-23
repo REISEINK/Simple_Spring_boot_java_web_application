@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Favicon icons -->
+  <link href="/visitor/images/favicon.png" rel="shortcut icon">
+
+  <!-- All CSS -->
+  <link rel="stylesheet" href="/visitor/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/visitor/css/themify-icons.css">
+  <link rel="stylesheet" href="/visitor/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="/visitor/css/style.css">
+  <link rel="stylesheet" href="/visitor/css/myself.css">
+
+  <title>曝光台-黑名单</title>
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="preloader">
+  <div id="status"></div>
+</div>
+
+<!-- Header strat -->
+<header class="header">
+  <div class="container">
+    <nav class="navbar">
+      <!-- Site logo -->
+      <a href="index.html" class="logo">
+        <img src="/visitor/images/logo.png" alt="">
+      </a>
+      <a href="javascript:void(0);" id="mobile-menu-toggler">
+        <i class="ti-align-justify"></i>
+      </a>
+      <ul class="navbar-nav">
+        <li><a href="/index">首页</a></li>
+        <li><a href="/searchlist">定位搜索</a></li>
+        <li class="has-menu-child" style="margin-right: 10px;">
+          <a href="javascript:void(0);">曝光台</a>
+          <ul class="sub-menu">
+            <li><a href="/whitelists">白名单</a></li>
+            <li><a href="/blocklists">黑名单</a></li>
+          </ul>
+        </li>
+        <li class="has-menu-child" style="margin-right: 10px;">
+          <a href="javascript:void(0);">信息公示</a>
+          <ul class="sub-menu">
+            <li><a href="/policylist">政策法规</a></li>
+            <li><a href="/newslist">通知公告</a></li>
+          </ul>
+        </li>
+        <li><a href="/report.html">监督反馈</a></li>
+        <li class="has-menu-child" style="margin-right: 10px;">
+          <a href="javascript:void(0);">用户登录</a>
+          <ul class="sub-menu">
+            <li><a href="/login">用户登录</a></li>
+            <li><a href="/orgApply/toSubmit">机构申请</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- Header strat -->
+
+<!-- Page feature start -->
+<section class="page-feature">
+  <div class="container text-center">
+    <h2>曝光台</h2>
+    <div class="breadcrumb">
+      <a href="index.html">首页</a>
+      <span>/ 曝光台</span>
+    </div>
+  </div>
+</section>
+<!-- Page feature end -->
+
+<!-- Main form start -->
+<section class="main-form" style="padding: 70px 0 20px 0;">
+  <div class="container">
+    <div class="m-search-form nm-top-130">
+      <form action="#">
+        <input name="licenseKey" type="text" placeholder="许可证号" style="font-size: inherit; font-weight: 400;">
+        <input name="orgName" type="text" placeholder="机构名称" style="font-size: inherit; font-weight: 400;">
+        <select name="orgType" style="font-size: inherit; font-weight: 400;">
+          <option value="allType">所有类型机构</option>
+          <option value="营利性">营利性</option>
+          <option value="非营利性">非营利性</option>
+        </select>
+        <button type="submit">查询</button>
+      </form>
+    </div>
+  </div>
+</section>
+<!-- Main form end -->
+
+<!-- Orgs section start -->
+<section class="events">
+  <div class="container">
+
+    <div class="event-group">
+      <h3 class="title" style="width: 50%; display: inline-block;">黑名单</h3>
+      <h5 class="title" style="width: 49%; border-left: 0px; border-right: 3px solid #0c2e60; display: inline-block; text-align: right; padding-right: 10px;">为您找到共<span style="color: red;" th:text="${blocklistPageInfo.total}"> 333 </span>家符合条件的机构</h5>
+      <!--限期整改-->
+      <div class="event-item" th:each="block:${blocklistPageInfo.list}">
+        <div class="e-content">
+          <div th:switch="${block.regStatus}" >
+            <!--限期整改-->
+            <div class="e-date rounded" style="width: 6rem; display: inline-block; margin-right: 15px; background-color: #fdcf00;" th:case="2"><span>限期整改</span></div>
+            <!--非法办学-->
+            <div class="e-date rounded" style="width: 6rem; display: inline-block; margin-right: 15px;" th:case="3" ><span>非法办学</span></div>
+            <span class="e-time"><i class="ti-timer"></i>核准日期: 2020-06-23 10:00</span>
+          </div >
+          <h3 style="margin-top: 8px;"><a href="org-details.html" th:href="@{/orgDetail(orgid=${block.orgID})}">[[${block.orgName}]]</a></h3>
+          <div th:switch="${block.orgType}">
+            <span class="e-time" style="margin-right: 11rem;"><img class="white-icon" src="/visitor/images/icons/expose/license.png"></i>许可证号: [[${block.licenseKey}]]</span>
+            <span class="e-time" style="margin-right: 11rem;"><img class="white-icon" src="/visitor/images/icons/expose/person.png"></i>法定代表人: [[${block.legalPerson}]]</span>
+            <span class="e-time" th:case = "营利性"><img class="white-icon" src="/visitor/images/icons/expose/type.png"></i>机构类型: 营利性</span>
+            <span class="e-time" th:case = "非营利性"><img class="white-icon" src="/visitor/images/icons/expose/type.png"></i>机构类型: 非营利性</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--        <ul class="pagination">-->
+    <!--          <li class="page-item"><a class="page-link"><span th:text="第+${blocklistPageInfo.pageNum}+页"></span></a></li>-->
+    <!--          <li class="page-item"><a class="page-link" th:href="@{/blocklistPageInfo}">首页</a></li>-->
+    <!--          <li class="page-item"><a class="page-link" th:href="@{/blocklistPageInfo(pageNum=1)}">1</a></li>-->
+    <!--          <li class="page-item"><a class="page-link" th:href="@{/blocklistPageInfo(pageNum=2)}">2</a></li>-->
+    <!--          <li class="page-item"><a class="page-link" th:href="@{/blocklistPageInfo(pageNum=${blocklistPageInfo.getNextPage()})}">Next</a></li>-->
+    <!--        </ul>-->
+
+    <!--页码-->
+    <div class="pagination" th:switch="${blocklistPageInfo.pageNum}">
+      <div th:case="1">
+        <span href="$" class="current-page" th:text="${blocklistPageInfo.pageNum}"></span>
+        <a th:href="@{/blocklists(pageNum=${blocklistPageInfo.pageNum}+1)}" th:if="${blocklistPageInfo.pageNum+1 le blocklistPageInfo.pages}" th:text="${blocklistPageInfo.pageNum}+1"></a>
+        <a th:href="@{/blocklists(pageNum=${blocklistPageInfo.pageNum}+2)}" th:if="${blocklistPageInfo.pageNum+2 le blocklistPageInfo.pages}" th:text="${blocklistPageInfo.pageNum}+2"></a>
+        <a th:href="@{/blocklists(pageNum=${blocklistPageInfo.pageNum}+1)}">Next</a>
+      </div>
+      <div th:case="${blocklistPageInfo.pages}">
+        <a th:href="@{/blocklists(pageNum=${blocklistPageInfo.pageNum}-1)}">prev</a>
+        <a th:href="@{/blocklists(pageNum=${blocklistPageInfo.pageNum}-2)}" th:if="${blocklistPageInfo.pageNum-2 ge 1}" th:text="${blocklistPageInfo.pageNum}-2"></a>
+        <a th:href="@{/blocklists(pageNum=${blocklistPageInfo.pageNum}-1)}" th:if="${blocklistPageInfo.pageNum-1 ge 1}" th:text="${blocklistPageInfo.pageNum}-1"></a>
+        <span href="$" class="current-page" th:text="${blocklistPageInfo.pageNum}"></span>
+      </div>
+      <div th:case="*">
+        <a th:href="@{/blocklists(pageNum=${blocklistPageInfo.pageNum}-1)}">prev</a>
+        <a th:href="@{/blocklists(pageNum=${blocklistPageInfo.pageNum}-1)}" th:if="${blocklistPageInfo.pageNum-1 ge 1}" th:text="${blocklistPageInfo.pageNum}-1"></a>
+        <span href="$" class="current-page" th:text="${blocklistPageInfo.pageNum}"></span>
+        <a th:href="@{/blocklists(pageNum=${blocklistPageInfo.pageNum}+1)}" th:if="${blocklistPageInfo.pageNum+1 le blocklistPageInfo.pages}" th:text="${blocklistPageInfo.pageNum}+1"></a>
+        <a th:href="@{/blocklists(pageNum=${blocklistPageInfo.pageNum}+1)}">Next</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Orgs section end -->
+
+<!-- Footer strat -->
+<footer class="footer">
+  <div class="foo-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-sm-6">
+          <div class="widget widget-navigation">
+            <h4 class="widget-title">联系方式</h4>
+            <ul>
+              <li><a href="" style="pointer-events: none;">咨询方式：010-6119XXXX-XXX</a></li>
+              <li><a href="" style="pointer-events: none;">客服邮箱：XXXX@cse.edu.cn</a></li>
+              <li><a href="" style="pointer-events: none;">官方微信：XXXX机构规范平台</a></li>
+              <li><a href="" style="pointer-events: none;">微信公众号：gh-76ba7712XXXX</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <div class="widget widget-navigation">
+            <h4 class="widget-title">友情链接</h4>
+            <ul>
+              <li><a href="http://www.moe.gov.cn/">中国人民共和国教育部</a></li>
+              <li><a href="http://www.scedu.net/">四川省教育厅</a></li>
+              <li><a href="http://edu.chengdu.gov.cn/">成都市教育局</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="foo-btm">
+    <div class="container">
+      <p class="copyright">Copyright &copy; 2019.Company name All rights reserved.</p>
+    </div>
+  </div>
+
+</footer>
+<!-- Footer end -->
+
+<!-- JS -->
+<script src="/visitor/js/jquery-3.3.1.min.js"></script>
+<script src="/visitor/js/jquery-ui.min.js"></script>
+<script src="/visitor/js/bootstrap.min.js"></script>
+<script src="/visitor/js/owl.carousel.min.js"></script>
+<script src="/visitor/js/scripts.js"></script>
+
+</body>
+</html>
